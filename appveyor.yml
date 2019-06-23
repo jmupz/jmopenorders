@@ -21,4 +21,5 @@ install:
 
 test_script:
   - "%PYTHON%/python.exe -m flake8"
-  - "%PYTHON%/Scripts/py.test.exe -sv"
+  - "%PYTHON%/python.exe tox -e docs"
+

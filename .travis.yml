@@ -6,7 +6,7 @@ dist: xenial
 env:
   global:
       # used by ci-helpers
-      - DEPS="pytest pytest-qt tox coveralls six"
+      - DEPS="pytest tox coveralls six"
       - MINICONDA_VERSION=latest
       - DISPLAY=":99.0"
 
@@ -41,7 +41,6 @@ install:
       conda config --set always_yes yes --set changeps1 no
       conda create -n test --quiet python=${PYTHON_VERSION} ${DEPS} ${PYQT_PACKAGE}
       source activate test && pip install -e .
-      pip install pyqt-distutils
     fi
 before_script:
  - "herbstluftwm &"
@@ -52,7 +51,7 @@ script:
     if [ $LINTING == "1" ]; then
       tox -e linting
     else
-      source activate test && catchsegv coverage run --source=jmopenoreders -m pytest -v tests
+      source activate test && catchsegv coverage run --source=jmopenorders -m pytest -v tests
     fi
 after_success:
   - coveralls

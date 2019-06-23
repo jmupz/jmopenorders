@@ -1,14 +1,4 @@
-flake8
-pytest
-mock
-pytest-mock
 wheel
 setuptools>=17.1
 pexpect
-pypandoc
-pytest-benchmark
-twine
 openpyxl
-faker
-nose
-sphinx

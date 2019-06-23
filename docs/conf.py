@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import sys
 import re
 from os.path import abspath, join, dirname
@@ -9,15 +11,15 @@ sys.path.append(abspath(join(dirname(__file__), '..')))
 extensions = ['sphinx.ext.autodoc', 'sphinx.ext.napoleon']
 
 # version
-with open(join('..', 'app', '__init__.py')) as f:
+with open(join('..', 'jmopenorders', '__init__.py')) as f:
     _version = re.search(r'__version__\s+=\s+\'(.*)\'', f.read()).group(1)
 
 # general
-project = 'app'
+project = 'jmopenorders'
 version = _version
-author = 'Gerard Marull-Paretas'
+author = u'Jürgen Mülbert'
 year = datetime.now().year
-copyright = '%d, Gerard Marull-Paretas.' % year
+copyright = u'%d, Jürgen Mülbert.' % year
 source_suffix = '.rst'
 master_doc = 'index'
 

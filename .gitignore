@@ -5,6 +5,8 @@ site
 build*
 dist/
 venv/
+htmlcov/*
+.coverage
 *.egg-info
 *.pyc
 *.qmlc
@@ -20,7 +22,7 @@ venv/
 *~
 *#
 
-# Editors 
+# Editors
 *.swp
 *.user
 
@@ -109,10 +111,8 @@ docs/build/doctrees/
 # Linux perf/debugging
 gmon.out
 
-
 # VS-Code
 *.db-*
-
 
 # This file is used to ignore files which are generated
 # ----------------------------------------------------------------------------
@@ -205,7 +205,6 @@ phony.c
 # Python byte code
 *.pyc
 
-
 # Qml caching files
 *.jsc
 *.qmlc
@@ -250,4 +249,3 @@ tmp/
 # qbs builds
 /*-debug/
 /*-release/
-
