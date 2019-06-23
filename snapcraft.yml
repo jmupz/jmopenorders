@@ -1,0 +1,24 @@
+name: jmopenorders
+version: stable
+version-script: git -C parts/jmopenorders/build describe --abbrev=0 --tags
+summary: Magnificent app which corrects your previous console command.
+description: |
+  Create Excel Files with open orders
+
+grade: stable
+confinement: classic
+
+apps:
+  openorders:
+    command: bin/jmopenorders
+    environment:
+      PYTHONIOENCODING: utf-8
+  orders:
+    command: bin/orders
+    environment:
+      PYTHONIOENCODING: utf-8
+
+parts:
+  thefuck:
+    source: https://github.com/jmuelbert/jmopenorders.git
+    plugin: python
