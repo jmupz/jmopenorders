@@ -1,4 +1,4 @@
-wheel
-setuptools>=17.1
-pexpect
-openpyxl
+wheel==0.33.6
+setuptools>=41.2.0
+pexpect==4.7.0
+openpyxl==2.6.3

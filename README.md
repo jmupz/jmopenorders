@@ -1,6 +1,7 @@
 
 # openorders
-
+[![Updates](https://pyup.io/repos/github/jmuelbert/jmopenorders/shield.svg)](https://pyup.io/repos/github/jmuelbert/jmopenorders/)
+[![Python 3](https://pyup.io/repos/github/jmuelbert/jmopenorders/python-3-shield.svg)](https://pyup.io/repos/github/jmuelbert/jmopenorders/)
 [![GitHub license](https://img.shields.io/badge/license-EUPL-blue.svg)](https://joinup.ec.europa.eu/page/eupl-text-11-12)
 [![Build Status](https://travis-ci.org/jmuelbert/jmopenorders.svg?branch=master)](https://travis-ci.org/jmuelbert/jmopenorders)
 
