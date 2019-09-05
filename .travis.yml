@@ -40,12 +40,13 @@ before_script:
   - sleep 1
 
 script:
-  - |
-    if [ $LINTING == "1" ]; then
-      # tox -e linting
-    else
-      # source activate test && catchsegv coverage run --source=jmopenorders -m pytest -v tests
-    fi
+  # - |
+  #   if [ $LINTING == "1" ]; then
+  #     # tox -e linting
+  #   else
+  #     # source activate test && catchsegv coverage run --source=jmopenorders -m pytest -v tests
+  #   fi
+
 after_success:
   - coveralls
 # deploy:
