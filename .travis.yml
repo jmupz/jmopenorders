@@ -11,11 +11,9 @@ env:
     - DISPLAY=":99.0"
 
   matrix:
-    - LINTING=1
+    # - LINTING=1
     - PYTHON_VERSION=3.6
-
-matrix:
-  # PySide2 crashes: #202
+    - PYTHON_VERSION=3.7
 
 install:
   - |
@@ -44,9 +42,9 @@ before_script:
 script:
   - |
     if [ $LINTING == "1" ]; then
-      tox -e linting
+      # tox -e linting
     else
-      source activate test && catchsegv coverage run --source=jmopenorders -m pytest -v tests
+      # source activate test && catchsegv coverage run --source=jmopenorders -m pytest -v tests
     fi
 after_success:
   - coveralls
