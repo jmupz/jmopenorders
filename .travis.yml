@@ -5,14 +5,14 @@ dist: xenial
 
 env:
   global:
-      # used by ci-helpers
-      - DEPS="pytest tox coveralls six"
-      - MINICONDA_VERSION=latest
-      - DISPLAY=":99.0"
+    # used by ci-helpers
+    - DEPS="pytest pylint tox coveralls six"
+    - MINICONDA_VERSION=latest
+    - DISPLAY=":99.0"
 
   matrix:
-      - LINTING=1
-      - PYTHON_VERSION=3.6
+    - LINTING=1
+    - PYTHON_VERSION=3.6
 
 matrix:
   # PySide2 crashes: #202
@@ -38,8 +38,8 @@ install:
       source activate test && pip install -e .
     fi
 before_script:
- - "herbstluftwm &"
- - sleep 1
+  - "herbstluftwm &"
+  - sleep 1
 
 script:
   - |
@@ -50,14 +50,13 @@ script:
     fi
 after_success:
   - coveralls
-
 # deploy:
 #  provider: pypi
 #  skip_upload_docs: true
 #  user: nicoddemus
 #  distributions: sdist bdist_wheel
 #  password:
-#    secure: * 
+#    secure: *
 #  on:
 #    tags: true
 #    repo: pytest-dev/pytest-qt
