@@ -118,7 +118,6 @@ setup(
     zip_safe=False,
     python_requires=">=3.6",
     install_requires=install_requires,
-    dependeny_links=dependency_links,
     entry_points={
         'console_scripts': [
             'jmopenorders = jmopenorders.entrypoints.main:main',
