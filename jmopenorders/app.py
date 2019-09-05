@@ -42,7 +42,6 @@
 #
 
 import argparse
-import sys
 from pathlib import Path
 import configparser
 import os  # noqa: E402
@@ -52,12 +51,12 @@ import logging.config
 import jmopenorders.lib.getserviceperson
 import jmopenorders.lib.getdata
 import jmopenorders.lib.generateorders
-import jmopenorders.lib.cleanoutput
 
 def main():
     """Program entry point.
     """
 
+    
     logging.config.fileConfig('logging.conf')
     logger = logging.getLogger(__name__)
 
