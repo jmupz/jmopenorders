@@ -1,10 +1,7 @@
-appveyorbuild: false
+build: false
 
 environment:
   matrix:
-    - PYTHON: "C:/Python27"
-    - PYTHON: "C:/Python34"
-    - PYTHON: "C:/Python35"
     - PYTHON: "C:/Python36"
     - PYTHON: "C:/Python37"
 
@@ -21,5 +18,4 @@ install:
 
 test_script:
   - "%PYTHON%/python.exe -m flake8"
-  - "%PYTHON%/python.exe tox"
-
+  - "%PYTHON%/python.exe tox - linting"
