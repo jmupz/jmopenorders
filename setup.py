@@ -39,12 +39,14 @@
 # unter der Lizenz sind dem Lizenztext zu entnehmen.
 #
 
-"""The setup.py file for Python openor   sders."""
+"""The setup.py file for Python openorders."""
 
 from setuptools import setup, find_packages
 import pkg_resources
 import sys
 import os
+
+__version__ = '0.1.0'
 
 try:
     if int(pkg_resources.get_distribution("pip").version.split('.')[0]) < 6:
@@ -71,7 +73,7 @@ elif (3, 0) < version < (3, 4):
           ' ({}.{} detected).'.format(*version))
     sys.exit(-1)
 
-VERSION = '0.1.0'
+
 
 install_requires = ['psutil', 'colorama', 'six', 'decorator', 'pyte']
 extras_require = {':python_version<"3.4"': ['pathlib2'],
@@ -79,17 +81,18 @@ extras_require = {':python_version<"3.4"': ['pathlib2'],
                   ":sys_platform=='win32'": ['win_unicode_console']}
 
 setup(
-    name='openorders',
-    version=VERSION,
+    name='jmopenorders',
+    version=__version__,
     # Authorship and online reference
     author='Jürgen Mülbert',
-    author_email='juergen.muelbert@gmail.cpip pom',
+    author_email='juergen.muelbert@gmail.com',
     url='https://github.com/jmuelbert/jmopenorders',
     # Detailled description
     description='Create OpenOrders Reports',
     long_description='Create Excel Reports from the OpenOrders File from CarLO',
     long_description_content_type='text/markdown',
     keywords='business report',
+    download_url='https://github.com/jmuelbert/jmopenorders/tarball' + __version__,
     license="EUPL-1.2",
 
     classifiers=[
@@ -115,6 +118,7 @@ setup(
     zip_safe=False,
     python_requires=">=3.6",
     install_requires=install_requires,
+    dependeny_links=dependency_links,
     entry_points={
         'console_scripts': [
             'jmopenorders = jmopenorders.entrypoints.main:main',

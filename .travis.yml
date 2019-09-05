@@ -12,12 +12,7 @@ env:
 
   matrix:
       - LINTING=1
-
-      - PYTHON_VERSION=3.5
-
       - PYTHON_VERSION=3.6
-
-      - PYTHON_VERSION=3.7
 
 matrix:
   # PySide2 crashes: #202

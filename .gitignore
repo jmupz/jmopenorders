@@ -1,13 +1,44 @@
 ## Ignore temporary files
 ## build results
 ## generated databases
+
+# pycharm
+.idea/
+.idea
+
+# packages
+*.egg
+*.egg-info
+build
+eggs
+parts
+sdist
+develop-eggs
+.installed.cfg
+
+# Installer-logs
+pip-log.txt
+
+# Unit test / coverage reports
+.coverage
+.tox
+nosetests.xml
+
+# Complexity
+output/*.html
+output/*/index.html
+
+# Sphinx
+docs/_build
+
+# Cookiecutter
+output/
+
 site
 build*
 dist/
 venv/
 htmlcov/*
-.coverage
-*.egg-info
 *.pyc
 *.qmlc
 *.pdf
@@ -17,8 +48,6 @@ htmlcov/*
 *.pref
 *.halscope
 .tmp*
-.idea/
-.tox/
 *~
 *#
 
