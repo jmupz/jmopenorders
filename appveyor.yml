@@ -37,7 +37,7 @@ build_script:
   - python setup.py build_ext -i
 
 test_script:
-  - "%PYTHON%/python.exe tox -e lint"
-  - "%PYTHON%/python.exe tox -e pylint"
-  - "%PYTHON%/python.exe tox -e cov"
-  - "%PYTHON%/python.exe tox -e docs"
+  - python.exe tox -e lint"
+  - python.exe tox -e pylint"
+  - python.exe tox -e cov"
+  - python.exe tox -e docs"

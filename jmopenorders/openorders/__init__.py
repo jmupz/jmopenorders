@@ -44,7 +44,7 @@ import pkgutil
 # Declare top-level shortcuts
 #
 
-__all__ = ['__version__', 'VERSION_INFO', 'CleanOutputDir', 'GenerateOrders']
+__all__ = ['__version__', 'VERSION_INFO']
 
 # openorders Version
 
