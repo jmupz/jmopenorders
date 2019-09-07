@@ -68,13 +68,23 @@ PROJECT_URLS = {
     "Bug Reports": "{}/issues".format(GITHUB_URL)
 }
 
+# 'setup.py publish' shortcut.
+if sys.argv[-1] == 'publish':
+    os.system('python setup.py sdist bdist_wheel')
+    os.system('twine upload dist/*')
+    sys.exit()
+    
 PACKAGES = find_packages(exclude=["tests", "tests.*"])
 
-install_requires = [
-    'pexpect>=4.7.0',
-    'openpyxl>=2.6.3',
-    'pypandoc>=1.4'
-    ]
+def requirements():
+    """Build the requirements list for this project"""
+    requirements_list = []
+
+    with open('requirements_all.txt') as requirements:
+        for install in requirements:
+            requirements_list.append(install.strip())
+
+    return requirements_list
 
 test_requirements = [
     'tox',
@@ -94,7 +104,7 @@ setup(
     packages=PACKAGES,
     include_package_data=True,
     zip_safe=False,
-    install_requires=install_requires,
+    install_requires=requirements(),
     python_requires=">={}".format(MIN_PY_VERSION),
     test_suite="tests",
     tests_require=test_requirements,

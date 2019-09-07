@@ -54,14 +54,14 @@ after_success:
   - conda install -c conda-forge codecov
   - codecov
   - coveralls
-# deploy:
-#  provider: pypi
-#  skip_upload_docs: true
-#  user: nicoddemus
-#  distributions: sdist bdist_wheel
-#  password:
-#    secure: *
-#  on:
-#    tags: true
-#    repo: pytest-dev/pytest-qt
-#    condition: $PYTEST_QT_API = pyqt5
+
+deploy:
+  provider: pypi
+  skip_upload_docs: true
+  user: jmuelbert
+  password:
+    secure: "blWLOCNJ/UuEK2tg4dpgd2pkRvIXlvJmFSv7vF06k+BSacTtRVn5L+syXkcJDjB8eOm1FLBAwlcqt2W6/KACrV0NnfyNj8kuBaIUVrJhWJ+7osoMGJR2tH/TqIFxYFgRs0ZcolfhCVWX0ApRt127526vhUR5m+BLlCRfMlGT4fRgK3Wd7x4YNabjk+t2AHAzDu2v43r95ozxFQALTZHwRg06DrVxuE1eU6QRA6k1mx68DVDmKjjjDVCMCHeTuiqXJ8yPF4btO9mo88B6lMlUQ/grIbY9XTCncscgrZyvuiToERbOeTsQllvVSbl1E2HXcDRBIQR/+M/gy0583Fwf33+cIrITaEtKhe5XU8jykAnW05kcTN81TEKPCxuJYRfkzyZ6+1TDtixniI9/sofwED8cN85yql8xhO44GPPeMfSBLHNAzScd73KhSMz2xDXfWxF9oBjtt3KoEM/v7CVHc+wSuxR/hT/++w2tJgxxxsnX8ntC8zkA7JgAMZn2rgRefYXeR24EQmmWiWJBABlfijYM7SqBEYrEVrV8TOQpfJ09X2CbqNlTMOlqzZBSNHGrMRR4+UsRgAvoYlUXifwRCYr/qY3XJqW8baGRogRYL6ASSTXO/DTC/QVpWqWg57Ey6gejG+NRhCeJsJCm0dzDGTuc3qw/kEHWimY+bX2Xgh0="
+  distributions: sdist bdist_wheel
+  on:
+    tags: true
+    repo: jmuelbert/jmopenorders

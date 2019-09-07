@@ -39,7 +39,7 @@ build_script:
   - python setup.py build_ext -i
 
 test_script:
-  - tox -e lint"
-  - tox -e pylint"
-  - tox -e cov"
-  - tox -e docs"
+  - tox -e lint
+  - tox -e pylint
+  - tox -e cov
+  - tox -e docs
