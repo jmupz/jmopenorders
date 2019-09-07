@@ -73,14 +73,16 @@ if sys.argv[-1] == 'publish':
     os.system('python setup.py sdist bdist_wheel')
     os.system('twine upload dist/*')
     sys.exit()
-    
+
 PACKAGES = find_packages(exclude=["tests", "tests.*"])
+
+here = os.path.abspath(os.path.dirname(__file__))
 
 def requirements():
     """Build the requirements list for this project"""
     requirements_list = []
 
-    with open('requirements_all.txt') as requirements:
+    with open(os.path.join(here, 'requirements_all.txt')) as requirements:
         for install in requirements:
             requirements_list.append(install.strip())
 
