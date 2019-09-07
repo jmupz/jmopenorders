@@ -1,22 +1,38 @@
-build: false
+# AppVeyor.com is a Continuous Integration service to build and run tests under
+# Windows
 
 environment:
+  global:
+    CONDA_PATH: "C:\\Miniconda3-x64"
   matrix:
-    - PYTHON: "C:/Python36"
-    - PYTHON: "C:/Python37"
+    - PYTHON_VERSION: "3.7"
+      platform: x64
 
-init:
-  - "ECHO %PYTHON%"
-  - ps: "ls C:/Python*"
+cache:
+  - '%LOCALAPPDATA%\pip\Cache'
 
 install:
-  - "curl -fsS -o C:/get-pip.py https://bootstrap.pypa.io/get-pip.py"
-  - "%PYTHON%/python.exe C:/get-pip.py"
-  - "%PYTHON%/Scripts/pip.exe install -U setuptools"
-  - "%PYTHON%/python.exe setup.py develop"
-  - "%PYTHON%/Scripts/pip.exe install -U -r requirements.txt"
+  # Init and clone submodules
+  - git submodule update --init --recursive
+
+  # Clear tmpdir (sometimes left behind by appveyor?)
+  - rmdir /s /q %APPVEYOR_BUILD_FOLDER%\\tmp & exit /b 0
+    # Setup conda environment
+  - "%CONDA_PATH%\\Scripts\\activate.bat"
+
+  # Install the build and runtime dependencies of the project.
+  - conda install -q --yes python=%PYTHON_VERSION% conda six pip tox pytest pytest-xdist pytest-timeout filelock selenium conda-build bzip2
+  - python -mpip install pytest-rerunfailures pytest-faulthandler
+
+  # Check that we have the expected version of Python
+  - python --version
+
+build_script:
+  # In-place build
+  - python setup.py build_ext -i
 
 test_script:
-  - "%PYTHON%/Scripts/pip.exe install -U -r requirements_dev.txt"
-  # - "%PYTHON%/python.exe -m flake8"
-  - "%PYTHON%/python.exe tox - linting"
+  - "%PYTHON%/python.exe tox -e lint"
+  - "%PYTHON%/python.exe tox -e pylint"
+  - "%PYTHON%/python.exe tox -e cov"
+  - "%PYTHON%/python.exe tox -e docs"

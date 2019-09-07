@@ -1,3 +1,4 @@
+"""The basic tests."""
 # -*- coding: utf-8 -*-
 
 #
@@ -38,11 +39,11 @@
 # unter der Lizenz sind dem Lizenztext zu entnehmen.
 #
 
-
 import unittest
 
 
 def test_absolute_truth_and_meaning():
+    """This is always True."""
     assert True
 
 

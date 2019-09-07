@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Program entry point"""
+"""Program entry point."""
 
 #
 # Copyright (c) 2019 Jürgen Mülbert. All rights reserved.
@@ -48,17 +48,17 @@ import os  # noqa: E402
 import logging
 import logging.config
 
-import jmopenorders.lib.getserviceperson
-import jmopenorders.lib.getdata
-import jmopenorders.lib.generateorders
+from .openorders import cleanoutputdir
+from .openorders import getserviceperson
+from .openorders import getdata
+from .openorders import generateorders
+
 
 def main():
-    """Program entry point.
-    """
+    """Program entry point."""
 
-    
     logging.config.fileConfig('logging.conf')
-    logger = logging.getLogger(__name__)
+    # logger = logging.getLogger(__name__)
 
     config = configparser.ConfigParser()
     config['DEFAULT'] = {
@@ -91,7 +91,7 @@ def main():
 
     args = parser.parse_args()
 
-    settigs_change = False
+    settings_change = False
 
     if args.personfile is None:
         logging.debug("take Personfile from configfile to: %s", config['DEFAULT']['PersonFile'])
@@ -121,7 +121,7 @@ def main():
         logging.debug("st new config for Output Path from args[OutPath]= %s", args.outpath)
         config['DEFAULT']['OutPath'] = args.outpath
 
-    if settigs_change == True:
+    if settings_change is True:
         logging.debug('Write changes to config file: %s', inifile)
         with open(inifile, 'w') as configfile:
             config.write(configfile)
@@ -137,7 +137,7 @@ def main():
     data = getdata.GetData(datafile)
     orders = data.get()
 
-    cleanoutput.CleanOutputDir(config['DEFAULT']['OutPath'])
+    cleanoutputdir.CleanOutputDir(config['DEFAULT']['OutPath'])
 
     for actual_berater in berater:
         print("actual_berater: " + actual_berater)

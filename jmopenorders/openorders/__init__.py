@@ -1,3 +1,4 @@
+"""JM OpenOrders Library."""
 # -*- coding: utf-8 -*-
 
 #
@@ -38,10 +39,16 @@
 # unter der Lizenz sind dem Lizenztext zu entnehmen.
 #
 
+import pkgutil
 
-__all__ = ['cleanoutput', 'getdata', 'generateorders', 'getserviceperson']
+# Declare top-level shortcuts
+#
 
-from . import cleanoutput
-from . import getdata
-from . import generateorders
-from . import getserviceperson
+__all__ = ['__version__', 'VERSION_INFO', 'CleanOutputDir', 'GenerateOrders']
+
+# openorders Version
+
+__version__ = pkgutil.get_data(__package__, 'VERSION').decode('ascii').strip()
+VERSION_INFO = tuple(int(v) if v.isdigit() else v
+                     for v in __version__.split('.'))
+del pkgutil

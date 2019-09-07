@@ -1,17 +1,22 @@
-Welcome to My Pip Installable Python Package's documentation!
-=========================================
+jmbde docs
+=============
 
-Contents:
+User’s Guide
+------------
 
 .. toctree::
    :maxdepth: 2
 
+   installation
+   upgrade
+   settings
 
+Additional Notes
+----------------
 
-Indices and tables
-==================
+.. toctree::
+   :maxdepth: 2
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
-
+   contributors
+   changelog
+   license

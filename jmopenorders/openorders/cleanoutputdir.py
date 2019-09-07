@@ -1,3 +1,9 @@
+"""
+Clean the Directory.
+
+Remove the generated files
+"""
+
 # -*- coding: utf-8 -*-
 
 #
@@ -39,40 +45,20 @@
 #
 
 
-import csv
-
-"""
-    Auftrag Nummer, 
-    Hauptbereich , 
-    Auftragsdatum, 
-    Tage offen , 
-    Deb.-Nr., 
-    Deb.-Name, 
-    Verkäufer Serviceberater, 
-    Arbeitswert, 
-    Teile , 
-    Fremdleistung, 
-    Andere, 
-    Gesamt, 
-    Auftragswert bereit geliefert
-
-"""
+import os
 
 
-class GetData:
-    def __init__(self, filename):
-        self.file_name = filename
+class CleanOutputDir:
+    """Clean the output directory."""
 
-    def get(self):
-        global orders_file
-        try:
-            with open(self.file_name, "r") as orders_file:
-                orders = csv.reader(orders_file, delimiter=";", quotechar='"')
-                data = list(orders)
+    def __init__(self, outdir):
+        """Init the CleanOutputDir Class."""
+        self.out_dir = outdir
 
-                return data
-
-        except IOError:
-            print("The File with the data '" + self.file_name + "' does not exists")
-        finally:
-            orders_file.close()
+    def clean(self):
+        """Before write the new excel files, remove the old ones."""
+        files = os.listdir(self.out_dir)
+        for file in files:
+            if '.xlsx' in file:
+                os.remove(file)
+                print(file)

@@ -1,15 +1,33 @@
 
-# openorders
-[![Updates](https://pyup.io/repos/github/jmuelbert/jmopenorders/shield.svg)](https://pyup.io/repos/github/jmuelbert/jmopenorders/)
-[![Python 3](https://pyup.io/repos/github/jmuelbert/jmopenorders/python-3-shield.svg)](https://pyup.io/repos/github/jmuelbert/jmopenorders/)
-[![GitHub license](https://img.shields.io/badge/license-EUPL-blue.svg)](https://joinup.ec.europa.eu/page/eupl-text-11-12)
-[![Build Status](https://travis-ci.org/jmuelbert/jmopenorders.svg?branch=master)](https://travis-ci.org/jmuelbert/jmopenorders)
+openorders
+==========
+
+..  image:: https://pyup.io/repos/github/jmuelbert/jmopenorders/shield.svg
+        :target: https://pyup.io/repos/github/jmuelbert/jmopenorders/
+        :alt: Updates
+
+..  image:: https://pyup.io/repos/github/jmuelbert/jmopenorders/python-3-shield.svg
+        :target: https://pyup.io/repos/github/jmuelbert/jmopenorders/
+        :alt: Python 3
+
+..  image:: https://img.shields.io/badge/license-EUPL-blue.svg
+        :target: https://joinup.ec.europa.eu/page/eupl-text-11-12
+        :alt: GitHub license
+
+..  image:: https://travis-ci.org/jmuelbert/jmopenorders.svg?branch=master
+        :target: https://travis-ci.org/jmuelbert/jmopenorders
+        :alt: Build Status
+
+..  image:: https://ci.appveyor.com/api/projects/status/fix0w1e14elb1hmg/branch/master?svg=true
+        :target: https://ci.appveyor.com/project/jmuelbert/jmopenorders/branch/master
+        :alt: Build status
 
 jmopenorders is a generator to generate infos for the affected persons.
 
 jmopenorders is written in [python](https://www.python.org). python does run on almosts known platforms.
 
-## Sources
+Sources
+-------
 
 The master branch represents the latest pre-release code.
 
@@ -17,18 +35,22 @@ The master branch represents the latest pre-release code.
 
 - [Milestones](https://github.com/jmuelbert/jmopenorders/milestones)
 
-## Requests and Bug reports
+Requests and Bug reports
+------------------------
 
 - [GitHub issues (preferred)](https://github.com/jmuelbert/jmopenorders/issues)
 
-## Questions or Comments
+Questions or Comments
+---------------------
 
-## Wiki
+Wiki
+----
 
 - [Main Page](https://github.com/jmuelbert/jmopenorders/wiki)
 - [User Manual](http://jmuelbert.github.io/jmopenorders/)
 
-## Installing
+Installing
+----------
 
 An install script is preferred. You can you the latest release or build the newest version with the command:
 
@@ -39,7 +61,8 @@ or
 
 This build an python installer
 
-## License
+License
+-------
 
 openorders is free software; you can redistribute ot and/or modify ir under the terms
 of the [European Public License Version 1.2](https://joinup.ec.europa.eu/page/eupl-text-11-12).

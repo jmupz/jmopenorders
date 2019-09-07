@@ -1,0 +1,4 @@
+[run]
+include = jmopenorders/*
+omit = *tests*
+plugins =

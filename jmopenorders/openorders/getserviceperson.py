@@ -1,3 +1,4 @@
+"""Get the service persion from csv-file."""
 # -*- coding: utf-8 -*-
 
 #
@@ -38,19 +39,26 @@
 # unter der Lizenz sind dem Lizenztext zu entnehmen.
 #
 
-
 import csv
 import logging
 import logging.config
 
 
 class GetServicePerson():
+    """Handle the service person."""
+
     def __init__(self, filename):
+        """Init the GetServicePerson Class."""
         self.file_name = filename
         self.berater = []
         self.logger = logging.getLogger(__name__)
 
     def get(self):
+        """
+        Read the Service Person from csv-file.
+
+        Then create a array and get this back
+        """
         service_person = []
         try:
             with open(self.file_name, "r") as berater_file:
@@ -63,6 +71,6 @@ class GetServicePerson():
                 return service_person
 
         except IOError:
-            self.logger.error("The File for the service persons '" + self.file_name + "' does not exists")
+            self.logger.error("The File for the service persons %s does not exists", self.file_name)
         finally:
             berater_file.close()

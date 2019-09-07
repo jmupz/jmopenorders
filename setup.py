@@ -40,88 +40,67 @@
 #
 
 """The setup.py file for Python openorders."""
-
+from datetime import datetime as dt
 from setuptools import setup, find_packages
 import pkg_resources
 import sys
 import os
 
 __version__ = '0.1.0'
+MIN_PY_VERSION = "3.6"
+PROJECT_NAME = "JM OpenOrders"
+PROJECT_PACKAGE_NAME = "jmopenorders"
+PROJECT_LICENSE = "EUPL-1.2 "
+PROJECT_AUTHOR = "Jürgen Mülbert"
+PROJECT_COPYRIGHT = " 2018-{}, {}".format(dt.now().year, PROJECT_AUTHOR)
+PROJECT_URL = "https://jmopenorders.github.io/"
+PROJECT_EMAIL = "juergen.muelbert@gmail.com"
 
-try:
-    if int(pkg_resources.get_distribution("pip").version.split('.')[0]) < 6:
-        print('pip older than 6.0 not supported, please upgrade pip with:\n\n'
-              '    pip install -U pip')
-        sys.exit(-1)
-except pkg_resources.DistributionNotFound:
-    pass
+PROJECT_GITHUB_USERNAME = "jmuelbert"
+PROJECT_GITHUB_REPOSITORY = "jmopenorders"
 
-if os.environ.get('CONVERT_README'):
-    import pypandoc
+PYPI_URL = "https://pypi.python.org/pypi/{}".format(PROJECT_PACKAGE_NAME)
+GITHUB_PATH = "{}/{}".format(PROJECT_GITHUB_USERNAME, PROJECT_GITHUB_REPOSITORY)
+GITHUB_URL = "https://github.com/{}".format(GITHUB_PATH)
 
-    long_description = pypandoc.convert('README.md', 'rst')
-else:
-    long_description = ''
+DOWNLOAD_URL = "{}/archive/{}.zip".format(GITHUB_URL, __version__)
+PROJECT_URLS = {
+    "Bug Reports": "{}/issues".format(GITHUB_URL)
+}
 
-version = sys.version_info[:2]
-if version < (2, 7):
-    print('jmopenorders requires Python version 2.7 or later' +
-          ' ({}.{} detected).'.format(*version))
-    sys.exit(-1)
-elif (3, 0) < version < (3, 4):
-    print('jmopenorders requires Python version 3.4 or later' +
-          ' ({}.{} detected).'.format(*version))
-    sys.exit(-1)
+PACKAGES = find_packages(exclude=["tests", "tests.*"])
 
+install_requires = [
+    'pexpect>=4.7.0',
+    'openpyxl>=2.6.3',
+    'pypandoc>=1.4'
+    ]
 
+test_requirements = [
+    'tox',
+    'flake8==2.6.0'
+]
 
-install_requires = ['psutil', 'colorama', 'six', 'decorator', 'pyte']
-extras_require = {':python_version<"3.4"': ['pathlib2'],
-                  ':python_version<"3.3"': ['backports.shutil_get_terminal_size'],
-                  ":sys_platform=='win32'": ['win_unicode_console']}
+extras_require = {}
 
 setup(
-    name='jmopenorders',
+    name=PROJECT_PACKAGE_NAME,
     version=__version__,
-    # Authorship and online reference
-    author='Jürgen Mülbert',
-    author_email='juergen.muelbert@gmail.com',
-    url='https://github.com/jmuelbert/jmopenorders',
-    # Detailled description
-    description='Create OpenOrders Reports',
-    long_description='Create Excel Reports from the OpenOrders File from CarLO',
-    long_description_content_type='text/markdown',
-    keywords='business report',
-    download_url='https://github.com/jmuelbert/jmopenorders/tarball' + __version__,
-    license="EUPL-1.2",
-
-    classifiers=[
-        'Development Status :: 4 - Beta',
-        'Intended Audience :: Developers',
-        'Natural Language :: English',
-        'License :: OSI Approved :: European Union Public Licence 1.2 (EUPL 1.2)',
-        "Programming Language :: Python",
-        "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.6",
-        "Programming Language :: Python :: 3.7",
-
-        'Operating System :: OS Independent',
-        'Operating System :: POSIX',
-        'Operating System :: MacOS',
-        'Operating System :: Unix',
-    ],
-    # Package configuration
-    packages=find_packages(exclude=('ez_setup', 'examples',
-                                    'tests', 'tests.*',
-                                    'release', 'docs')),
+    url=PROJECT_URL,
+    download_url=DOWNLOAD_URL,
+    project_urls=PROJECT_URLS,
+    author=PROJECT_AUTHOR,
+    author_email=PROJECT_EMAIL,
+    packages=PACKAGES,
     include_package_data=True,
     zip_safe=False,
-    python_requires=">=3.6",
     install_requires=install_requires,
+    python_requires=">={}".format(MIN_PY_VERSION),
+    test_suite="tests",
+    tests_require=test_requirements,
     entry_points={
         'console_scripts': [
-            'jmopenorders = jmopenorders.entrypoints.main:main',
-            'jmorders = jmopenorders.entrypoints.not_configured:main'
+            'jmopenorders = jmopenorders.__main__:main',
         ]
-    }
+    },
 )

@@ -1,53 +1,59 @@
+# Config file for automatic building at travis-ci.org
+
 language: python
-python: "3.6"
-sudo: required
-dist: xenial
+sudo: false
 
-env:
-  global:
-    # used by ci-helpers
-    - DEPS="pytest pylint tox coveralls six"
-    - MINICONDA_VERSION=latest
-    - DISPLAY=":99.0"
+python:
+  - "3.6"
 
-  matrix:
-    # - LINTING=1
-    - PYTHON_VERSION=3.6
-    - PYTHON_VERSION=3.7
+matrix:
+  fast_finish: true
+  include:
+    - python: "3.6.1"
+      env: TOXENV=lint
+    - python: "3.6.1"
+      env: TOXENV=pylint
+    - python: "3.6.1"
+      env: TOXENV=py36
+    - python: "3.7"
+      env: TOXENV=py37
+    - python: "3.8"
+      env: TOXENV=py38
+cache:
+  directories:
+    - $HOME/.cache/pip
+    - $HOME/download
+    
+before_install:
+  - wget http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
+  - bash miniconda.sh -b -p $HOME/miniconda
+  - export PATH="$HOME/miniconda/bin:$PATH"
+  - hash -r
+    - hash -r
+  - conda config --set always_yes yes --set changeps1 no
+  - conda update -q conda
+  - conda info -a
+
+  # - conda build conda.receipe --no-test
+  # - conda install --use-local repository_name
 
 install:
-  - |
-    if [ $LINTING == "1" ]; then
-      pip install -U pip
-      pip install tox
-    else
-      # Xvfb / window manager
-      sudo apt-get update
-      sudo apt-get install -y xvfb herbstluftwm
-      # courtesy of https://github.com/astropy/ci-helpers/blob/master/travis/setup_conda_linux.sh
-      /sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -screen 0 1920x1200x24 -ac +extension GLX +render -noreset
-      # Setup miniconda
-      wget https://repo.continuum.io/miniconda/Miniconda3-${MINICONDA_VERSION}-Linux-x86_64.sh -O miniconda.sh
-      bash miniconda.sh -b -p $HOME/miniconda
-      export PATH="$HOME/miniconda/bin:$PATH"
-      conda config --add channels conda-forge
-      conda config --set always_yes yes --set changeps1 no
-      conda create -n test --quiet python=${PYTHON_VERSION} ${DEPS} ${PYQT_PACKAGE}
-      source activate test && pip install -e .
-    fi
-before_script:
-  - "herbstluftwm &"
-  - sleep 1
+  - conda create -q -n jmbuild python=$TRAVIS_PYTHON_VERSION
+  - source activate jmbuild
+  - conda install conda-build anaconda-client pytest pytest-cov tox
+  - conda install pexpect openpyxl
+  - conda install pip
+  - pip install .
 
 script:
-  - |
-    if [ $LINTING == "1" ]; then
-      tox -e linting
-    else
-      source activate test && catchsegv coverage run --source=jmopenorders -m pytest -v tests
-    fi
+  - tox -e lint
+  - tox -e pylint
+  - tox -e py37
+  - tox -e docs
 
 after_success:
+  - conda install -c conda-forge codecov
+  - codecov
   - coveralls
 # deploy:
 #  provider: pypi

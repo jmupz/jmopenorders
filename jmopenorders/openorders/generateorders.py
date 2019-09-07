@@ -39,28 +39,28 @@
 #
 
 """
-    This Program will read a csv that contents service persons
-    as csv.
-    Then reads an csv with informations of this people and split
-    the csv. for each person writes a seperate excel-file.
+This Program will read a csv that contents service persons as csv.
 
-    The Format of the person file is:
-        | Name | Firstname |
+Then reads an csv with informations of this people and split
+the csv. for each person writes a seperate excel-file.
 
-    The Format of the data file is:
-        - Auftrag Nummer                pos 0 (String)
-        - Hauptbereich                  pos 1 (String)
-        - Auftragsdatum                 pos 2 (Datum)
-        - Tage offen                    pos 3 (Int)
-        - Deb.-Nr.                      pos 4 (String)
-        - Deb.-Name                     pos 5 (String)
-        - Verkäufer Serviceberater      pos 6 (String)
-        - Arbeitswert                   pos 7 (float)
-        - Teile                         pos 8 (float)
-        - Fremdleistung                 pos 9 (float)
-        - Andere                        pos 10 (float)
-        - Gesamt                        pos 11 (float)
-        - Auftragswert bereit geliefert pos 12 (float)
+The Format of the person file is:
+    | Name | Firstname |
+
+The Format of the data file is:
+    - Auftrag Nummer                pos 0 (String)
+    - Hauptbereich                  pos 1 (String)
+    - Auftragsdatum                 pos 2 (Datum)
+    - Tage offen                    pos 3 (Int)
+    - Deb.-Nr.                      pos 4 (String)
+    - Deb.-Name                     pos 5 (String)
+    - Verkäufer Serviceberater      pos 6 (String)
+    - Arbeitswert                   pos 7 (float)
+    - Teile                         pos 8 (float)
+    - Fremdleistung                 pos 9 (float)
+    - Andere                        pos 10 (float)
+    - Gesamt                        pos 11 (float)
+    - Auftragswert bereit geliefert pos 12 (float)
 """
 
 import os
@@ -70,12 +70,15 @@ from openpyxl.styles import Font
 
 
 class GenerateOrders:
+    """Generate the orders for output."""
+
     def __init__(self, destdir):
+        """Init the GenerateOrders Class."""
         self.dest_name = ''
         self.dest_dir = destdir
 
     def create(self, actual_name, actual_content):
-        """ Put all the data for the actual_name to the excel-file """
+        """Put all the data for the actual_name to the excel-file."""
         row_num = 1
         col_num = 1
 

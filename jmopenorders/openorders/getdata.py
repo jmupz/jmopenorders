@@ -1,3 +1,4 @@
+"""Get the Data from csv-file to generate to output."""
 # -*- coding: utf-8 -*-
 
 #
@@ -39,17 +40,43 @@
 #
 
 
-import os
+import csv
 
 
-class CleanOutputDir:
-    def __init__(self, outdir):
-        self.out_dir = outdir
+class GetData:
+    """
+    Get the data from csv-file.
 
-    def clean(self):
-        """ Before write the new excel files, remove the old ones """
-        files = os.listdir(self.out_dir)
-        for file in files:
-            if '.xlsx' in file:
-                os.remove(file)
-                print(file)
+    Auftrag Nummer,
+    Hauptbereich ,
+    Auftragsdatum,
+    Tage offen ,
+    Deb.-Nr.,
+    Deb.-Name,
+    Verkäufer Serviceberater,
+    Arbeitswert,
+    Teile ,
+    Fremdleistung,
+    Andere,
+    Gesamt,
+    Auftragswert bereit geliefert
+    """
+
+    def __init__(self, filename):
+        """Init the GetData Class."""
+        self.file_name = filename
+
+    def get(self):
+        """Get the data from the csv-file."""
+        # global orders_file
+        try:
+            with open(self.file_name, "r") as orders_file:
+                orders = csv.reader(orders_file, delimiter=";", quotechar='"')
+                data = list(orders)
+
+                return data
+
+        except IOError:
+            print("The File with the data '" + self.file_name + "' does not exists")
+        finally:
+            orders_file.close()
