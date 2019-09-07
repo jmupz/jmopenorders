@@ -76,21 +76,16 @@ if sys.argv[-1] == 'publish':
 
 PACKAGES = find_packages(exclude=["tests", "tests.*"])
 
-here = os.path.abspath(os.path.dirname(__file__))
-
-def requirements():
-    """Build the requirements list for this project"""
-    requirements_list = []
-
-    with open(os.path.join(here, 'requirements_all.txt')) as requirements:
-        for install in requirements:
-            requirements_list.append(install.strip())
-
-    return requirements_list
+REQUIREMENTS = [
+    'pexpect',
+    'openpyxl',
+    'pypandoc',
+    'python-slugify'
+]
 
 test_requirements = [
     'tox',
-    'flake8==2.6.0'
+    'flake8'
 ]
 
 extras_require = {}
@@ -106,7 +101,7 @@ setup(
     packages=PACKAGES,
     include_package_data=True,
     zip_safe=False,
-    install_requires=requirements(),
+    install_requires=REQUIREMENTS,
     python_requires=">={}".format(MIN_PY_VERSION),
     test_suite="tests",
     tests_require=test_requirements,
