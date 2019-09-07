@@ -5,6 +5,8 @@ environment:
   global:
     CONDA_PATH: "C:\\Miniconda3-x64"
   matrix:
+    - PYTHON_VERSION: "3.6"
+      platform: x64
     - PYTHON_VERSION: "3.7"
       platform: x64
 
@@ -37,7 +39,7 @@ build_script:
   - python setup.py build_ext -i
 
 test_script:
-  - python.exe tox -e lint"
-  - python.exe tox -e pylint"
-  - python.exe tox -e cov"
-  - python.exe tox -e docs"
+  - tox -e lint"
+  - tox -e pylint"
+  - tox -e cov"
+  - tox -e docs"
