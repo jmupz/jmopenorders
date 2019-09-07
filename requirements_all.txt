@@ -1,4 +1,4 @@
-pip==19.0.3
+pip==19.2.3
 pexpect==4.7.0
 openpyxl==2.6.3
 pypandoc==1.4
