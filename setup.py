@@ -45,10 +45,17 @@ from setuptools import setup, find_packages
 import pkg_resources
 import sys
 import os
+import io
 
-__version__ = '0.1.0'
+with io.open("README.rst", "rt", encoding="utf8") as f:
+    readme = f.read()
+
+__version__ = "0.1.0"
 MIN_PY_VERSION = "3.6"
 PROJECT_NAME = "JM OpenOrders"
+PROJECT_DESCRIPTION = (
+    "jmopenorders is a generator to generate infos for the affected persons"
+)
 PROJECT_PACKAGE_NAME = "jmopenorders"
 PROJECT_LICENSE = "EUPL-1.2 "
 PROJECT_AUTHOR = "Jürgen Mülbert"
@@ -64,35 +71,27 @@ GITHUB_PATH = "{}/{}".format(PROJECT_GITHUB_USERNAME, PROJECT_GITHUB_REPOSITORY)
 GITHUB_URL = "https://github.com/{}".format(GITHUB_PATH)
 
 DOWNLOAD_URL = "{}/archive/{}.zip".format(GITHUB_URL, __version__)
-PROJECT_URLS = {
-    "Bug Reports": "{}/issues".format(GITHUB_URL)
-}
+PROJECT_URLS = {"Bug Reports": "{}/issues".format(GITHUB_URL)}
 
 # 'setup.py publish' shortcut.
-if sys.argv[-1] == 'publish':
-    os.system('python setup.py sdist bdist_wheel')
-    os.system('twine upload dist/*')
+if sys.argv[-1] == "publish":
+    os.system("python setup.py sdist bdist_wheel")
+    os.system("twine upload dist/*")
     sys.exit()
 
 PACKAGES = find_packages(exclude=["tests", "tests.*"])
 
-REQUIREMENTS = [
-    'pexpect',
-    'openpyxl',
-    'pypandoc',
-    'python-slugify'
-]
+REQUIREMENTS = ["pexpect", "openpyxl", "python-slugify"]
 
-test_requirements = [
-    'tox',
-    'flake8'
-]
+test_requirements = ["tox"]
 
 extras_require = {}
 
 setup(
     name=PROJECT_PACKAGE_NAME,
     version=__version__,
+    description=PROJECT_DESCRIPTION,
+    long_description=readme,
     url=PROJECT_URL,
     download_url=DOWNLOAD_URL,
     project_urls=PROJECT_URLS,
@@ -105,9 +104,5 @@ setup(
     python_requires=">={}".format(MIN_PY_VERSION),
     test_suite="tests",
     tests_require=test_requirements,
-    entry_points={
-        'console_scripts': [
-            'jmopenorders = jmopenorders.__main__:main',
-        ]
-    },
+    entry_points={"console_scripts": ["jmopenorders = jmopenorders.__main__:main"]},
 )

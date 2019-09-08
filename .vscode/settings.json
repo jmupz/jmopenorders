@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": "/Users/juergen/anaconda3/bin/python",
+    "python.pythonPath": "/Users/juergen/anaconda3/envs/jmopenorders/bin/python",
     "python.linting.pylintEnabled": true,
     "python.linting.pylintArgs": ["--reports", "12", "--disable-msg", "I0011"],
     "python.linting.flake8Enabled": false,
@@ -57,4 +57,5 @@
 
     // Enable parameter hints
     "editor.parameterHints.enabled": true,
+    "python.formatting.provider": "black",
 }
