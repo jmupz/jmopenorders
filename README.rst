@@ -1,6 +1,16 @@
+jmopenorders
+=====
+.. image:: https://img.shields.io/pypi/v/jmopenorders.svg
+        :target: https://pypi.python.org/pypi/jmopenorders
+        :alt: PyPi
 
-openorders
-==========
+.. image:: https://img.shields.io/pypi/wheel/jmopenorders.svg
+        :target: https://pypi.python.org/pypi/jmopenorders/
+        :alt: Wheel
+
+.. image:: https://img.shields.io/pypi/pyversions/jmopenorders.svg
+        :target: https://pypi.python.org/pypi/jmopenorders/
+        :alt: PyPi-Versions
 
 ..  image:: https://pyup.io/repos/github/jmuelbert/jmopenorders/shield.svg
         :target: https://pyup.io/repos/github/jmuelbert/jmopenorders/
@@ -24,21 +34,21 @@ openorders
 
 jmopenorders is a generator to generate infos for the affected persons.
 
-jmopenorders is written in [python](https://www.python.org). python does run on almosts known platforms.
+jmopenorders is written in `python <https://www.python.org>`_. python does run on almosts known platforms.
 
 Sources
 -------
 
 The master branch represents the latest pre-release code.
 
-- [Releases](https://github.com/jmuelbert/jmopenorders/releases)
+- 'Releases <https://github.com/jmuelbert/jmopenorders/releases>`_
 
-- [Milestones](https://github.com/jmuelbert/jmopenorders/milestones)
+- `Milestones <https://github.com/jmuelbert/jmopenorders/milestones`_
 
 Requests and Bug reports
 ------------------------
 
-- [GitHub issues (preferred)](https://github.com/jmuelbert/jmopenorders/issues)
+- `GitHub issues (preferred) <https://github.com/jmuelbert/jmopenorders/issues>`_
 
 Questions or Comments
 ---------------------
@@ -46,8 +56,8 @@ Questions or Comments
 Wiki
 ----
 
-- [Main Page](https://github.com/jmuelbert/jmopenorders/wiki)
-- [User Manual](http://jmuelbert.github.io/jmopenorders/)
+- `Main Page <https://github.com/jmuelbert/jmopenorders/wiki>`_
+- 'User Manual <http://jmuelbert.github.io/jmopenorders/>`_
 
 Installing
 ----------
@@ -65,9 +75,7 @@ License
 -------
 
 openorders is free software; you can redistribute ot and/or modify ir under the terms
-of the [European Public License Version 1.2](https://joinup.ec.europa.eu/page/eupl-text-11-12).
-Please read the [LICENSE](https://github.com/jmuelbert/jmopenorders/blob/master/LICENSE) for additional information.
+of the `European Public License Version 1.2 <https://joinup.ec.europa.eu/page/eupl-text-11-12>`_.
+Please read the `LICENSE <https://github.com/jmuelbert/jmopenorders/blob/master/LICENSE>`_ for additional information.
 
-EUPL-1.2 © [Jürgen Mülbert](https:/github.com/jmuelbert/jmopenorders)
-
-[Return to top](#top)
+EUPL-1.2 © Jürgen Mülbert
