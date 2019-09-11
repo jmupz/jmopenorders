@@ -98,7 +98,7 @@ PYPI_URL = "https://pypi.python.org/pypi/{}".format(PROJECT_PACKAGE_NAME)
 GITHUB_PATH = "{}/{}".format(PROJECT_GITHUB_USERNAME, PROJECT_GITHUB_REPOSITORY)
 GITHUB_URL = "https://github.com/{}".format(GITHUB_PATH)
 
-DOWNLOAD_URL = "{}/archive/{}.zip".format(GITHUB_URL, __version__)
+DOWNLOAD_URL = "{}/archive/{}.zip".format(GITHUB_URL, version)
 PROJECT_URLS = [
     {"Source Code": "{GITHUB_URL}"},
     {"Bug Reports": "{}/issues".format(GITHUB_URL)},
