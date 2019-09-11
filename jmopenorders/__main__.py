@@ -57,93 +57,117 @@ from .openorders import generateorders
 def main():
     """Program entry point."""
 
-    logging.config.fileConfig('logging.conf')
+    logging.config.fileConfig(
+        os.path.join(os.path.dirname(os.path.abspath(__file__)), "logging.conf")
+    )
     # logger = logging.getLogger(__name__)
 
     config = configparser.ConfigParser()
-    config['DEFAULT'] = {
-        'DataPath': 'InputPath',
-        'OutPath': 'OutputPath',
-        'PersonFile': 'Person',
-        'DataFile': 'Data'
+    config["DEFAULT"] = {
+        "DataPath": "InputPath",
+        "OutPath": "OutputPath",
+        "PersonFile": "Person",
+        "DataFile": "Data",
     }
 
-    config['DEBUG'] = {
-        'LogFile': 'JMOpenOrders.log',
-        'Level': 'INFO'
-    }
+    config["DEBUG"] = {"LogFile": "JMOpenOrders.log", "Level": "INFO"}
 
-    inifile = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'jmopenorders.ini')
+    inifile = os.path.join(
+        os.path.dirname(os.path.abspath(__file__)), "jmopenorders.ini"
+    )
     if Path(inifile).exists():
-        logging.debug('Read existing config file: %s', inifile)
+        logging.debug("Read existing config file: %s", inifile)
         config.read(inifile)
 
     else:
-        logging.debug('Create new config file: %s', inifile)
-        with open(inifile, 'w') as configfile:
+        logging.debug("Create new config file: %s", inifile)
+        with open(inifile, "w") as configfile:
             config.write(configfile)
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('--personfile', type=str, help="The File with the Service Persons")
-    parser.add_argument('--datafile', type=str, help="The File with the Data")
-    parser.add_argument('--datapath', type=str, help="The Path to the Data File")
-    parser.add_argument('--outpath', type=str, help="The Directory for the Excel-Files")
+    parser.add_argument(
+        "--personfile", type=str, help="The File with the Service Persons"
+    )
+    parser.add_argument("--datafile", type=str, help="The File with the Data")
+    parser.add_argument("--datapath", type=str, help="The Path to the Data File")
+    parser.add_argument("--outpath", type=str, help="The Directory for the Excel-Files")
 
     args = parser.parse_args()
 
     settings_change = False
 
     if args.personfile is None:
-        logging.debug("take Personfile from configfile to: %s", config['DEFAULT']['PersonFile'])
+        logging.debug(
+            "take Personfile from configfile to: %s", config["DEFAULT"]["PersonFile"]
+        )
     else:
         settings_change = True
-        logging.debug("set new config for Personfile from args['personfile'] = %s", args.personfile)
-        config['DEFAULT']['PersonFile'] = args.personfile
+        logging.debug(
+            "set new config for Personfile from args['personfile'] = %s",
+            args.personfile,
+        )
+        config["DEFAULT"]["PersonFile"] = args.personfile
 
     if args.datafile is None:
-        logging.debug("take Datafile from configfile to: %s", config['DEFAULT']['DataFile'])
+        logging.debug(
+            "take Datafile from configfile to: %s", config["DEFAULT"]["DataFile"]
+        )
     else:
         settings_change = True
-        logging.debug("set new config for Datafile from args['datafile']  = %s", args.datafile)
-        config['DEFAULT']['DataFile'] = args.datafile
+        logging.debug(
+            "set new config for Datafile from args['datafile']  = %s", args.datafile
+        )
+        config["DEFAULT"]["DataFile"] = args.datafile
 
     if args.datapath is None:
-        logging.debug("take DataPath from configfile to: %s", config['DEFAULT']['DataPath'])
+        logging.debug(
+            "take DataPath from configfile to: %s", config["DEFAULT"]["DataPath"]
+        )
     else:
         settings_change = True
-        logging.debug("set new config for Datapath from args[datapath]= %s", args.datapath)
-        config['DEFAULT']['DataPath'] = args.datapath
+        logging.debug(
+            "set new config for Datapath from args[datapath]= %s", args.datapath
+        )
+        config["DEFAULT"]["DataPath"] = args.datapath
 
     if args.outpath is None:
-        logging.debug('take OutputPath from configfile to: %s', config['DEFAULT']['OutPath'])
+        logging.debug(
+            "take OutputPath from configfile to: %s", config["DEFAULT"]["OutPath"]
+        )
     else:
         settings_change = True
-        logging.debug("st new config for Output Path from args[OutPath]= %s", args.outpath)
-        config['DEFAULT']['OutPath'] = args.outpath
+        logging.debug(
+            "st new config for Output Path from args[OutPath]= %s", args.outpath
+        )
+        config["DEFAULT"]["OutPath"] = args.outpath
 
     if settings_change is True:
-        logging.debug('Write changes to config file: %s', inifile)
-        with open(inifile, 'w') as configfile:
+        logging.debug("Write changes to config file: %s", inifile)
+        with open(inifile, "w") as configfile:
             config.write(configfile)
 
-    logging.basicConfig(filename=config['DEBUG']['logfile'], level=logging.DEBUG)
+    logging.basicConfig(filename=config["DEBUG"]["logfile"], level=logging.DEBUG)
 
-    personfile = os.path.join(os.path.abspath(config['DEFAULT']['DataPath']), config['DEFAULT']['PersonFile'])
-    logging.debug('Personfile= %s', personfile)
+    personfile = os.path.join(
+        os.path.abspath(config["DEFAULT"]["DataPath"]), config["DEFAULT"]["PersonFile"]
+    )
+    logging.debug("Personfile= %s", personfile)
     names = getserviceperson.GetServicePerson(personfile)
     berater = names.get()
 
-    datafile = os.path.join(os.path.abspath(config['DEFAULT']['DataPath']), config['DEFAULT']['DataFile'])
+    datafile = os.path.join(
+        os.path.abspath(config["DEFAULT"]["DataPath"]), config["DEFAULT"]["DataFile"]
+    )
     data = getdata.GetData(datafile)
     orders = data.get()
 
-    cleanoutputdir.CleanOutputDir(config['DEFAULT']['OutPath'])
+    cleanoutputdir.CleanOutputDir(config["DEFAULT"]["OutPath"])
 
     for actual_berater in berater:
         print("actual_berater: " + actual_berater)
         berater_name = actual_berater
         print("Berater Name: " + berater_name)
-        create_table = generateorders.GenerateOrders(config['DEFAULT']['OutPath'])
+        create_table = generateorders.GenerateOrders(config["DEFAULT"]["OutPath"])
         create_table.create(actual_name=berater_name, actual_content=orders)
 
 
