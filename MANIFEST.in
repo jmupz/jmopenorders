@@ -1,2 +1,5 @@
-include README.md
+include README.rst
 include LICENSE
+include LICENSE.DE
+include jmopenorders/logging.conf
+include jmopenorders/jmopenorders.ini

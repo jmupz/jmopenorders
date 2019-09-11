@@ -41,7 +41,7 @@ Sources
 
 The master branch represents the latest pre-release code.
 
-- 'Releases <https://github.com/jmuelbert/jmopenorders/releases>`_
+- `Releases <https://github.com/jmuelbert/jmopenorders/releases>`_
 
 - `Milestones <https://github.com/jmuelbert/jmopenorders/milestones`_
 
@@ -57,7 +57,7 @@ Wiki
 ----
 
 - `Main Page <https://github.com/jmuelbert/jmopenorders/wiki>`_
-- 'User Manual <http://jmuelbert.github.io/jmopenorders/>`_
+- `User Manual <http://jmuelbert.github.io/jmopenorders/>`_
 
 Installing
 ----------

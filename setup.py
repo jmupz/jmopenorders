@@ -47,10 +47,38 @@ import sys
 import os
 import io
 
-with io.open("README.rst", "rt", encoding="utf8") as f:
-    readme = f.read()
+# Global functions
+##################
 
-__version__ = "0.1.0"
+with open(os.path.join("jmopenorders", "__init__.py"), encoding="utf-8") as f:
+    version = re.search(r"^__version__ = ['\"]([^'\"]*)['\"]", f.read(), re.M).group(1)
+
+if not version:
+    raise RuntimeError("Cannot find Glances version information.")
+
+with io.open("README.rst", "rt", encoding="utf8") as f:
+    long_description = f.read()
+
+
+def get_data_files():
+    data_files = [
+        (
+            "share/doc/jmopenorders",
+            [
+                "AUTHORS",
+                "COPYING",
+                "NEWS.rst",
+                "README.rst",
+                "CONTRIBUTING.md",
+                "conf/jmopenorders.conf",
+            ],
+        ),
+        ("share/man/man1", ["docs/man/jmopenorders.1"]),
+    ]
+
+    return data_files
+
+
 MIN_PY_VERSION = "3.6"
 PROJECT_NAME = "JM OpenOrders"
 PROJECT_DESCRIPTION = (
@@ -71,8 +99,15 @@ GITHUB_PATH = "{}/{}".format(PROJECT_GITHUB_USERNAME, PROJECT_GITHUB_REPOSITORY)
 GITHUB_URL = "https://github.com/{}".format(GITHUB_PATH)
 
 DOWNLOAD_URL = "{}/archive/{}.zip".format(GITHUB_URL, __version__)
-PROJECT_URLS = {"Bug Reports": "{}/issues".format(GITHUB_URL)}
-
+PROJECT_URLS = [
+    {"Source Code": "{GITHUB_URL}"},
+    {"Bug Reports": "{}/issues".format(GITHUB_URL)},
+    {
+        "Documentation": "https://readthedocs.org/projects/{}".format(
+            PROJECT_PACKAGE_NAME
+        )
+    },
+]
 # 'setup.py publish' shortcut.
 if sys.argv[-1] == "publish":
     os.system("python setup.py sdist bdist_wheel")
@@ -89,9 +124,9 @@ extras_require = {}
 
 setup(
     name=PROJECT_PACKAGE_NAME,
-    version=__version__,
+    version=version,
     description=PROJECT_DESCRIPTION,
-    long_description=readme,
+    long_description=long_description,
     url=PROJECT_URL,
     download_url=DOWNLOAD_URL,
     project_urls=PROJECT_URLS,
