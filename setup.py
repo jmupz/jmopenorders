@@ -127,5 +127,5 @@ setup(
     python_requires=">={}".format(MIN_PY_VERSION),
     test_suite="tests",
     tests_require=test_requirements,
-    entry_points={"console_scripts": ["jmopenorders = jmopenorders.__main__:main"]},
+    entry_points={"console_scripts": ["jmopenorders = jmopenorders.__main__:cli‚"]},
 )

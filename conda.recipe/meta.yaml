@@ -6,14 +6,15 @@ package:
   version: "{{ version }}"
 
 source:
-  url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
   sha256: "e0dcc4ed8b63b37d561dfdf8d4f4a436e2b88988df18855b7e84c4ec7716efb8"
 
 build:
+  noarch: python
   number: 0
   entry_points:
-    - jmopenorders = jmopenorders.__main__:cli
-  script: "{{ PYTHON }}" -m pip install . --no-deps --ignore-installed -vv
+    - jmopenorders = jmopenorders.__main__:cli,
+  script: "{{ PYTHON }}"" -m pip install . --no-deps --ignore-installed -vv"
 
 requirements:
   host:
