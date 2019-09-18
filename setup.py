@@ -48,6 +48,7 @@ import ast
 from datetime import datetime as dt
 from setuptools import setup, find_packages
 from pathlib import Path  # noqa E402
+import versioneer
 
 CURRENT_DIR = Path(__file__).parent
 
@@ -57,18 +58,6 @@ def get_long_description() -> str:
 
     with io.open(readme_rst, "rt", encoding="utf8") as f:
         readme = f.read()
-
-
-_version_re = re.compile(r"VERSION\s+=\s+(.*)")
-
-with open(os.path.join(CURRENT_DIR, "jmopenorders/__init__.py"), "rb") as f:
-    try:
-        version = str(
-            ast.literal_eval(_version_re.search(f.read().decode("utf-8")).group(1))
-        )
-    except:
-        __version__ = "test"
-        print("Version can't read, use test")
 
 
 MIN_PY_VERSION = "3.6"
@@ -113,7 +102,7 @@ extras_require = {}
 
 setup(
     name=PROJECT_PACKAGE_NAME,
-    version=__version__,
+    version="0.1.0",
     description=PROJECT_DESCRIPTION,
     long_description=get_long_description(),
     long_description_content_type="text/markdown",
@@ -129,5 +118,7 @@ setup(
     python_requires=">={}".format(MIN_PY_VERSION),
     test_suite="tests",
     tests_require=test_requirements,
-    entry_points={"console_scripts": ["jmopenorders = jmopenorders.cli:main‚"]},
+    entry_points={"console_scripts": ["jmopenorders=jmopenorders.cli:main"]},
+    version=versioneer.get_version(),
+    cmdclass=versioneer.get_cmdclass(),
 )
