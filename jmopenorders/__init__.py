@@ -1,4 +1,19 @@
-"""The App Version."""
+"""
+Put the version to the __version__ variable.
 
-from .__version__ import __version__
-from .__maim__ import main
+Realized with the versioneer.
+"""
+
+
+__all__ = ("VERSION", "Client", "get_version")  # noqa
+
+
+# Declare child imports last to prevent recursion
+from .__version__ import get_revision
+from .__version__ import get_version
+from .__version__ import __build__
+from .__main__ import main
+
+from ._version import get_versions
+__version__ = get_versions()['version']
+del get_versions
