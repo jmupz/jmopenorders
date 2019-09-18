@@ -12,7 +12,7 @@ matrix:
     - python: "3.6.1"
       env: TOXENV=lint
     - python: "3.6.1"
-      env: TOXENV=pylint
+      env: TOXENV=lint
     - python: "3.6.1"
       env: TOXENV=py36
     - python: "3.7"
@@ -31,15 +31,12 @@ before_install:
   - conda config --set always_yes yes --set changeps1 no
   - conda config --add channels conda-forge
   - conda update -q conda
-  - conda info -a
-
-  # - conda build conda.receipe --no-test
-  # - conda install --use-local repository_name
+  - conda config --set auto_update_conda no
 
 install:
   - conda create -q -n jmbuild python=$TRAVIS_PYTHON_VERSION
   - source activate jmbuild
-  - conda install conda-build anaconda-client pytest pytest-cov tox
+  - conda install tox
   - conda install pexpect openpyxl
   - conda install pip
   - pip install .
@@ -52,8 +49,12 @@ script:
 
 after_success:
   - conda install -c conda-forge codecov
+  - conda install conda-build anaconda-client pytest pytest-cov
   - codecov
   - coveralls
+  - conda build conda.recipe --no-test
+  - conda install --use-local jmopenorders
+  - conda info -a
 
 deploy:
   provider: pypi

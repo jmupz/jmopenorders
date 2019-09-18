@@ -40,43 +40,33 @@
 #
 
 """The setup.py file for Python openorders."""
-from datetime import datetime as dt
-from setuptools import setup, find_packages
-import pkg_resources
 import sys
 import os
 import io
+import re
+import ast
+from datetime import datetime as dt
+from setuptools import setup, find_packages
+from pathlib import Path  # noqa E402
 
-# Global functions
-##################
-
-with open(os.path.join("jmopenorders", "__init__.py"), encoding="utf-8") as f:
-    version = re.search(r"^__version__ = ['\"]([^'\"]*)['\"]", f.read(), re.M).group(1)
-
-if not version:
-    raise RuntimeError("Cannot find Glances version information.")
-
-with io.open("README.rst", "rt", encoding="utf8") as f:
-    long_description = f.read()
+CURRENT_DIR = Path(__file__).parent
 
 
-def get_data_files():
-    data_files = [
-        (
-            "share/doc/jmopenorders",
-            [
-                "AUTHORS",
-                "COPYING",
-                "NEWS.rst",
-                "README.rst",
-                "CONTRIBUTING.md",
-                "conf/jmopenorders.conf",
-            ],
-        ),
-        ("share/man/man1", ["docs/man/jmopenorders.1"]),
-    ]
+def get_long_description() -> str:
+    readme_rst = os.path.join(CURRENT_DIR, "README.rst")
 
-    return data_files
+    with io.open(readme_rst, "rt", encoding="utf8") as f:
+        readme = f.read()
+
+_version_re = re.compile(r'VERSION\s+=\s+(.*)')
+
+with open(os.path.join(CURRENT_DIR, 'jmopenorders/__init__.py'), 'rb') as f:
+    try:
+        version = str(ast.literal_eval(_version_re.search(
+            f.read().decode('utf-8')).group(1)))
+    except:
+        __version__ = "test"
+        print("Version can't read, use test")
 
 
 MIN_PY_VERSION = "3.6"
@@ -98,16 +88,13 @@ PYPI_URL = "https://pypi.python.org/pypi/{}".format(PROJECT_PACKAGE_NAME)
 GITHUB_PATH = "{}/{}".format(PROJECT_GITHUB_USERNAME, PROJECT_GITHUB_REPOSITORY)
 GITHUB_URL = "https://github.com/{}".format(GITHUB_PATH)
 
-DOWNLOAD_URL = "{}/archive/{}.zip".format(GITHUB_URL, version)
-PROJECT_URLS = [
-    {"Source Code": "{GITHUB_URL}"},
-    {"Bug Reports": "{}/issues".format(GITHUB_URL)},
-    {
-        "Documentation": "https://readthedocs.org/projects/{}".format(
-            PROJECT_PACKAGE_NAME
-        )
-    },
-]
+DOWNLOAD_URL = "{}/archive/{}.zip".format(GITHUB_URL, __version__)
+PROJECT_URLS = {
+    "Source Code": "{GITHUB_URL}",
+    "Bug Reports": "{}/issues".format(GITHUB_URL),
+    "Documentation": "https://readthedocs.org/projects/{}".format(PROJECT_PACKAGE_NAME),
+}
+
 # 'setup.py publish' shortcut.
 if sys.argv[-1] == "publish":
     os.system("python setup.py sdist bdist_wheel")
@@ -124,9 +111,10 @@ extras_require = {}
 
 setup(
     name=PROJECT_PACKAGE_NAME,
-    version=version,
+    version=__version__,
     description=PROJECT_DESCRIPTION,
-    long_description=long_description,
+    long_description=get_long_description(),
+    long_description_content_type="text/markdown",
     url=PROJECT_URL,
     download_url=DOWNLOAD_URL,
     project_urls=PROJECT_URLS,

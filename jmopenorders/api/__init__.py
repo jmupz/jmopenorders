@@ -1,9 +1,4 @@
-"""
-Clean the Directory.
-
-Remove the generated files
-"""
-
+"""JM OpenOrders Library."""
 # -*- coding: utf-8 -*-
 
 #
@@ -43,22 +38,3 @@ Remove the generated files
 # Die sprachspezifischen Genehmigungen und Beschränkungen
 # unter der Lizenz sind dem Lizenztext zu entnehmen.
 #
-
-
-import os
-
-
-class CleanOutputDir:
-    """Clean the output directory."""
-
-    def __init__(self, outdir):
-        """Init the CleanOutputDir Class."""
-        self.out_dir = outdir
-
-    def clean(self):
-        """Before write the new excel files, remove the old ones."""
-        files = os.listdir(self.out_dir)
-        for file in files:
-            if '.xlsx' in file:
-                os.remove(file)
-                print(file)

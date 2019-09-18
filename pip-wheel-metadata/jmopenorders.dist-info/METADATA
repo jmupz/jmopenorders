@@ -1,3 +1,33 @@
+Metadata-Version: 2.1
+Name: jmopenorders
+Version: test
+Summary: jmopenorders is a generator to generate infos for the affected persons
+Home-page: https://jmopenorders.github.io/
+Author: Jürgen Mülbert
+Author-email: juergen.muelbert@gmail.com
+License: EUPL-1.2
+Download-URL: https://github.com/jmuelbert/jmopenorders/archive/test.zip
+Project-URL: Source Code, {GITHUB_URL}
+Project-URL: Bug Reports, https://github.com/jmuelbert/jmopenorders/issues
+Project-URL: Documentation, https://readthedocs.org/projects/jmopenorders
+Keywords: business report
+Platform: any
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Console
+Classifier: Intended Audience :: End Users/Desktop
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: European Union Public Licence 1.2 (EUPL 1.2)
+Classifier: Natural Language :: English
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Topic :: Office/Business
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+Requires-Dist: pexpect
+Requires-Dist: openpyxl
+Requires-Dist: python-slugify
+
 jmopenorders
 ============
 
@@ -81,3 +111,5 @@ of the `European Public License Version 1.2 <https://joinup.ec.europa.eu/page/eu
 Please read the `<https://github.com/jmuelbert/jmopenorders/blob/master/LICENSE>`_ for additional information.
 
 EUPL-1.2 © Jürgen Mülbert
+
+

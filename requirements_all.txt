@@ -1,5 +1,0 @@
-pip==19.2.3
-pexpect==4.7.0
-openpyxl==2.6.3
-pypandoc==1.4
-python-slugify==3.0.3  # https://github.com/un33k/python-slugify

@@ -1,4 +1,9 @@
-"""JM OpenOrders Library."""
+"""
+Clean the Directory.
+
+Remove the generated files
+"""
+
 # -*- coding: utf-8 -*-
 
 #
@@ -39,16 +44,23 @@
 # unter der Lizenz sind dem Lizenztext zu entnehmen.
 #
 
-import pkgutil
 
-# Declare top-level shortcuts
-#
+import os
+from ..core.logger import logger
 
-__all__ = ['__version__', 'VERSION_INFO']
 
-# openorders Version
+class CleanOutputDir:
 
-__version__ = pkgutil.get_data(__package__, 'VERSION').decode('ascii').strip()
-VERSION_INFO = tuple(int(v) if v.isdigit() else v
-                     for v in __version__.split('.'))
-del pkgutil
+    """Clean the output directory."""
+
+    def __init__(self, outdir):
+        """Init the CleanOutputDir Class."""
+        self.out_dir = os.path.abspath(outdir)
+
+    def clean(self):
+        """Before write the new excel files, remove the old ones."""
+        files = os.listdir(self.out_dir)
+        for file in files:
+            if ".xlsx" in file:
+                os.remove(file)
+                logger.debug(file)

@@ -1,4 +1,4 @@
-"""Get the Data from csv-file to generate to output."""
+"""Get the service persion from csv-file."""
 # -*- coding: utf-8 -*-
 
 #
@@ -39,44 +39,39 @@
 # unter der Lizenz sind dem Lizenztext zu entnehmen.
 #
 
-
 import csv
 
+from ..core.logger import logger
 
-class GetData:
-    """
-    Get the data from csv-file.
 
-    Auftrag Nummer,
-    Hauptbereich ,
-    Auftragsdatum,
-    Tage offen ,
-    Deb.-Nr.,
-    Deb.-Name,
-    Verkäufer Serviceberater,
-    Arbeitswert,
-    Teile ,
-    Fremdleistung,
-    Andere,
-    Gesamt,
-    Auftragswert bereit geliefert
-    """
+class GetServicePerson:
+    """Handle the service person."""
 
     def __init__(self, filename):
-        """Init the GetData Class."""
+        """Init the GetServicePerson Class."""
         self.file_name = filename
+        self.berater = []
 
-    def get(self):
-        """Get the data from the csv-file."""
-        # global orders_file
+    def get(self) -> list:
+        """
+        Read the Service Person from csv-file.
+
+        Then create a array and get this back
+        """
+        service_person = []
         try:
-            with open(self.file_name, "r") as orders_file:
-                orders = csv.reader(orders_file, delimiter=";", quotechar='"')
-                data = list(orders)
+            with open(self.file_name, "r") as berater_file:
+                self.berater = csv.DictReader(
+                    berater_file, delimiter=";", quotechar='"'
+                )
 
-                return data
+                for row in self.berater:
+
+                    service_person.append(row["Name"])
+
+                return service_person
 
         except IOError:
-            print("The File with the data '" + self.file_name + "' does not exists")
-        finally:
-            orders_file.close()
+            logger.debug(
+                "The File for the service persons %s does not exists", self.file_name
+            )

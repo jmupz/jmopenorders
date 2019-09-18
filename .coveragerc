@@ -1,4 +1,7 @@
-[run]
-include = jmopenorders/*
-omit = *tests*
-plugins =
+[report]
+omit =
+    setup.py
+    jmopenorders/__main__.py
+    jmopenorders/_version.py
+    versioneer.py
+    tests/*

@@ -1,42 +1,51 @@
-
-{% set data = load_setup_py_data() %}
+{% set name = "jmopenorders" %}
+{% set version = "0.1.0" %}
 
 package:
-  name: repository_name
-  
-  version: {{ data['version'] }}
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
 
 source:
-  path: ..
+  url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
+  sha256: "e0dcc4ed8b63b37d561dfdf8d4f4a436e2b88988df18855b7e84c4ec7716efb8"
 
 build:
-  # If the installation is complex, or different between Unix and Windows, use
-  # separate bld.bat and build.sh files instead of this key.  Add the line
-  # "skip: True  # [py<35]" (for example) to limit to Python 3.5 and newer, or
-  # "skip: True  # [not win]" to limit to Windows.
-  script: python setup.py install --single-version-externally-managed --record=record.txt
+  number: 0
+  entry_points:
+    - jmopenorders = jmopenorders.__main__:main
+  script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv "
 
 requirements:
-  build:
+  host:
+    - openpyxl
+    - pexpect
+    - pip
     - python
-    - setuptools
+    - python-slugify
   run:
+    - openpyxl
+    - pexpect
     - python
-    # dependencies are defined in setup.py
-    {% for dep in data['install_requires'] %}
-    - {{ dep.lower() }}
-    {% endfor %}
-    {# raw is for ignoring templating with cookiecutter, leaving it for use with conda-build #}
+    - python-slugify
 
 test:
-  source_files:
-    - tests
-  requires:
-    - pytest
-    - pytest-cov
+  imports:
+    - jmopenorders
+    - jmopenorders.openorders
   commands:
-    - pytest tests
+    - jmopenorders --help
+  requires:
+    - tox
 
 about:
-  home: https://github.com/Destination github org or username/repository_name
-  summary: Short description
+  home: "https://jmopenorders.github.io/"
+  license: "European Union Public Licence 1.2 (EUPL 1.2)"
+  license_family: "OTHER"
+  license_file: ""
+  summary: "jmopenorders is a generator to generate infos for the affected persons"
+  doc_url: ""
+  dev_url: ""
+
+extra:
+  recipe-maintainers:
+    - your-github-id-here
