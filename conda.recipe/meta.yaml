@@ -13,7 +13,7 @@ build:
   noarch: python
   number: 0
   entry_points:
-    - jmopenorders = jmopenorders.__main__:cli,
+    - jmopenorders = jmopenorders.cli:main
   script: "{{ PYTHON }}"" -m pip install . --no-deps --ignore-installed -vv"
 
 requirements:

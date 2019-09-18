@@ -58,12 +58,14 @@ def get_long_description() -> str:
     with io.open(readme_rst, "rt", encoding="utf8") as f:
         readme = f.read()
 
-_version_re = re.compile(r'VERSION\s+=\s+(.*)')
 
-with open(os.path.join(CURRENT_DIR, 'jmopenorders/__init__.py'), 'rb') as f:
+_version_re = re.compile(r"VERSION\s+=\s+(.*)")
+
+with open(os.path.join(CURRENT_DIR, "jmopenorders/__init__.py"), "rb") as f:
     try:
-        version = str(ast.literal_eval(_version_re.search(
-            f.read().decode('utf-8')).group(1)))
+        version = str(
+            ast.literal_eval(_version_re.search(f.read().decode("utf-8")).group(1))
+        )
     except:
         __version__ = "test"
         print("Version can't read, use test")
@@ -127,5 +129,5 @@ setup(
     python_requires=">={}".format(MIN_PY_VERSION),
     test_suite="tests",
     tests_require=test_requirements,
-    entry_points={"console_scripts": ["jmopenorders = jmopenorders.__main__:cli‚"]},
+    entry_points={"console_scripts": ["jmopenorders = jmopenorders.cli:main‚"]},
 )
