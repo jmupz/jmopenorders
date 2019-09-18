@@ -102,7 +102,6 @@ extras_require = {}
 
 setup(
     name=PROJECT_PACKAGE_NAME,
-    version="0.1.0",
     description=PROJECT_DESCRIPTION,
     long_description=get_long_description(),
     long_description_content_type="text/markdown",
