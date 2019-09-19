@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite errors="0" failures="0" hostname="Jurgens-iMac" name="pytest" skipped="0" tests="6" time="0.974" timestamp="2019-09-18T18:09:56.200077"><testcase classname="tests.test_api" file="tests/test_api.py" line="14" name="test_hello" time="0.001"></testcase><testcase classname="tests.test_api" file="tests/test_api.py" line="22" name="test_hello_name" time="0.001"></testcase><testcase classname="tests.test_api" file="tests/test_api.py" line="30" name="test_report" time="0.008"></testcase><testcase classname="tests.test_api" file="tests/test_api.py" line="38" name="test_report_name" time="0.001"></testcase><testcase classname="tests.test_cli" file="tests/test_cli.py" line="25" name="test_main[report]" time="0.003"><system-out>usage: pytest report [-h] [-n NAME]
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite errors="0" failures="0" hostname="Jurgens-iMac" name="pytest" skipped="0" tests="6" time="1.821" timestamp="2019-09-19T20:30:37.501833"><testcase classname="tests.test_api" file="tests/test_api.py" line="14" name="test_hello" time="0.001"></testcase><testcase classname="tests.test_api" file="tests/test_api.py" line="22" name="test_hello_name" time="0.001"></testcase><testcase classname="tests.test_api" file="tests/test_api.py" line="30" name="test_report" time="0.001"></testcase><testcase classname="tests.test_api" file="tests/test_api.py" line="38" name="test_report_name" time="0.001"></testcase><testcase classname="tests.test_cli" file="tests/test_cli.py" line="25" name="test_main[report]" time="0.003"><system-out>usage: pytest report [-h] [-n NAME]
 
 optional arguments:
   -h, --help            show this help message and exit
   -n NAME, --name NAME  greeting name
-</system-out></testcase><testcase classname="tests.test_cli" file="tests/test_cli.py" line="36" name="test_script[report]" time="0.390"><system-out>usage: cli.py report [-h] [-n NAME]
+</system-out></testcase><testcase classname="tests.test_cli" file="tests/test_cli.py" line="36" name="test_script[report]" time="0.505"><system-out>usage: cli.py report [-h] [-n NAME]
 
 optional arguments:
   -h, --help            show this help message and exit

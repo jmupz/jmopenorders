@@ -14,7 +14,7 @@ build:
   number: 0
   entry_points:
     - jmopenorders = jmopenorders.cli:main
-  script: "{{ PYTHON }}"" -m pip install . --no-deps --ignore-installed -vv"
+  script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv"
 
 requirements:
   host:
@@ -41,7 +41,7 @@ test:
 about:
   home: "https://jmopenorders.github.io/"
   license: "European Union Public Licence 1.2 (EUPL 1.2)"
-  license_family: "EUPL-1.2"
+  license_family: "NONE"
   license_file: "LICENSE"
   summary: "jmopenorders is a generator to generate infos for the affected persons"
   doc_url: "https://readthedocs.org/projects/jmopenorders/"

@@ -35,7 +35,11 @@
         "htmlcov": true,
         "build": true,
         "*.log": true,
-        "*.egg-info": true
+        "*.egg-info": true,
+        "**/.classpath": true,
+        "**/.project": true,
+        "**/.settings": true,
+        "**/.factorypath": true
     },
     // Controls if quick suggestions should show up while typing
     "editor.quickSuggestions": {
