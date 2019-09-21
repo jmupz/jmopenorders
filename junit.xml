@@ -1,11 +1,21 @@
-<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite errors="0" failures="0" hostname="Jurgens-iMac" name="pytest" skipped="0" tests="6" time="1.821" timestamp="2019-09-19T20:30:37.501833"><testcase classname="tests.test_api" file="tests/test_api.py" line="14" name="test_hello" time="0.001"></testcase><testcase classname="tests.test_api" file="tests/test_api.py" line="22" name="test_hello_name" time="0.001"></testcase><testcase classname="tests.test_api" file="tests/test_api.py" line="30" name="test_report" time="0.001"></testcase><testcase classname="tests.test_api" file="tests/test_api.py" line="38" name="test_report_name" time="0.001"></testcase><testcase classname="tests.test_cli" file="tests/test_cli.py" line="25" name="test_main[report]" time="0.003"><system-out>usage: pytest report [-h] [-n NAME]
-
-optional arguments:
-  -h, --help            show this help message and exit
-  -n NAME, --name NAME  greeting name
-</system-out></testcase><testcase classname="tests.test_cli" file="tests/test_cli.py" line="36" name="test_script[report]" time="0.505"><system-out>usage: cli.py report [-h] [-n NAME]
-
-optional arguments:
-  -h, --help            show this help message and exit
-  -n NAME, --name NAME  greeting name
-</system-out></testcase></testsuite></testsuites>
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite errors="4" failures="0" hostname="Jurgens-iMac" name="pytest" skipped="0" tests="4" time="0.177" timestamp="2019-09-21T11:19:13.391806"><testcase classname="" file="tests/test_api.py" name="tests.test_api" time="0.000"><error message="collection failure">ImportError while importing test module &apos;/Users/juergen/Documents/Projects/GitHub/openorders-py/master/tests/test_api.py&apos;.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+tests/test_api.py:11: in &lt;module&gt;
+    from jmopenorders.api.hello import hello  # tests __all__
+E   ModuleNotFoundError: No module named &apos;jmopenorders&apos;</error></testcase><testcase classname="" file="tests/test_cli.py" name="tests.test_cli" time="0.000"><error message="collection failure">ImportError while importing test module &apos;/Users/juergen/Documents/Projects/GitHub/openorders-py/master/tests/test_cli.py&apos;.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+tests/test_cli.py:15: in &lt;module&gt;
+    from jmopenorders.cli import main
+E   ModuleNotFoundError: No module named &apos;jmopenorders&apos;</error></testcase><testcase classname="" file="tests/core/test_config.py" name="tests.core.test_config" time="0.000"><error message="collection failure">ImportError while importing test module &apos;/Users/juergen/Documents/Projects/GitHub/openorders-py/master/tests/core/test_config.py&apos;.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+tests/core/test_config.py:14: in &lt;module&gt;
+    from jmopenorders.core.config import YamlConfig
+E   ModuleNotFoundError: No module named &apos;jmopenorders&apos;</error></testcase><testcase classname="" file="tests/core/test_logger.py" name="tests.core.test_logger" time="0.000"><error message="collection failure">ImportError while importing test module &apos;/Users/juergen/Documents/Projects/GitHub/openorders-py/master/tests/core/test_logger.py&apos;.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+tests/core/test_logger.py:15: in &lt;module&gt;
+    from jmopenorders.core.logger import Logger
+E   ModuleNotFoundError: No module named &apos;jmopenorders&apos;</error></testcase></testsuite></testsuites>

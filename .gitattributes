@@ -26,5 +26,5 @@
 *.ttf binary
 *.woff binary
 *.mo binary
-jmopenorders/__version__.py export-subst
+
 jmopenorders/_version.py export-subst

@@ -1,3 +1,0 @@
-[console_scripts]
-jmopenorders = jmopenorders.__main__:main
-
