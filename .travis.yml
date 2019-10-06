@@ -49,7 +49,7 @@ matrix:
         - source "$HOME/miniconda/etc/profile.d/conda.sh"
       install:
         - conda env create -f environment.yml -p conda-env python=${PYTHON_VERSION}
-        - conda activate /Users/travis/build/jmopenorders/conda-env
+        - conda activate /Users/travis/build/jmuelbert/jmopenorders/conda-env
         - conda list # for debug reasons
 
     - name: "Python 3.7.4 on Windows"
@@ -60,6 +60,9 @@ matrix:
         - python -m pip install --upgrade pip
         - choco install miniconda
         - dir /c/
+        - dir /c/tools
+        - dir /c/tools/miniconda
+        - dir /c/tools/miniconda
       env: PATH=/c/Python37:/c/Python37/Scripts:/c/miniconda:/c/miniconda/scripts:$PATH
       install:
         - conda-env create -f environment.yml -p conda-env python=${PYTHON_VERSION}
@@ -144,7 +147,7 @@ before_script:
 
 script:
   - source conda-env/bin/activate
-  - tox -e ${PYTHON}
+  - tox -e p37
   - tox -e docs
 
 after_success:
