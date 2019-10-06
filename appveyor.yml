@@ -48,7 +48,7 @@ install:
   - conda update -q conda --yes
   - conda config --set auto_update_conda no
   - conda info -a # for debug reasons
-  - conda env create -fcon environment.yml -p conda-env python=${PYTHON_VERSION}
+  - conda env create -f environment.yml -p conda-env python=${PYTHON_VERSION}
   - cmd: activate %APPVEYOR_BUILD_FOLDER%\jmuelbert\jmopenorders\conda-env
   - sh: conda activate "$APPVEYOR_BUILD_FOLDER/jmuelbet/jmopenorders/conda-env"
   - conda list

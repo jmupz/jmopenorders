@@ -63,12 +63,12 @@ matrix:
       before_install:
         - choco install python
         - python -m pip install --upgrade pip
-        - choco install miniconda
+        - choco install miniconda3
         - dir /c/ProgramData/Miniconda3
         - dir /c/ProgramData/Miniconda3/bin
-      env: PATH=/c/Python37:/c/Python37/Scripts:/c/miniconda:/c/miniconda/scripts:$PATH
+      env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
       install:
-        - conda-env create -f environment.yml -p conda-env python=${PYTHON_VERSION}
+        - conda env create -f environment.yml -p conda-env python=${PYTHON_VERSION}
         - conda list # for debug reasons
         - activate /c/users/travis/build/jmuelbert/jmopenorders/conda-env
         - conda list # for debug reasons
