@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """ Global application logging.
 
 All modules use the same global logging object. No messages will be emitted

@@ -28,4 +28,3 @@ Installation::
     # Replace the x by the latest patch version
 
 Migration::
-

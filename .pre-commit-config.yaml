@@ -23,7 +23,7 @@ repos:
       - id: forbid-new-submodules
       - id: mixed-line-ending
       - id: name-tests-test
-      - id: pretty-format-json
+      # - id: pretty-format-json
       - id: requirements-txt-fixer
       - id: trailing-whitespace
         exclude: ^tests/fixtures/diffs/

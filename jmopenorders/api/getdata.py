@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """Get the Data from csv-file to generate to output."""
 # -*- coding: utf-8 -*-
 

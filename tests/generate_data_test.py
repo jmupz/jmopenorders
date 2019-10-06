@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """Generator for fake data for testing."""
 # -*- coding: utf-8 -*-
 

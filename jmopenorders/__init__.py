@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Put the version to the __version__ variable.
 

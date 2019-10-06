@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """Get the service persion from csv-file."""
 # -*- coding: utf-8 -*-
 
