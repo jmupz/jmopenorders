@@ -23,14 +23,15 @@ matrix:
       before_install:
         - wget http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
         - bash miniconda.sh -b -p $HOME/miniconda
-        - export PATH="$HOME/miniconda/bin:$PATH"
+        - source "$HOME/miniconda/etc/profile.d/conda.sh"
         - hash -r
-        - ls "$HOME/miniconda/bin"
-        - activate
+        - conda config --set always_yes yes --set changeps1 no
+        - conda update -q conda
+        # Useful for debugging any issues with conda
+        - conda info -a
 
       install:
-        - conda init bash
-        - conda env create -f environment.yml -p conda-env python=${PYTHON_VERSION}
+        - conda env create -f environment.yml -p conda-env python=${PYTHON}
         - conda activate /home/travis/build/jmuelbert/jmopenorders/conda-env
         - conda list # for debug reasons
 
@@ -42,11 +43,13 @@ matrix:
       osx_image: xcode11 # Python 3.7.4 running on macOS 10.14.4
       language: shell # 'language: python' is an error on Travis CI macOS
       before_install:
-        - brew cask install miniconda
+        - wget https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -O ~/miniconda.sh
+        - bash ~/miniconda.sh -b -p $HOME/miniconda
+        - export PATH="$HOME/miniconda/bin:$PATH"
+        - source "$HOME/miniconda/etc/profile.d/conda.sh"
       install:
-        - conda init bash
         - conda env create -f environment.yml -p conda-env python=${PYTHON_VERSION}
-        - conda activate /home/travis/build/jmuelbert/jmopenorders/conda-env
+        - conda activate /Users/travis/build/jmopenorders/conda-env
         - conda list # for debug reasons
 
     - name: "Python 3.7.4 on Windows"
@@ -59,9 +62,9 @@ matrix:
         - dir /c/
       env: PATH=/c/Python37:/c/Python37/Scripts:/c/miniconda:/c/miniconda/scripts:$PATH
       install:
-        - conda env create -f environment.yml -p conda-env python=${PYTHON_VERSION}
+        - conda-env create -f environment.yml -p conda-env python=${PYTHON_VERSION}
         - conda list # for debug reasons
-        - conda activate /home/travis/build/jmuelbert/jmopenorders/conda-env
+        - activate /home/travis/build/jmuelbert/jmopenorders/conda-env
         - conda list # for debug reasons
 
 cache:
