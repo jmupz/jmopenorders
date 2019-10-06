@@ -35,6 +35,11 @@ matrix:
         - conda activate /home/travis/build/jmuelbert/jmopenorders/conda-env
         - conda list # for debug reasons
 
+      before_script:
+        # We need to create a (fake) display on Travis, let's use a funny resolution
+        - export DISPLAY=:99.0
+        - /sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -screen 0 1400x900x24 -ac +extension GLX +render
+
       services:
         - xvfb
 
@@ -59,15 +64,13 @@ matrix:
         - choco install python
         - python -m pip install --upgrade pip
         - choco install miniconda
-        - dir /c/
-        - dir /c/tools
-        - dir /c/tools/miniconda
-        - dir /c/tools/miniconda
+        - dir /c/ProgramData/Miniconda3
+        - dir /c/ProgramData/Miniconda3/bin
       env: PATH=/c/Python37:/c/Python37/Scripts:/c/miniconda:/c/miniconda/scripts:$PATH
       install:
         - conda-env create -f environment.yml -p conda-env python=${PYTHON_VERSION}
         - conda list # for debug reasons
-        - activate /home/travis/build/jmuelbert/jmopenorders/conda-env
+        - activate /c/users/travis/build/jmuelbert/jmopenorders/conda-env
         - conda list # for debug reasons
 
 cache:
@@ -95,10 +98,6 @@ install:
   # 'python3' is a 'command not found' error on Windows but 'py' works on Windows only
 
 before_script:
-  # We need to create a (fake) display on Travis, let's use a funny resolution
-  - export DISPLAY=:99.0
-  - /sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -screen 0 1400x900x24 -ac +extension GLX +render
-
   # Make sure everyone uses the correct python (this is handled by conda)
   - which python
   - python --version
@@ -146,8 +145,7 @@ before_script:
     fi;
 
 script:
-  - source conda-env/bin/activate
-  - tox -e p37
+  - tox -e py37
   - tox -e docs
 
 after_success:

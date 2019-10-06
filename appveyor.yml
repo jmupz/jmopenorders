@@ -36,12 +36,12 @@ install:
   - sh: sudo apt -y --force-yes install libglu1-mesa xvfb libgl1-mesa-dri mesa-common-dev libglu1-mesa-dev
   - sh: wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
   - sh: bash miniconda.sh -b -p $HOME/miniconda
+  - sh: source "$HOME/miniconda/etc/profile.d/conda.sh"
 
   # Windows - Miniconda is in Image
   - cmd: set "PATH="C:\Miniconda3-x64;C:\Miniconda3-x64\Scripts;%PATH%"
   - sh: export PATH="$HOME/miniconda/bin;$PATH"
-  - sh: ls "$HOME/miniconda"
-  - sh: ls "$HOME/miniconda/bin"
+
   # - conda activate base
   - conda config --set always_yes yes --set changeps1 no
   - conda config --add channels conda-forge
@@ -49,8 +49,8 @@ install:
   - conda config --set auto_update_conda no
   - conda info -a # for debug reasons
   - conda env create -fcon environment.yml -p conda-env python=${PYTHON_VERSION}
-  - cmd: conda-env/bin/activate.bat
-  - sh: source conda-env/bin/activate
+  - cmd: activate %APPVEYOR_BUILD_FOLDER%\jmuelbert\jmopenorders\conda-env
+  - sh: conda activate "$APPVEYOR_BUILD_FOLDER/jmuelbet/jmopenorders/conda-env"
   - conda list
   - pip install -e .
   - pip install pytest-xvfb pytest-mock pytest-cov pytest-repeat codecov pyvirtualdisplay==0.2.1
