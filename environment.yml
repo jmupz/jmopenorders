@@ -70,7 +70,6 @@ dependencies:
   - pysocks
   - pytest
   - pytest-cov
-  - python>=3.4
   - python-dateutil
   - python-libarchive-c
   - pytz

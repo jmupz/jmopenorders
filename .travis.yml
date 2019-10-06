@@ -67,7 +67,7 @@ matrix:
         - dir /c/tools/miniconda3
         - dir /c/tools/miniconda3/Scripts
         - dir /c/tools/miniconda3/etc
-      env: PATH=/c/Python37:/c/Python37/Scripts:/c/tools/miniconda3/Scripts/:$PATH
+      env: PATH=/c/Python37:/c/Python37/Scripts:/c/tools/miniconda3/Scripts:$PATH
       install:
         - conda env create -f environment.yml -p conda-env python=${PYTHON_VERSION}
         - conda list # for debug reasons
