@@ -49,8 +49,8 @@ install:
   - conda config --set auto_update_conda no
   - conda info -a # for debug reasons
   - conda env create -f environment.yml -p conda-env python=${PYTHON_VERSION}
-  - cmd: activate %APPVEYOR_BUILD_FOLDER%\jmuelbert\jmopenorders\conda-env
-  - sh: conda activate "$APPVEYOR_BUILD_FOLDER/jmuelbet/jmopenorders/conda-env"
+  - cmd: activate %APPVEYOR_BUILD_FOLDER%\jmopenorders/conda-env
+  - sh: conda activate "$APPVEYOR_BUILD_FOLDER/jmopenorders/conda-env"
   - conda list
   - pip install -e .
   - pip install pytest-xvfb pytest-mock pytest-cov pytest-repeat codecov pyvirtualdisplay==0.2.1

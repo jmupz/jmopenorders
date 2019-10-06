@@ -151,7 +151,7 @@ script:
 after_success:
   - codecov
   - coveralls
-  - conda build conda.recipe --no-test
+  - conda build recipe --no-test
   - conda install --use-local jmopenorders
   - conda info -a
 

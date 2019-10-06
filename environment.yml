@@ -21,6 +21,7 @@ dependencies:
   - conda
   - conda-build
   - conda-package-handling
+  - coveralls
   - coverage
   - cryptography
   - decorator
