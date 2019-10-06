@@ -84,6 +84,7 @@ dependencies:
   - sqlite
   - tk
   - toml
+  - tox
   - tqdm
   - traitlets
   - urllib3

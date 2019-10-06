@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><testsuite errors="4" failures="0" name="pytest" skipped="0" tests="4" time="0.197"><testcase classname="" file="tests/test_api.py" name="tests.test_api" time="0.000"><error message="collection failure">ImportError while importing test module &apos;/Users/juergen/Documents/Projects/GitHub/openorders-py/master/tests/test_api.py&apos;.
+<?xml version="1.0" encoding="utf-8"?><testsuite errors="4" failures="0" name="pytest" skipped="0" tests="4" time="0.199"><testcase classname="" file="tests/test_api.py" name="tests.test_api" time="0.000"><error message="collection failure">ImportError while importing test module &apos;/Users/juergen/Documents/Projects/GitHub/openorders-py/master/tests/test_api.py&apos;.
 Hint: make sure your test modules/packages have valid Python names.
 Traceback:
 tests/test_api.py:11: in &lt;module&gt;

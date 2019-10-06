@@ -39,6 +39,7 @@ install:
 
   # Windows - Miniconda is in Image
   - cmd: set "PATH="C:\Miniconda3-x64;C:\Miniconda3-x64\Scripts;%PATH%"
+  - sh: export PATH="$HOME/miniconda/bin;$PATH"
   - conda activate base
   - conda config --set always_yes yes --set changeps1 no
   - conda config --add channels conda-forge
