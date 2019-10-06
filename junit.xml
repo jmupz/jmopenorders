@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite errors="9" failures="0" hostname="Jurgens-iMac" name="pytest" skipped="0" tests="9" time="0.341" timestamp="2019-10-06T12:39:46.458889"><testcase classname="" file="tests/api_test.py" name="tests.api_test" time="0.000"><error message="collection failure">ImportError while importing test module &apos;/Users/juergen/Documents/Projects/GitHub/openorders-py/master/tests/api_test.py&apos;.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+tests/api_test.py:12: in &lt;module&gt;
+    from jmopenorders.api.hello import hello  # tests __all__
+E   ModuleNotFoundError: No module named &apos;jmopenorders&apos;</error></testcase><testcase classname="" file="tests/cli_test.py" name="tests.cli_test" time="0.000"><error message="collection failure">ImportError while importing test module &apos;/Users/juergen/Documents/Projects/GitHub/openorders-py/master/tests/cli_test.py&apos;.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+tests/cli_test.py:16: in &lt;module&gt;
+    from jmopenorders.cli import main
+E   ModuleNotFoundError: No module named &apos;jmopenorders&apos;</error></testcase><testcase classname="" file="tests/generate_data_test.py" name="tests.generate_data_test" time="0.000"><error message="collection failure">ImportError while importing test module &apos;/Users/juergen/Documents/Projects/GitHub/openorders-py/master/tests/generate_data_test.py&apos;.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+tests/generate_data_test.py:48: in &lt;module&gt;
+    from faker import Factory
+E   ModuleNotFoundError: No module named &apos;faker&apos;</error></testcase><testcase classname="" file="tests/test_api 3.py" name="tests.test_api 3" time="0.000"><error message="collection failure">ImportError while importing test module &apos;/Users/juergen/Documents/Projects/GitHub/openorders-py/master/tests/test_api 3.py&apos;.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+tests/test_api 3.py:12: in &lt;module&gt;
+    from jmopenorders.api.hello import hello  # tests __all__
+E   ModuleNotFoundError: No module named &apos;jmopenorders&apos;</error></testcase><testcase classname="" file="tests/test_cli 3.py" name="tests.test_cli 3" time="0.000"><error message="collection failure">ImportError while importing test module &apos;/Users/juergen/Documents/Projects/GitHub/openorders-py/master/tests/test_cli 3.py&apos;.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+tests/test_cli 3.py:16: in &lt;module&gt;
+    from jmopenorders.cli import main
+E   ModuleNotFoundError: No module named &apos;jmopenorders&apos;</error></testcase><testcase classname="" file="tests/core/config_test.py" name="tests.core.config_test" time="0.000"><error message="collection failure">ImportError while importing test module &apos;/Users/juergen/Documents/Projects/GitHub/openorders-py/master/tests/core/config_test.py&apos;.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+tests/core/config_test.py:15: in &lt;module&gt;
+    from jmopenorders.core.config import YamlConfig
+E   ModuleNotFoundError: No module named &apos;jmopenorders&apos;</error></testcase><testcase classname="" file="tests/core/logger_test.py" name="tests.core.logger_test" time="0.000"><error message="collection failure">ImportError while importing test module &apos;/Users/juergen/Documents/Projects/GitHub/openorders-py/master/tests/core/logger_test.py&apos;.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+tests/core/logger_test.py:16: in &lt;module&gt;
+    from jmopenorders.core.logger import Logger
+E   ModuleNotFoundError: No module named &apos;jmopenorders&apos;</error></testcase><testcase classname="" file="tests/core/test_config 3.py" name="tests.core.test_config 3" time="0.000"><error message="collection failure">ImportError while importing test module &apos;/Users/juergen/Documents/Projects/GitHub/openorders-py/master/tests/core/test_config 3.py&apos;.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+tests/core/test_config 3.py:15: in &lt;module&gt;
+    from jmopenorders.core.config import YamlConfig
+E   ModuleNotFoundError: No module named &apos;jmopenorders&apos;</error></testcase><testcase classname="" file="tests/core/test_logger 3.py" name="tests.core.test_logger 3" time="0.000"><error message="collection failure">ImportError while importing test module &apos;/Users/juergen/Documents/Projects/GitHub/openorders-py/master/tests/core/test_logger 3.py&apos;.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+tests/core/test_logger 3.py:16: in &lt;module&gt;
+    from jmopenorders.core.logger import Logger
+E   ModuleNotFoundError: No module named &apos;jmopenorders&apos;</error></testcase></testsuite></testsuites>
