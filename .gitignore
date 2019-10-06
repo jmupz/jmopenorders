@@ -21,6 +21,7 @@ parts/
 sdist/
 var/
 wheels/
+pip-wheel-metadata/
 *.egg-info/
 .installed.cfg
 *.egg
@@ -68,6 +69,7 @@ target/
 .venv
 venv/
 ENV/
+conda-env/
 
 # Rope project settings
 .ropeproject

@@ -1,65 +1,66 @@
-# AppVeyor.com is a Continuous Integration service to build and run tests under
-# Windows
+shallow_clone: false
+
+image:
+  - Ubuntu
+  - Ubuntu1804
+  - Visual Studio 2015
 
 environment:
-  global:
-    # SDK v7.0 MSVC Express 2008's SetEnv.cmd script will fail if the
-    # /E:ON and /V:ON options are not enabled in the batch script intepreter
-    # See: http://stackoverflow.com/a/13751649/163740
-    CMD_IN_ENV: "cmd /E:ON /V:ON /C .\\tools\\appveyor\\run_with_env.cmd"
-
   matrix:
-    - PYTHON: "C:\\Miniconda36-x64"
-      PYTHON_VERSION: "3.6"
-      PYTHON_ARCH: "64"
+    - PYTHON_VERSION: "3.6"
+      PYTEST_QT_API: "pyside2"
+      CONDA_DEPENDENCIES: "pytest-qt pytest pyside2=2.*"
+    - PYTHON_VERSION: "3.7"
+      PYTEST_QT_API: "pyside2"
+      CONDA_DEPENDENCIES: "pytest-qt pytest pyside2=2.*"
+    - PYTHON_VERSION: "3.8"
+      PYTEST_QT_API: "pyside2"
+      CONDA_DEPENDENCIES: "pytest-qt pytest pyside2=2.*"
 
-    - PYTHON: "C:\\Miniconda36-x64"
-      PYTHON_VERSION: "3.7"
-      PYTHON_ARCH: "64"
+  global:
+    PYTHON: "C:\\conda"
+    CMD_IN_ENV: "cmd /E:ON /V:ON /C .\\ci-helpers\\appveyor\\windows_sdk.cmd"
+    PYTHON_ARCH:
+      "64" # needs to be set for CMD_IN_ENV to succeed. If a mix
+      # of 32 bit and 64 bit builds are needed, move this
+      # to the matrix section.
+    # Used by atropy ci-helpers
+    CONDA_CHANNELS: "conda-forge"
 
-init:
-  - ECHO %PYTHON% %PYTHON_VERSION% %PYTHON_ARCH% %HOME%
+platform:
+  - x64
 
 install:
-  # If there is a newer build queued for the same PR, cancel this one.
-  # The AppVeyor 'rollout builds' option is supposed to serve the same
-  # purpose but it is problematic because it tends to cancel builds pushed
-  # directly to master instead of just PR builds (or the converse).
-  # credits: JuliaLang developers.
-  - ps:
-      if ($env:APPVEYOR_PULL_REQUEST_NUMBER -and $env:APPVEYOR_BUILD_NUMBER -ne ((Invoke-RestMethod `
-      https://ci.appveyor.com/api/projects/$env:APPVEYOR_ACCOUNT_NAME/$env:APPVEYOR_PROJECT_SLUG/history?recordsNumber=50).builds | `
-      Where-Object pullRequestId -eq $env:APPVEYOR_PULL_REQUEST_NUMBER)[0].buildNumber) { `
-      throw "There are newer queued builds for this pull request, failing early." }
-  # these correspond to folder naming of miniconda installs on appveyor.  See
-  # https://www.appveyor.com/docs/installed-software#python
-  - if "%PYTHON_VERSION%" == "3.6" set "BASE_PYTHON_VERSION=36"
-  - if "%PYTHON_ARCH%" == "64" set "ARCH_LABEL=-x64"
-  - call "C:\Miniconda%BASE_PYTHON_VERSION%%ARCH_LABEL%\Scripts\activate.bat"
+  # Linux
+  - sh: sudo apt update
+  - sh: sudo apt -y --force-yes install libglu1-mesa xvfb libgl1-mesa-dri mesa-common-dev libglu1-mesa-dev
+  - sh: wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
+  - sh: bash miniconda.sh -b -p $HOME/miniconda
 
+  # Windows - Miniconda is in Image
+  - cmd: set "PATH="C:\Miniconda3-x64;C:\Miniconda3-x64\Scripts;%PATH%"
+  - conda activate base
   - conda config --set always_yes yes --set changeps1 no
-  - conda update -q conda
   - conda config --add channels conda-forge
+  - conda update -q conda --yes
   - conda config --set auto_update_conda no
-  - conda update -q --all
-  - conda install -q pytest pytest-cov conda-build anaconda-client
-  - conda install tox
-  - conda info
-  # this is to ensure dependencies
-  - conda build conda.recipe --no-test
-  - conda install --use-local jmopenorders
-  - conda info -a
+  - conda info -a # for debug reasons
+  - conda env create -fcon environment.yml -p conda-env python=${PYTHON_VERSION}
+  - cmd: conda-env/bin/activate.bat
+  - sh: source conda-env/bin/activate
+  - conda list
+  - pip install -e .
+  - pip install pytest-xvfb pytest-mock pytest-cov pytest-repeat codecov pyvirtualdisplay==0.2.1
+  - conda list # for debug reason
 
-  # Check that we have the expected version of Python
-  - python --version
-  - tox
-
-# Not a .NET project, we build package in the install step instead
+# Not a .NET project, we build in the install step instead
 build: false
 
 test_script:
-  - py.test --color=yes -v --cov jmopenorders --cov-report xml tests
+  - tox -e ${PYTHON}
+  - tox -e docs
 
 on_success:
-  - conda install -c conda-forge codecov
-  - codecov --env %PYTHON_VERSION% --file C:\projects\jmopenorders\coverage.xml
+  - codecov
+
+skip_tags: true

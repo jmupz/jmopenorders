@@ -1,59 +1,147 @@
-# Config file for automatic building at travis-ci.org
-
+---
 language: python
+dist: xenial
+
+# Setting sudo to false opts in to Travis-CI container-based builds.
 sudo: false
 
-python:
-  - "3.6"
+# Turn off email notifications
+notifications:
+  email: false
+
+env:
+  global:
+    # used by ci-helpers
+    - DEPS="pytest pytest-qt tox coveralls six"
+    - MINICONDA_VERSION=latest
+    - DISPLAY=":99.0"
 
 matrix:
-  fast_finish: true
   include:
-    - python: "3.6.1"
-      env: TOXENV=lint
-    - python: "3.6.1"
-      env: TOXENV=lint
-    - python: "3.6.1"
-      env: TOXENV=py36
-    - python: "3.7"
-      env: TOXENV=py37
+    - os: linux
+      env: PYTHON_VERSION="3.5"
+    - os: linux
+      env: PYTHON_VERSION="3.6"
+    - os: linux
+      env: PYTHON_VERSION="3.7"
+    - os: osx
+      osx_image: xcode9.4
+      env: PYTHON_VERSION="3.5"
+    - os: osx
+      osx_image: xcode10
+      env: PYTHON_VERSION="3.6"
+    - os: osx
+      osx_image: xcode11
+      env: PYTHON_VERSION="3.7"
 
 cache:
   directories:
     - $HOME/.cache/pip
     - $HOME/download
 
+services:
+  - xvfb
+
 before_install:
   - wget http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
   - bash miniconda.sh -b -p $HOME/miniconda
   - export PATH="$HOME/miniconda/bin:$PATH"
   - hash -r
+
   - conda config --set always_yes yes --set changeps1 no
   - conda config --add channels conda-forge
-  - conda update -q conda
-  - conda config --set auto_update_conda no
+  - conda update -q conda --yes
+  - conda info -a # for debug reasons
+
+  # to aid in debugging
+  - echo ${TRAVIS_BRANCH}
+  - echo ${TRAVIS_REPO_SLUG}
+  - echo ${GIT_TARGET_EXTRA}
+  - echo ${GIT_SOURCE_EXTRA}
 
 install:
-  - conda create -q -n jmbuild python=$TRAVIS_PYTHON_VERSION
-  - source activate jmbuild
-  - conda install tox
-  - conda install pexpect openpyxl
-  - conda install pip
-  - pip install .
+  - export GIT_FULL_HASH=`git rev-parse HEAD`
+  - conda env create -f environment.yml -p conda-env python=${PYTHON_VERSION}
+  - conda list # for debug reasons
+
+before_script:
+  # We need to create a (fake) display on Travis, let's use a funny resolution
+  - export DISPLAY=:99.0
+  - /sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -screen 0 1400x900x24 -ac +extension GLX +render
+
+  # Make sure everyone uses the correct python (this is handled by conda)
+  - which python
+  - python --version
+  - pwd
+  - ls
+  # Help color output from each test
+  - RESET='\033[0m';
+    RED='\033[00;31m';
+    GREEN='\033[00;32m';
+    YELLOW='\033[00;33m';
+    BLUE='\033[00;34m';
+    PURPLE='\033[00;35m';
+    CYAN='\033[00;36m';
+    WHITE='\033[00;37m';
+    start_test() {
+    echo -e "${BLUE}======== Starting $1 ========${RESET}";
+    };
+    check_output() {
+    ret=$?;
+    if [ $ret == 0 ]; then
+    echo -e "${GREEN}>>>>>>    $1 passed    <<<<<<${RESET}";
+    else
+    echo -e "${RED}>>>>>>    $1 FAILED    <<<<<<${RESET}";
+    fi;
+    return $ret;
+    };
+
+  - if [ "${TEST}" == "extra" ]; then
+    start_test "repo size check";
+    mkdir ~/repo-clone && cd ~/repo-clone &&
+    git init && git remote add -t ${TRAVIS_BRANCH} origin git://github.com/${TRAVIS_REPO_SLUG}.git &&
+    git fetch origin ${GIT_TARGET_EXTRA} &&
+    git checkout -qf FETCH_HEAD &&
+    git tag travis-merge-target &&
+    git gc --aggressive &&
+    TARGET_SIZE=`du -s . | sed -e "s/\t.*//"` &&
+    git pull origin ${GIT_SOURCE_EXTRA} &&
+    git gc --aggressive &&
+    MERGE_SIZE=`du -s . | sed -e "s/\t.*//"` &&
+    if [ "${MERGE_SIZE}" != "${TARGET_SIZE}" ]; then
+    SIZE_DIFF=`expr \( ${MERGE_SIZE} - ${TARGET_SIZE} \)`;
+    else
+    SIZE_DIFF=0;
+    fi;
+    fi;
 
 script:
-  - tox -e lint
-  - tox -e py37
+  - source conda-env/bin/activate
+  - tox -e ${PYTHON}
   - tox -e docs
 
 after_success:
-  - conda install -c conda-forge codecov
-  - conda install conda-build anaconda-client pytest pytest-cov
   - codecov
   - coveralls
   - conda build conda.recipe --no-test
   - conda install --use-local jmopenorders
   - conda info -a
+
+before_deploy:
+  # Conda deploy if on tag
+  # ANACONDA_TOKEN should be provided by Travis
+  # How to generate ANACONDA_TOKEN: https://docs.anaconda.com/anaconda-cloud/user-guide/tasks/work-with-accounts#creating-access-tokens
+
+  # https://conda.io/docs/user-guide/tasks/build-packages/install-conda-build.html
+  - conda config --set anaconda_upload no
+  - travis_wait 60 conda build --quiet --no-test --output-folder conda_build conda.recipe
+
+  # Convert to other platforms: OSX, WIN
+  - conda convert --platform win-64 conda_build/linux-64/*.tar.bz2 -o conda_build/
+  - conda convert --platform osx-64 conda_build/linux-64/*.tar.bz2 -o conda_build/
+  # Upload to Anaconda
+  # We could use --all but too much platforms to uploaded
+  - ls conda_build/*/*.tar.bz2 | xargs -I {} anaconda -v -t $ANACONDA_TOKEN upload -u jmuelbert {}
 
 deploy:
   provider: pypi
