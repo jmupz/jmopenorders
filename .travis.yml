@@ -64,8 +64,7 @@ matrix:
         - choco install python
         - python -m pip install --upgrade pip
         - choco install miniconda3
-        - dir /c/ProgramData/Miniconda3
-        - dir /c/ProgramData/Miniconda3/bin
+        - dir /c/tools
       env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
       install:
         - conda env create -f environment.yml -p conda-env python=${PYTHON_VERSION}
