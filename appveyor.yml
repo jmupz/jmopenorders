@@ -60,7 +60,7 @@ install:
 build: false
 
 test_script:
-  - tox -e ${PYTHON_VERSION}
+  - tox -e py37  # Must update
   - tox -e docs
 
 on_success:
