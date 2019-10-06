@@ -60,7 +60,7 @@ install:
 build: false
 
 test_script:
-  - tox -e ${PYTHON}
+  - tox -e ${PYTHON_VERSION}
   - tox -e docs
 
 on_success:

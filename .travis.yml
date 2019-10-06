@@ -25,20 +25,27 @@ matrix:
         - bash miniconda.sh -b -p $HOME/miniconda
         - export PATH="$HOME/miniconda/bin:$PATH"
         - hash -r
-
+        - ls "$HOME/miniconda/bin"
         - activate
 
       install:
         - conda env create -f environment.yml -p conda-env python=${PYTHON_VERSION}
+        - conda activate /home/travis/build/jmuelbert/jmopenorders/conda-env
         - conda list # for debug reasons
+
+      services:
+        - xvfb
 
     - name: "Python 3.7.4 on macOS"
       os: osx
       osx_image: xcode11 # Python 3.7.4 running on macOS 10.14.4
       language: shell # 'language: python' is an error on Travis CI macOS
       before_install:
-        - brew install miniconda
+        - brew cask install miniconda
       install:
+        - conda env create -f environment.yml -p conda-env python=${PYTHON_VERSION}
+        - conda activate /home/travis/build/jmuelbert/jmopenorders/conda-env
+        - conda list # for debug reasons
 
     - name: "Python 3.7.4 on Windows"
       os: windows # Windows 10.0.17134 N/A Build 17134
@@ -49,20 +56,18 @@ matrix:
         - choco install miniconda
       env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
       install:
-        - activate
         - conda env create -f environment.yml -p conda-env python=${PYTHON_VERSION}
         - conda list # for debug reasons
-        - activate
+        - conda activate /home/travis/build/jmuelbert/jmopenorders/conda-env
+        - conda list # for debug reasons
 
 cache:
   directories:
     - $HOME/.cache/pip
     - $HOME/download
 
-services:
-  - xvfb
-
 before_install:
+  - conda update -n base -c defaults conda
   - conda config --set always_yes yes --set changeps1 no
   - conda config --add channels conda-forge
   - conda update -q conda --yes
