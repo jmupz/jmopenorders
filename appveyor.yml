@@ -39,7 +39,7 @@ install:
   - sh: source "$HOME/miniconda/etc/profile.d/conda.sh"
 
   # Windows - Miniconda is in Image
-  - cmd: set "PATH="C:\Miniconda3-x64;C:\Miniconda3-x64\Scripts;%PATH%"
+  - cmd: set PATH="C:\Miniconda3-x64;C:\Miniconda3-x64\Scripts;%PATH%"
   - cmd: dir c:\Miniconda3-x64
   - cmd: dir c:\Miniconda3-x64\Scripts
   - cmd: dir c:\Miniconda3-x64\Tools
