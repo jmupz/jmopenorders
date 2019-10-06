@@ -24,10 +24,10 @@ def html_page_context(app, pagename, templatename, context, doctree):
         return
 
     if not app.config.edit_on_github_project:
-        warnings.warn("edit_on_github_project not specified")
+        warnings.warn('edit_on_github_project not specified')
         return
     if not doctree:
-        warnings.warn("doctree is None")
+        warnings.warn('doctree is None')
         return
     path = os.path.relpath(doctree.get('source'), app.builder.srcdir)
     show_url = get_github_url(app, 'blob', path)

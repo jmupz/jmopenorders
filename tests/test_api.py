@@ -16,7 +16,7 @@ def test_hello():
     """ Test the hello() function.
 
     """
-    assert hello() == "Hello, World!"
+    assert hello() == 'Hello, World!'
     return
 
 
@@ -24,7 +24,7 @@ def test_hello_name():
     """ Test the hello() function with a name.
 
     """
-    assert hello("foo") == "Hello, foo!"
+    assert hello('foo') == 'Hello, foo!'
     return
 
 
@@ -32,7 +32,7 @@ def test_report():
     """ Test the report() function.
 
     """
-    assert report() == "Hello, names.csv!"
+    assert report() == 'Hello, names.csv!'
     return
 
 
@@ -40,11 +40,11 @@ def test_report_name():
     """ Test the report() function with a name.
 
     """
-    assert report("foo") == "Hello, foo!"
+    assert report('foo') == 'Hello, foo!'
     return
 
 
 # Make the script executable.
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     raise SystemExit(pytest.main([__file__]))

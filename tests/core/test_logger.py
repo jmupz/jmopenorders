@@ -24,9 +24,9 @@ class LoggerTest(object):
         """ Test the start method.
 
         """
-        message = "test message"
+        message = 'test message'
         logger = Logger()
-        logger.start("debug")
+        logger.start('debug')
         logger.debug(message)
         _, stderr = capsys.readouterr()
         assert logger.level == DEBUG
@@ -38,9 +38,9 @@ class LoggerTest(object):
 
         """
         logger = Logger()
-        logger.start("debug")
+        logger.start('debug')
         logger.stop()
-        logger.critical("test")
+        logger.critical('test')
         _, stderr = capsys.readouterr()
         assert not stderr
         return
@@ -49,10 +49,10 @@ class LoggerTest(object):
         """ Test output to an alternate stream.
 
         """
-        message = "test message"
+        message = 'test message'
         stream = StringIO()
         logger = Logger()
-        logger.start("debug", stream)
+        logger.start('debug', stream)
         logger.debug(message)
         assert message in stream.getvalue()
         return
@@ -60,5 +60,5 @@ class LoggerTest(object):
 
 # Make the module executable.
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     raise SystemExit(pytest.main([__file__]))

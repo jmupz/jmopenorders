@@ -26,9 +26,9 @@ class YamlConfigTest(object):
 
         """
         configs = (
-            (tmpdir.join("empty.yml"), None),
-            (tmpdir.join("conf1.yml"), {"global": "%x1;", "%x1;": "%x1;"}),
-            (tmpdir.join("conf2.yml"), {"global": "%x2;", "%x2;": "%x2;"}),
+            (tmpdir.join('empty.yml'), None),
+            (tmpdir.join('conf1.yml'), {'global': '%x1;', '%x1;': '%x1;'}),
+            (tmpdir.join('conf2.yml'), {'global': '%x2;', '%x2;': '%x2;'}),
         )
         for pathobj, values in configs:
             pathobj.write(dump(values))
@@ -39,9 +39,9 @@ class YamlConfigTest(object):
 
         """
         config = YamlConfig()
-        config["root"] = {}
-        config["root"]["key"] = "value"
-        assert config["root"]["key"] == "value"
+        config['root'] = {}
+        config['root']['key'] = 'value'
+        assert config['root']['key'] == 'value'
         return
 
     def test_attr(self):
@@ -50,17 +50,17 @@ class YamlConfigTest(object):
         """
         config = YamlConfig()
         config.root = {}
-        config.root.key = "value"
-        assert config.root.key == "value"
+        config.root.key = 'value'
+        assert config.root.key == 'value'
         return
 
-    @pytest.mark.parametrize("root", (None, "root"))
+    @pytest.mark.parametrize('root', (None, 'root'))
     def test_init(self, files, root):
         """ Test the __init__() method for loading a file.
 
         """
-        merged = {"global": "conf2", "conf1": "conf1", "conf2": "conf2"}
-        macros = {"x1": "conf1", "x2": "conf2"}
+        merged = {'global': 'conf2', 'conf1': 'conf1', 'conf2': 'conf2'}
+        macros = {'x1': 'conf1', 'x2': 'conf2'}
         config = YamlConfig(files, root, macros)
         if root:
             assert config == {root: merged}
@@ -68,13 +68,13 @@ class YamlConfigTest(object):
             assert config == merged
         return
 
-    @pytest.mark.parametrize("root", (None, "root"))
+    @pytest.mark.parametrize('root', (None, 'root'))
     def test_load(self, files, root):
         """ Test the load() method.
 
         """
-        merged = {"global": "conf2", "conf1": "conf1", "conf2": "conf2"}
-        macros = {"x1": "conf1", "x2": "conf2"}
+        merged = {'global': 'conf2', 'conf1': 'conf1', 'conf2': 'conf2'}
+        macros = {'x1': 'conf1', 'x2': 'conf2'}
         config = YamlConfig()
         config.load(files, root, macros)
         if root:
@@ -86,5 +86,5 @@ class YamlConfigTest(object):
 
 # Make the module executable.
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     raise SystemExit(pytest.main([__file__]))

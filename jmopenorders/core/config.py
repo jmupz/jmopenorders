@@ -10,7 +10,7 @@ from yaml import safe_load
 from .logger import logger
 
 
-__all__ = "config", "YamlConfig"
+__all__ = 'config', 'YamlConfig'
 
 
 class _AttrDict(dict):
@@ -90,11 +90,11 @@ class YamlConfig(_AttrDict):
             # This allows for multi-pattern substitution in a single pass.
             return macros[match.group(0)]
 
-        macros = {r"%{:s};".format(key): val for (key, val) in
+        macros = {r'%{:s};'.format(key): val for (key, val) in
                   macros.items()} if macros else {}
-        regex = compile("|".join(macros) or r"^(?!)")
+        regex = compile('|'.join(macros) or r'^(?!)')
         for path in [path] if isinstance(path, str) else path:
-            with open(path, "r") as stream:
+            with open(path, 'r') as stream:
                 # Global text substitution is used for macro replacement. Two
                 # drawbacks of this are 1) the entire config file has to be
                 # read into memory first; 2) it might be nice if comments were
@@ -110,7 +110,7 @@ class YamlConfig(_AttrDict):
                 else:
                     self.update(data)
             except TypeError:  # data is None
-                logger.warning("config file {:s} is empty".format(path))
+                logger.warning('config file {:s} is empty'.format(path))
         return
 
 
