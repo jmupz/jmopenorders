@@ -1,5 +1,5 @@
 repos:
-  - repo: https://github.com/pre-commit/pre-commit-hooks
+-   repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v2.3.0
     hooks:
       - id: check-added-large-files
@@ -27,3 +27,9 @@ repos:
       - id: requirements-txt-fixer
       - id: trailing-whitespace
         exclude: ^tests/fixtures/diffs/
+-   repo: https://github.com/ambv/black
+    rev: 19.3b0
+    hooks:
+    -   id: black
+        args: [--safe]
+        language_version: python3.7
