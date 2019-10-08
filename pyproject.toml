@@ -2,10 +2,10 @@
 # Minimum requirements for the build system to execute.
 # See https://github.com/scipy/scipy/pull/10431 for the AIX issue.
 requires = [
-    "setuptools",
-    "wheel"
+    "setuptools >= 40.0.4",
+    "wheel >= 0.29.0"
 ]
+build-backend = 'setuptools.build_meta'
 
 [tool.black]
-target-version = ["py36", "py37", "py38"]
-exclude = 'generated'
+line-length = 99

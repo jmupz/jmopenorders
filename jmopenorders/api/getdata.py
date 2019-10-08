@@ -42,6 +42,7 @@
 
 
 import csv
+
 from ..core.logger import logger
 
 
@@ -73,13 +74,11 @@ class GetData:
         """Get the data from the csv-file."""
         # global orders_file
         try:
-            with open(self.file_name, 'r') as orders_file:
-                orders = csv.reader(orders_file, delimiter=';', quotechar='"')
+            with open(self.file_name, "r") as orders_file:
+                orders = csv.reader(orders_file, delimiter=";", quotechar='"')
                 data = list(orders)
 
                 return data
 
         except IOError:
-            logger.debug(
-                "The File with the data '" + self.file_name + "' does not exists"
-            )
+            logger.debug("The File with the data '" + self.file_name + "' does not exists")

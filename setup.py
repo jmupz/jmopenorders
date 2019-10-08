@@ -40,63 +40,84 @@
 #
 
 """The setup.py file for Python openorders."""
-import sys
-import os
 import io
-import re
-import ast
+import os
+import sys
 from datetime import datetime as dt
-from setuptools import setup, find_packages
 from pathlib import Path  # noqa E402
+
+from setuptools import setup
+
 import versioneer
 
 CURRENT_DIR = Path(__file__).parent
+cmdclass = {}
 
 
 def get_long_description() -> str:
-    readme_rst = os.path.join(CURRENT_DIR, 'README.rst')
+    readme_rst = os.path.join(CURRENT_DIR, "README.rst")
 
-    with io.open(readme_rst, 'rt', encoding='utf8') as f:
+    with io.open(readme_rst, "rt", encoding="utf8") as f:
         readme = f.read()
+        return readme
 
 
-MIN_PY_VERSION = '3.6'
-PROJECT_NAME = 'JM OpenOrders'
-PROJECT_DESCRIPTION = (
-    'jmopenorders is a generator to generate infos for the affected persons'
-)
-PROJECT_PACKAGE_NAME = 'jmopenorders'
-PROJECT_LICENSE = 'EUPL-1.2 '
-PROJECT_AUTHOR = 'Jürgen Mülbert'
-PROJECT_COPYRIGHT = ' 2018-{}, {}'.format(dt.now().year, PROJECT_AUTHOR)
-PROJECT_URL = 'https://jmopenorders.github.io/'
-PROJECT_EMAIL = 'juergen.muelbert@gmail.com'
+def parse_requirements(requirements):
+    """ load requirements from a pip requirements file """
+    # load from requirements.txt
+    with open(requirements) as f:
+        lines = [l for l in f]
+        # remove spaces
+        stripped = map((lambda x: x.strip()), lines)
+        # remove comments
+        nocomments = filter((lambda x: not x.startswith("#")), stripped)
+        # remove empty lines
+        reqs = filter((lambda x: x), nocomments)
+        return reqs
 
-PROJECT_GITHUB_USERNAME = 'jmuelbert'
-PROJECT_GITHUB_REPOSITORY = 'jmopenorders'
 
-PYPI_URL = 'https://pypi.python.org/pypi/{}'.format(PROJECT_PACKAGE_NAME)
-GITHUB_PATH = '{}/{}'.format(PROJECT_GITHUB_USERNAME, PROJECT_GITHUB_REPOSITORY)
-GITHUB_URL = 'https://github.com/{}'.format(GITHUB_PATH)
+extras_require = {}
 
-DOWNLOAD_URL = '{}/archive/{}.zip'.format(GITHUB_URL, versioneer.get_version())
+REQUIREMENTS = parse_requirements(os.path.join(CURRENT_DIR, "requirements.txt"))
+TESTS_REQUIRES = parse_requirements(os.path.join(CURRENT_DIR, "requirements_dev.txt"))
+
+CMDCLASS = versioneer.get_cmdclass()
+
+MIN_PY_VERSION = "3.6"
+PROJECT_NAME = "JM OpenOrders"
+PROJECT_DESCRIPTION = "jmopenorders is a generator to generate infos for the affected persons"
+PROJECT_PACKAGE_NAME = "jmopenorders"
+PROJECT_LICENSE = "EUPL-1.2 "
+PROJECT_AUTHOR = "Jürgen Mülbert"
+PROJECT_COPYRIGHT = " 2018-{}, {}".format(dt.now().year, PROJECT_AUTHOR)
+PROJECT_URL = "https://jmopenorders.github.io/"
+PROJECT_EMAIL = "juergen.muelbert@gmail.com"
+
+PROJECT_GITHUB_USERNAME = "jmuelbert"
+PROJECT_GITHUB_REPOSITORY = "jmopenorders"
+
+PYPI_URL = "https://pypi.python.org/pypi/{}".format(PROJECT_PACKAGE_NAME)
+GITHUB_PATH = "{}/{}".format(PROJECT_GITHUB_USERNAME, PROJECT_GITHUB_REPOSITORY)
+GITHUB_URL = "https://github.com/{}".format(GITHUB_PATH)
+
+DOWNLOAD_URL = "{}/archive/{}.zip".format(GITHUB_URL, versioneer.get_version())
 PROJECT_URLS = {
-    'Source Code': '{GITHUB_URL}',
-    'Bug Reports': '{}/issues'.format(GITHUB_URL),
-    'Documentation': 'https://readthedocs.org/projects/{}'.format(PROJECT_PACKAGE_NAME),
+    "Source Code": "{GITHUB_URL}",
+    "Bug Reports": "{}/issues".format(GITHUB_URL),
+    "Documentation": "https://readthedocs.org/projects/{}".format(PROJECT_PACKAGE_NAME),
 }
 
+PACKAGES = ["jmopenorders"]
+PACKAGE_DIR = {"": "src"}
+PACKAGE_DATA = {}
+OPTIONS = {}
+
 # 'setup.py publish' shortcut.
-if sys.argv[-1] == 'publish':
-    os.system('python setup.py sdist bdist_wheel')
-    os.system('twine upload dist/*')
+if sys.argv[-1] == "publish":
+    os.system("python setup.py sdist bdist_wheel")
+    os.system("twine upload dist/*")
     sys.exit()
 
-PACKAGES = find_packages(exclude=['tests', 'tests.*'])
-
-REQUIREMENTS = ['pexpect', 'openpyxl', 'python-slugify']
-
-test_requirements = ['tox']
 
 extras_require = {}
 
@@ -104,20 +125,23 @@ setup(
     name=PROJECT_PACKAGE_NAME,
     description=PROJECT_DESCRIPTION,
     long_description=get_long_description(),
-    long_description_content_type='text/markdown',
+    long_description_content_type="text/markdown",
     url=PROJECT_URL,
     download_url=DOWNLOAD_URL,
     project_urls=PROJECT_URLS,
     author=PROJECT_AUTHOR,
     author_email=PROJECT_EMAIL,
     packages=PACKAGES,
+    package_dir=PACKAGE_DIR,
+    package_data=PACKAGE_DATA,
     include_package_data=True,
     zip_safe=False,
     install_requires=REQUIREMENTS,
-    python_requires='>={}'.format(MIN_PY_VERSION),
-    test_suite='tests',
-    tests_require=test_requirements,
-    entry_points={'console_scripts': ['jmopenorders=jmopenorders.cli:main']},
+    python_requires=">={}".format(MIN_PY_VERSION),
+    test_suite="tests",
+    tests_require=TESTS_REQUIRES,
+    entry_points={"console_scripts": ["jmopenorders=jmopenorders.cli:main"]},
     version=versioneer.get_version(),
-    cmdclass=versioneer.get_cmdclass(),
+    options=OPTIONS,
+    cmdclass=CMDCLASS,
 )

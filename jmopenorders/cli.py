@@ -45,11 +45,8 @@ from argparse import ArgumentParser
 from inspect import getfullargspec
 
 from .__init__ import __version__
-
 from .api.hello import hello
 from .api.report import report
-
-
 from .core.config import config
 from .core.logger import logger
 
@@ -61,8 +58,8 @@ def main(argv=None):
     :return: exit status
     """
     args = _args(argv)
-    logger.start(args.warn or 'DEBUG')  # can't use default from config yet
-    logger.debug('starting execution')
+    logger.start(args.warn or "DEBUG")  # can't use default from config yet
+    logger.debug("starting execution")
     config.load(args.config)
     config.core.config = args.config
     if args.warn:
@@ -80,7 +77,7 @@ def main(argv=None):
     except RuntimeError as err:
         logger.critical(err)
         return 1
-    logger.debug('sucessful completion')
+    logger.debug("sucessful completion")
     return 0
 
 
@@ -91,34 +88,28 @@ def _args(argv):
     :param argv: argument list to parse
     """
     parser = ArgumentParser()
+    parser.add_argument("-c", "--config", action="append", help="config file [etc/config.yml]")
     parser.add_argument(
-        '-c', '--config', action='append', help='config file [etc/config.yml]'
+        "-v",
+        "--version",
+        action="version",
+        version="jmopenorders {:s}".format(__version__),
+        help="print version and exit",
     )
-    parser.add_argument(
-        '-v',
-        '--version',
-        action='version',
-        version='jmopenorders {:s}'.format(__version__),
-        help='print version and exit',
-    )
-    parser.add_argument(
-        '-w', '--warn', default='WARN', help='logger warning level [WARN]'
-    )
-    parser.add_argument('-i', '--inputpath', type=str, help='inputpath for data')
-    parser.add_argument(
-        '-o', '--outputpath', type=str, help='outputpath to write files'
-    )
-    parser.add_argument('-p', '--personfile', type=str, help='the names to report')
-    parser.add_argument('-d', '--datafile', type=str, help='the datafile')
+    parser.add_argument("-w", "--warn", default="WARN", help="logger warning level [WARN]")
+    parser.add_argument("-i", "--inputpath", type=str, help="inputpath for data")
+    parser.add_argument("-o", "--outputpath", type=str, help="outputpath to write files")
+    parser.add_argument("-p", "--personfile", type=str, help="the names to report")
+    parser.add_argument("-d", "--datafile", type=str, help="the datafile")
     common = ArgumentParser(add_help=False)  # common subcommand arguments
-    common.add_argument('-n', '--name', default='World', help='greeting name')
-    subparsers = parser.add_subparsers(title='subcommand')
+    common.add_argument("-n", "--name", default="World", help="greeting name")
+    subparsers = parser.add_subparsers(title="subcommand")
     _report(subparsers, common)
     args = parser.parse_args(argv)
     if not args.config:
         # Don't specify this as an argument default or else it will always be
         # included it the list.
-        args.config = 'etc/config.yml'
+        args.config = "etc/config.yml"
     return args
 
 
@@ -130,7 +121,7 @@ def _hello(subparsers, common):
     :param common: parser for common subcommand arguments
     """
 
-    parser = subparsers.add_parser('hello', parents=[common])
+    parser = subparsers.add_parser("hello", parents=[common])
     parser.set_defaults(commands=hello)
     return
 
@@ -142,17 +133,17 @@ def _report(subparsers, common):
     :param common: parser for common subcommand arguments
     """
 
-    parser = subparsers.add_parser('report', parents=[common])
+    parser = subparsers.add_parser("report", parents=[common])
     parser.set_defaults(commands=report)
     return
 
 
 # Make the module executable.
-if __name__ == '__main__':
+if __name__ == "__main__":
     try:
         status = main()
     except Exception:
-        logger.critical('shutting down due to fatal error')
+        logger.critical("shutting down due to fatal error")
         raise  # print stack trace
     else:
         raise SystemExit(status)

@@ -67,6 +67,7 @@ import os
 
 from openpyxl import Workbook
 from openpyxl.styles import Font
+
 from ..core.logger import logger
 
 
@@ -75,7 +76,7 @@ class GenerateOrders:
 
     def __init__(self, destdir):
         """Init the GenerateOrders Class."""
-        self.dest_name = ''
+        self.dest_name = ""
         self.dest_dir = destdir
 
     def create(self, actual_name, actual_content):
@@ -85,29 +86,27 @@ class GenerateOrders:
 
         # Create a workbook and add a worksheet.
         if self.dest_dir:
-            self.dest_name = os.path.join(
-                os.path.abspath(self.dest_dir), actual_name + '.xlsx'
-            )
+            self.dest_name = os.path.join(os.path.abspath(self.dest_dir), actual_name + ".xlsx")
         else:
-            self.dest_name = actual_name + '.xlsx'
+            self.dest_name = actual_name + ".xlsx"
 
         workbook = Workbook()
         sheet = workbook.active
         sheet.title = actual_name
-        sheet.sheet_properties.tabColor = '1072BA'
+        sheet.sheet_properties.tabColor = "1072BA"
 
         line_count = 0
         for print_line in actual_content:
             logger.debug(print_line)
-            if 'Auftrag Nr.' in print_line[0]:
+            if "Auftrag Nr." in print_line[0]:
                 # Write Header
                 for item in print_line:
-                    logger.debug('Header: ' + item)
+                    logger.debug("Header: " + item)
                     cell = sheet.cell(row=row_num, column=col_num)
                     cell.value = item
-                    cell.font = Font(name='Courier', size=12)
-                    cell.style = 'Title'
-                    cell.number_format = 'text'
+                    cell.font = Font(name="Courier", size=12)
+                    cell.style = "Title"
+                    cell.number_format = "text"
                     col_num += 1
 
                 row_num += 1
@@ -118,32 +117,25 @@ class GenerateOrders:
                 line_count += 1
                 for item in print_line:
                     logger.debug(
-                        'Name: '
-                        + actual_name
-                        + ' Data: '
-                        + item
-                        + ' Count: '
-                        + str(line_count)
+                        "Name: " + actual_name + " Data: " + item + " Count: " + str(line_count)
                     )
-                    logger.debug(
-                        'row_num: ' + str(row_num) + ' col_num: ' + str(col_num)
-                    )
+                    logger.debug("row_num: " + str(row_num) + " col_num: " + str(col_num))
 
                     # Tage offen ist eine ganze Zahl
                     if col_num == 3:
                         cell = sheet.cell(row=row_num, column=col_num)
                         cell.value = item
-                        cell.number_format = 'dd.mm.yyyy'
+                        cell.number_format = "dd.mm.yyyy"
                     # Tage offen ist eine ganze Zahl
                     elif col_num == 4:
                         cell = sheet.cell(row=row_num, column=col_num)
                         cell.value = float(item)
-                        cell.number_format = '#,##0.00'
+                        cell.number_format = "#,##0.00"
                     # Alles was nach Deb-Name ist, ist eine reale Zahl
                     elif col_num > 7:
                         cell = sheet.cell(row=row_num, column=col_num)
                         cell.value = float(item)
-                        cell.number_format = '#,##0.00_€'
+                        cell.number_format = "#,##0.00_€"
                     else:
                         sheet.cell(row=row_num, column=col_num).value = item
 

@@ -61,18 +61,14 @@ class GetServicePerson:
         """
         service_person = []
         try:
-            with open(self.file_name, 'r') as berater_file:
-                self.berater = csv.DictReader(
-                    berater_file, delimiter=';', quotechar='"'
-                )
+            with open(self.file_name, "r") as berater_file:
+                self.berater = csv.DictReader(berater_file, delimiter=";", quotechar='"')
 
                 for row in self.berater:
 
-                    service_person.append(row['Name'])
+                    service_person.append(row["Name"])
 
                 return service_person
 
         except IOError:
-            logger.debug(
-                'The File for the service persons %s does not exists', self.file_name
-            )
+            logger.debug("The File for the service persons %s does not exists", self.file_name)
