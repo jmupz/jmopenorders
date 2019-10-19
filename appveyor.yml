@@ -1,9 +1,7 @@
 shallow_clone: false
 
 image:
-  - Ubuntu
-  - Ubuntu1804
-  - Visual Studio 2015
+  - Visual Studio 2017
 
 # What Python version is installed where:
 # http://www.appveyor.com/docs/installed-software#python
@@ -18,22 +16,12 @@ environment:
     - PYTHON: "C:\\Python37"
       TOX_ENV: "py37"
 
-    - PYTHON: "C:\\Python38"
-      TOX_ENV: "py38"
-
 init:
   - "%PYTHON%/python -V"
   - mkdir C:\Users\appveyor\.conda
   - call %MINICONDA%\Scripts\activate.bat
 
 install:
-  # Linux
-  - sh: sudo apt update
-  - sh: sudo apt -y --force-yes install libglu1-mesa xvfb libgl1-mesa-dri mesa-common-dev libglu1-mesa-dev
-  - sh: wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
-  - sh: bash miniconda.sh -b -p $HOME/miniconda
-  - sh: source "$HOME/miniconda/etc/profile.d/conda.sh"
-
   - cmd: "%PYTHON%/Scripts/pip install -U --user pip"
   - cmd: "%PYTHON%/Scripts/pip install -U --user tox wheel"
 
@@ -48,7 +36,6 @@ test_script:
 
 after_test:
   - "%PYTHON%/python setup.py bdist_wheel"
-  - ps: "ls dist"
 
 artifacts:
   - path: dist\*
