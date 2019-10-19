@@ -12,9 +12,11 @@ environment:
   matrix:
     - PYTHON: "C:\\Python36"
       TOX_ENV: "py36"
+      PYVER: "3.6"
 
     - PYTHON: "C:\\Python37"
       TOX_ENV: "py37"
+      PYVER: "3.7"
 
 init:
   - "%PYTHON%/python -V"
@@ -22,20 +24,19 @@ init:
   - call %MINICONDA%\Scripts\activate.bat
 
 install:
-  - cmd: "%PYTHON%/python -m pip install --upgrade pip"
-  - cmd: "%PYTHON%/python -m pip install --upgrade  tox wheel"
-
+  - conda env create python=%PYVER% -f environment.yml
+  - conda activate jmopenorders
+  - conda update
   - conda list # for debug reason
 
 # Not a .NET project, we build in the install step instead
 build: false
 
 test_script:
-  - "%PYTHON%/python -m tox -e %TOX_ENV%"
-  - tox -e docs
+  - "python -m tox -e %TOX_ENV%"
 
 after_test:
-  - "%PYTHON%/python setup.py bdist_wheel"
+  - "python setup.py bdist_wheel"
 
 artifacts:
   - path: dist\*
