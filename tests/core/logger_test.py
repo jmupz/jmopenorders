@@ -12,6 +12,7 @@ from io import StringIO
 from logging import DEBUG
 
 import pytest
+
 from jmopenorders.core.logger import Logger
 
 
