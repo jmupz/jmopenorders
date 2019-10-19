@@ -115,8 +115,6 @@ setup(
     author_email='juergen.muelbert@gmail.com',
     install_requirements=REQUIREMENTS,
 
-    package_dir={'': 'src'},
-
     packages=find_packages(
         exclude=["contrib", "docs", "tests*", "tasks"],
     ),
