@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """Generator for fake data for testing."""
 # -*- coding: utf-8 -*-
-
 #
 # Copyright (c) 2019 Jürgen Mülbert. All rights reserved.
 #
@@ -39,8 +38,6 @@
 # Die sprachspezifischen Genehmigungen und Beschränkungen
 # unter der Lizenz sind dem Lizenztext zu entnehmen.
 #
-
-
 import csv
 import os
 from datetime import date
@@ -69,12 +66,16 @@ class CreateFakeOrders:
     def generate_part_person(self, count):
         """Generate random names for parts-person."""
         for _ in range(0, count):
-            self.part_person.append(self.fake.first_name() + " " + self.fake.last_name())
+            self.part_person.append(
+                self.fake.first_name() + " " + self.fake.last_name(),
+            )
 
     def generate_service_person(self, count):
         """Generate random names for service persons."""
         for _ in range(0, count):
-            self.service_person.append(self.fake.last_name() + ", " + self.fake.first_name())
+            self.service_person.append(
+                self.fake.last_name() + ", " + self.fake.first_name(),
+            )
 
     def generate_header(self):
         """Generate Headers."""
@@ -113,11 +114,17 @@ class CreateFakeOrders:
         for _ in range(0, count):
             if workshop is True:
                 self.workshop_count = count
-                line = ["", "WK" + self.fake.numerify(text="######"), "Werkstatt"]
+                line = [
+                    "",
+                    "WK" + self.fake.numerify(text="######"),
+                    "Werkstatt"
+                ]
             else:
                 self.part_count = count
                 line = ["", "ET" + self.fake.numerify(text="######"), "Teile"]
-            fake_date = self.fake.date_between(start_date="-2y", end_date="+1y")
+            fake_date = self.fake.date_between(
+                start_date="-2y", end_date="+1y"
+            )
             line.append(fake_date.strftime("%d.%m.%Y"))
             date_now = date.today()
             delta = date_now - fake_date
@@ -126,10 +133,20 @@ class CreateFakeOrders:
             line.append(self.fake.name())
             if workshop is True:
                 line.append(
-                    self.service_person[self.fake.random_int(0, len(self.service_person) - 1)]
+                    self.service_person[
+                        self.fake.random_int(
+                            0, len(self.service_person) - 1,
+                        )
+                    ],
                 )
             else:
-                line.append(self.part_person[self.fake.random_int(0, len(self.part_person) - 1)])
+                line.append(
+                    self.part_person[
+                        self.fake.random_int(
+                            0, len(self.part_person) - 1,
+                        )
+                    ],
+                )
             if workshop is True:
                 line.append(self.fake.numerify(text="####,##"))
             else:
@@ -154,16 +171,26 @@ class CreateFakeOrders:
             line = ["Gesamt Teile", self.part_count]
         self.order_list.append(line)
         if workshop is True:
-            line = ["Durchschnitt Werkstatt", self.fake.random_int(1, self.workshop_count)]
+            line = [
+                "Durchschnitt Werkstatt",
+                self.fake.random_int(1, self.workshop_count),
+            ]
         else:
-            line = ["Durchschnitt Werkstatt", self.fake.random_int(1, self.part_count)]
+            line = [
+                "Durchschnitt Werkstatt",
+                self.fake.random_int(1, self.part_count),
+            ]
 
         self.order_list.append(line)
         self.order_list.append("")
 
     def csv_output(self, name):
         """Write the data to a csv-file."""
-        with open(os.path.join(self.data_path, name), "w", newline="") as csvfile:
+        with open(
+                os.path.join(self.data_path, name),
+                "w",
+                newline="",
+        ) as csvfile:
             orderswriter = csv.writer(csvfile, delimiter=";")
             for row in self.order_list:
                 orderswriter.writerow(row)

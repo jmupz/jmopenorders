@@ -7,7 +7,8 @@ until the logger is started.
 """
 from logging import Formatter
 from logging import Logger as _Logger
-from logging import NullHandler, StreamHandler
+from logging import NullHandler
+from logging import StreamHandler
 
 __all__ = "logger", "Logger"
 
@@ -19,7 +20,7 @@ class Logger(_Logger):
 
     LOGFMT = "%(asctime)s;%(levelname)s;%(name)s;%(message)s"
 
-    def __init__(self, name=None):
+    def __init__(self, name=None) -> None:
         """ Initialize this logger.
 
         Loggers with the same name refer to the same underlying object.
@@ -36,7 +37,7 @@ class Logger(_Logger):
         self.addHandler(NullHandler())  # default to no output
         return
 
-    def start(self, level="WARN", stream=None):
+    def start(self, level="WARN", stream=None) -> None:
         """ Start logging to a stream.
 
         Until the logger is started, no messages will be emitted. This applies

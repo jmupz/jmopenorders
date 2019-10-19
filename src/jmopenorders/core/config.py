@@ -28,7 +28,8 @@ class _AttrDict(dict):
         if isinstance(value, dict):
             # For mixed recursive assignment (e.g. `a["b"].c = value` to work
             # as expected, all dict-like values must themselves be _AttrDicts.
-            # The "right way" to do this would be to convert to an _AttrDict on
+            # The "right way" to do this would be to convert to an
+            # _AttrDict on
             # assignment, but that requires overriding both __setitem__
             # (straightforward) and __init__ (good luck). An explicit type
             # check is used here instead of EAFP because exceptions would be
@@ -94,7 +95,11 @@ class YamlConfig(_AttrDict):
             # This allows for multi-pattern substitution in a single pass.
             return macros[match.group(0)]
 
-        macros = {r"%{:s};".format(key): val for (key, val) in macros.items()} if macros else {}
+        macros = {
+            r"%{:s};".format(key): val for (
+                key, val,
+            ) in macros.items()
+        } if macros else {}
         regex = compile("|".join(macros) or r"^(?!)")
         for path in [path] if isinstance(path, str) else path:
             with open(path, "r") as stream:

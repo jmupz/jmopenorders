@@ -3,10 +3,18 @@ import os
 
 from jmopenorders.core.logger import logger
 
-from . import cleanoutputdir, generateorders, getdata, getserviceperson
+from . import cleanoutputdir
+from . import generateorders
+from . import getdata
+from . import getserviceperson
 
 
-def report(personfile="names.csv", datafile="data.csv", inputpath="home", outputpath="out") -> str:
+def report(
+        personfile="names.csv",
+        datafile="data.csv",
+        inputpath="home",
+        outputpath="out",
+) -> str:
 
     logger.debug("executing report command")
 
@@ -32,7 +40,10 @@ def report(personfile="names.csv", datafile="data.csv", inputpath="home", output
             berater_name = actual_berater
             logger.debug("Berater Name: " + berater_name)
             create_table = generateorders.GenerateOrders(outputpath)
-            create_table.create(actual_name=berater_name, actual_content=orders)
+            create_table.create(
+                actual_name=berater_name,
+                actual_content=orders,
+            )
     else:
         logger.critical("Berater file is empty or not exist")
 

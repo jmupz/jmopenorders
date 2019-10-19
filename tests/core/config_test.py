@@ -9,9 +9,8 @@ environment or setuptools develop mode to test against the development version.
 
 """
 import pytest
-from yaml import dump
-
 from jmopenorders.core.config import YamlConfig
+from yaml import dump
 
 
 class YamlConfigTest(object):

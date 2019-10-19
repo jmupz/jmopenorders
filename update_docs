@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 # build the docs
-cd docs
+cd docs ||  exit
 make clean
 make html
-cd ..
+cd .. || exit
 
 # commit and push
 git add -A

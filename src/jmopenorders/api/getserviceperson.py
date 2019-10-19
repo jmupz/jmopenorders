@@ -1,12 +1,6 @@
 # -*- coding: utf-8 -*-
-"""
-Clean the Directory.
-
-Remove the generated files
-"""
-
+"""Get the service persion from csv-file."""
 # -*- coding: utf-8 -*-
-
 #
 # Copyright (c) 2019 Jürgen Mülbert. All rights reserved.
 #
@@ -44,25 +38,40 @@ Remove the generated files
 # Die sprachspezifischen Genehmigungen und Beschränkungen
 # unter der Lizenz sind dem Lizenztext zu entnehmen.
 #
-
-
-import os
+import csv
 
 from ..core.logger import logger
 
 
-class CleanOutputDir:
+class GetServicePerson:
+    """Handle the service person."""
 
-    """Clean the output directory."""
+    def __init__(self, filename):
+        """Init the GetServicePerson Class."""
+        self.file_name = filename
+        self.berater = []
 
-    def __init__(self, outdir):
-        """Init the CleanOutputDir Class."""
-        self.out_dir = os.path.abspath(outdir)
+    def get(self) -> list:
+        """
+        Read the Service Person from csv-file.
 
-    def clean(self):
-        """Before write the new excel files, remove the old ones."""
-        files = os.listdir(self.out_dir)
-        for file in files:
-            if ".xlsx" in file:
-                os.remove(file)
-                logger.debug(file)
+        Then create a array and get this back
+        """
+        service_person = []
+        try:
+            with open(self.file_name, "r") as berater_file:
+                self.berater = csv.DictReader(
+                    berater_file, delimiter=";", quotechar='"',
+                )
+
+                for row in self.berater:
+
+                    service_person.append(row["Name"])
+
+                return service_person
+
+        except IOError:
+            logger.debug(
+                "The File for the service persons %s does not exists",
+                self.file_name,
+            )

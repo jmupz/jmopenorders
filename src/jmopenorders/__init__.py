@@ -1,7 +1,4 @@
 # -*- coding: utf-8 -*-
-"""Get the Data from csv-file to generate to output."""
-# -*- coding: utf-8 -*-
-
 #
 # Copyright (c) 2019 Jürgen Mülbert. All rights reserved.
 #
@@ -39,46 +36,11 @@
 # Die sprachspezifischen Genehmigungen und Beschränkungen
 # unter der Lizenz sind dem Lizenztext zu entnehmen.
 #
+"""
+Put the version to the __version__ variable.
+"""
 
 
-import csv
-
-from ..core.logger import logger
-
-
-class GetData:
-    """
-    Get the data from csv-file.
-
-    Auftrag Nummer,
-    Hauptbereich ,
-    Auftragsdatum,
-    Tage offen ,
-    Deb.-Nr.,
-    Deb.-Name,
-    Verkäufer Serviceberater,
-    Arbeitswert,
-    Teile ,
-    Fremdleistung,
-    Andere,
-    Gesamt,
-    Auftragswert bereit geliefert
-    """
-
-    def __init__(self, filename):
-        """Init the GetData Class."""
-        self.file_name = filename
-
-    def get(self) -> list:
-
-        """Get the data from the csv-file."""
-        # global orders_file
-        try:
-            with open(self.file_name, "r") as orders_file:
-                orders = csv.reader(orders_file, delimiter=";", quotechar='"')
-                data = list(orders)
-
-                return data
-
-        except IOError:
-            logger.debug("The File with the data '" + self.file_name + "' does not exists")
+__all__ = (
+    "__version__",
+)

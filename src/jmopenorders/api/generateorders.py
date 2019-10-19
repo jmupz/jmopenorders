@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 #
 # Copyright (c) 2019 Jürgen Mülbert. All rights reserved.
 #
@@ -37,7 +36,6 @@
 # Die sprachspezifischen Genehmigungen und Beschränkungen
 # unter der Lizenz sind dem Lizenztext zu entnehmen.
 #
-
 """
 This Program will read a csv that contents service persons as csv.
 
@@ -62,7 +60,6 @@ The Format of the data file is:
     - Gesamt                        pos 11 (float)
     - Auftragswert bereit geliefert pos 12 (float)
 """
-
 import os
 
 from openpyxl import Workbook
@@ -86,7 +83,11 @@ class GenerateOrders:
 
         # Create a workbook and add a worksheet.
         if self.dest_dir:
-            self.dest_name = os.path.join(os.path.abspath(self.dest_dir), actual_name + ".xlsx")
+            self.dest_name = os.path.join(
+                os.path.abspath(
+                    self.dest_dir,
+                ), actual_name + ".xlsx",
+            )
         else:
             self.dest_name = actual_name + ".xlsx"
 
@@ -117,9 +118,13 @@ class GenerateOrders:
                 line_count += 1
                 for item in print_line:
                     logger.debug(
-                        "Name: " + actual_name + " Data: " + item + " Count: " + str(line_count)
+                        "Name: {0} Data: {1} Count: {2}".formmat(
+                            actual_name, item, line_count)
                     )
-                    logger.debug("row_num: " + str(row_num) + " col_num: " + str(col_num))
+                    logger.debug(
+                        "row_num: " + str(row_num) +
+                        " col_num: " + str(col_num)
+                    )
 
                     # Tage offen ist eine ganze Zahl
                     if col_num == 3:
@@ -141,7 +146,8 @@ class GenerateOrders:
 
                     col_num += 1
 
-                # Alle Daten für den aktuellen Auftrag geschrieben -> nächste Zeile
+                # Alle Daten für den aktuellen Auftrag geschrieben ->
+                # nächste Zeile
                 row_num += 1
                 # und wieder ganz nach links.
                 col_num = 1

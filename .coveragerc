@@ -1,7 +1,28 @@
+
+[run]
+branch = True
+
 [report]
+# Regexes for lines to exclude from consideration
+exclude_lines =
+    # Have to re-enable the standard pragma
+    pragma: no cover
+
+    # Don't complain about missing debug-only code:
+    def __repr__
+    if self\.debug
+
+    # Don't complain if tests don't hit defensive assertion code:
+    raise AssertionError
+    raise NotImplementedError
+
+    # Don't complain if non-runnable code isn't run
+    if __name__ == .__main__.:
+
+# Paths to omit from consideration
 omit =
-    setup.py
-    jmopenorders/__main__.py
-    jmopenorders/_version.py
-    versioneer.py
-    tests/*
+    # __main__.py exists only as a very basic wrapper
+    #   and exists only to provide setuptools and python -m a place to point
+    #   at.
+    */jmopenorders/__main__.py
+    */jmopenorders/cli.py

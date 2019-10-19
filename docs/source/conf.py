@@ -12,7 +12,6 @@
 #
 # All configuration values have a default; values that are commented out
 # serve to show the default.
-
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
@@ -29,7 +28,9 @@ PROJECT_NAME = "JM OpenOrders"
 PROJECT_PACKAGE_NAME = "jmopenorders"
 PROJECT_LICENSE = "EUPL-1.2 "
 PROJECT_AUTHOR = "Jürgen Mülbert"
-PROJECT_COPYRIGHT = " 2018-{}, {}".format(dt.datetime.now().year, PROJECT_AUTHOR)
+PROJECT_COPYRIGHT = " 2018-{}, {}".format(
+    dt.datetime.now().year, PROJECT_AUTHOR,
+)
 PROJECT_URL = "https://jmopenorders.github.io/"
 PROJECT_EMAIL = "juergen.muelbert@gmail.com"
 PROJECT_LONG_DESCRIPTION = "A BDE Tool"
@@ -37,7 +38,10 @@ PROJECT_LONG_DESCRIPTION = "A BDE Tool"
 PROJECT_GITHUB_USERNAME = "jmuelbert"
 PROJECT_GITHUB_REPOSITORY = "jmopenorders"
 
-GITHUB_PATH = "{}/{}".format(PROJECT_GITHUB_USERNAME, PROJECT_GITHUB_REPOSITORY)
+GITHUB_PATH = "{}/{}".format(
+    PROJECT_GITHUB_USERNAME,
+    PROJECT_GITHUB_REPOSITORY,
+)
 GITHUB_URL = "https://github.com/{}".format(GITHUB_PATH)
 
 sys.path.insert(0, os.path.abspath("_ext"))
@@ -55,7 +59,6 @@ sys.path.insert(0, os.path.abspath("../jmopenorders"))
 extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.linkcode",
-    "sphinx_autodoc_annotation",
     "edit_on_github",
     "sphinx.ext.githubpages",
 ]
@@ -222,7 +225,7 @@ html_sidebars = {
         "relations.html",  # needs 'show_related': True theme option to display
         "searchbox.html",
         "donate.html",
-    ]
+    ],
 }
 
 # Add any extra paths that contain custom files (such as robots.txt or
@@ -269,7 +272,10 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, "jmopenorders.tex", "jmopenorders Documentation", "Jürgen Mülbert", "manual")
+    (
+        master_doc, "jmopenorders.tex",
+        "jmopenorders Documentation", "Jürgen Mülbert", "manual",
+    ),
 ]
 
 
@@ -277,7 +283,10 @@ latex_documents = [
 
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
-man_pages = [(master_doc, "jmopenorders.tex", "jmopenorders Documentation", [author], 1)]
+man_pages = [(
+    master_doc, "jmopenorders.tex",
+    "jmopenorders Documentation", [author], 1,
+)]
 
 
 # -- Options for Texinfo output -------------------------------------------
@@ -294,5 +303,5 @@ texinfo_documents = [
         "jmopenorders",
         "One line description of project.",
         "Miscellaneous",
-    )
+    ),
 ]

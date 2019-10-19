@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
 """Implementation of the command line interface."""
-
 #
 # Copyright (c) 2019 Jürgen Mülbert. All rights reserved.
 #
@@ -40,18 +38,17 @@
 # Die sprachspezifischen Genehmigungen und Beschränkungen
 # unter der Lizenz sind dem Lizenztext zu entnehmen.
 #
-
 from argparse import ArgumentParser
 from inspect import getfullargspec
 
-from .__init__ import __version__
+from . import __version__
 from .api.hello import hello
 from .api.report import report
 from .core.config import config
 from .core.logger import logger
 
 
-def main(argv=None):
+def main(argv=None) -> int:
     """Execute the application CLI.
 
     :param argv: argument list to parse (sys.argv by default)
@@ -82,13 +79,15 @@ def main(argv=None):
 
 
 def _args(argv):
-
     """ Parse command line arguments.
 
     :param argv: argument list to parse
     """
     parser = ArgumentParser()
-    parser.add_argument("-c", "--config", action="append", help="config file [etc/config.yml]")
+    parser.add_argument(
+        "-c", "--config", action="append",
+        help="config file [etc/config.yml]",
+    )
     parser.add_argument(
         "-v",
         "--version",
@@ -96,10 +95,22 @@ def _args(argv):
         version="jmopenorders {:s}".format(__version__),
         help="print version and exit",
     )
-    parser.add_argument("-w", "--warn", default="WARN", help="logger warning level [WARN]")
-    parser.add_argument("-i", "--inputpath", type=str, help="inputpath for data")
-    parser.add_argument("-o", "--outputpath", type=str, help="outputpath to write files")
-    parser.add_argument("-p", "--personfile", type=str, help="the names to report")
+    parser.add_argument(
+        "-w", "--warn", default="WARN",
+        help="logger warning level [WARN]",
+    )
+    parser.add_argument(
+        "-i", "--inputpath", type=str,
+        help="inputpath for data",
+    )
+    parser.add_argument(
+        "-o", "--outputpath", type=str,
+        help="outputpath to write files",
+    )
+    parser.add_argument(
+        "-p", "--personfile", type=str,
+        help="the names to report",
+    )
     parser.add_argument("-d", "--datafile", type=str, help="the datafile")
     common = ArgumentParser(add_help=False)  # common subcommand arguments
     common.add_argument("-n", "--name", default="World", help="greeting name")
@@ -114,7 +125,6 @@ def _args(argv):
 
 
 def _hello(subparsers, common):
-
     """ CLI adaptor for the api.hello command.
 
     :param subparsers: subcommand parsers

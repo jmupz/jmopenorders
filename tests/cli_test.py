@@ -12,7 +12,6 @@ from subprocess import call
 from sys import executable
 
 import pytest
-
 from jmopenorders.cli import main
 
 

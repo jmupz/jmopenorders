@@ -66,10 +66,10 @@ Installing
 
 An install script is preferred. You can you the latest release or build the newest version with the command:
 
-    `./setup.py sdist`
+    ``./setup.py sdist``
 
 or
-    `python setup.py sdist`
+    ``python setup.py sdist``
 
 This build an python installer
 
