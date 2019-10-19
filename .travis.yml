@@ -47,15 +47,14 @@ matrix:
         TOX_ENV=py37
 
     # Run a series of tests on Windows
-    - os: windows
-      env: PYTHON_VERSION=3.6
-        MINICONDA_VERSION=4.7.10
-        TOX_ENV=py36
-
-    - os: windows
-      env: PYTHON_VERSION=3.7
-        MINICONDA_VERSION=4.7.10
-        TOX_ENV=py37
+    #  - os: windows
+    #  env: PYTHON_VERSION=3.6
+    #    MINICONDA_VERSION=4.7.10
+    #    TOX_ENV=py36
+    # - os: windows
+    #  env: PYTHON_VERSION=3.7
+    #    MINICONDA_VERSION=4.7.10
+    #    TOX_ENV=py37
 
 install:
   - git clone git://github.com/astropy/ci-helpers.git
