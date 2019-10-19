@@ -24,20 +24,20 @@ import datetime as dt
 __version__ = '0.2.0'
 __short_version__ = __version__
 
-PROJECT_NAME = "JM OpenOrders"
-PROJECT_PACKAGE_NAME = "jmopenorders"
-PROJECT_LICENSE = "EUPL-1.2 "
-PROJECT_AUTHOR = "Jürgen Mülbert"
-PROJECT_COPYRIGHT = " 2018-{}, {}".format(dt.datetime.now().year, PROJECT_AUTHOR)
-PROJECT_URL = "https://jmopenorders.github.io/"
-PROJECT_EMAIL = "juergen.muelbert@gmail.com"
+PROJECT_NAME = 'JM OpenOrders'
+PROJECT_PACKAGE_NAME = 'jmopenorders'
+PROJECT_LICENSE = 'EUPL-1.2 '
+PROJECT_AUTHOR = 'Jürgen Mülbert'
+PROJECT_COPYRIGHT = ' 2018-{}, {}'.format(dt.datetime.now().year, PROJECT_AUTHOR)
+PROJECT_URL = 'https://jmopenorders.github.io/'
+PROJECT_EMAIL = 'juergen.muelbert@gmail.com'
 PROJECT_LONG_DESCRIPTION = 'A BDE Tool'
 
-PROJECT_GITHUB_USERNAME = "jmuelbert"
-PROJECT_GITHUB_REPOSITORY = "jmopenorders"
+PROJECT_GITHUB_USERNAME = 'jmuelbert'
+PROJECT_GITHUB_REPOSITORY = 'jmopenorders'
 
-GITHUB_PATH = "{}/{}".format(PROJECT_GITHUB_USERNAME, PROJECT_GITHUB_REPOSITORY)
-GITHUB_URL = "https://github.com/{}".format(GITHUB_PATH)
+GITHUB_PATH = '{}/{}'.format(PROJECT_GITHUB_USERNAME, PROJECT_GITHUB_REPOSITORY)
+GITHUB_URL = 'https://github.com/{}'.format(GITHUB_PATH)
 
 sys.path.insert(0, os.path.abspath('_ext'))
 sys.path.insert(0, os.path.abspath('../jmopenorders'))
@@ -118,10 +118,10 @@ def linkcode_resolve(domain, info):
     except:
         lineno = None
     if lineno:
-        linespec = "#L%d" % (lineno + 1)
+        linespec = '#L%d' % (lineno + 1)
     else:
-        linespec = ""
-    index = fn.find("/homeassistant/")
+        linespec = ''
+    index = fn.find('/homeassistant/')
     if index == -1:
         index = 0
 

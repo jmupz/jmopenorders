@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Clean the Directory.
 
@@ -61,6 +62,6 @@ class CleanOutputDir:
         """Before write the new excel files, remove the old ones."""
         files = os.listdir(self.out_dir)
         for file in files:
-            if ".xlsx" in file:
+            if '.xlsx' in file:
                 os.remove(file)
                 logger.debug(file)

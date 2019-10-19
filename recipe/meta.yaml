@@ -2,8 +2,8 @@
 {% set version = "0.1.2" %}
 
 package:
-  name: "{{ name|lower }}"
-  version: "{{ version }}"
+  name: {{ name }}
+  version: {{ version }}
 
 source:
   url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
@@ -12,22 +12,22 @@ source:
 build:
   noarch: python
   number: 0
+  script: pip install . --no-deps --ignore-installed
   entry_points:
     - jmopenorders = jmopenorders.cli:main
-  script: "python -m pip install . --no-deps --ignore-installed -vv"
 
+# https://conda.io/docs/user-guide/tasks/build-packages/define-metadata.html#export-runtime-requirements
 requirements:
-  host:
-    - openpyxl
-    - pexpect
+  build:
     - pip
     - python
-    - python-slugify
+
   run:
     - openpyxl
     - pexpect
     - python
     - python-slugify
+    - setuptools
 
 test:
   imports:
@@ -39,13 +39,13 @@ test:
     - tox
 
 about:
-  home: "https://jmopenorders.github.io/"
-  license: "European Union Public Licence 1.2 (EUPL 1.2)"
-  license_family: "NONE"
+  home: https://jmopenorders.github.io/
+  license: EUPL-1.2
+  license_family: NONE
   license_file: "LICENSE"
-  summary: "jmopenorders is a generator to generate infos for the affected persons"
-  doc_url: "https://readthedocs.org/projects/jmopenorders/"
-  dev_url: "https://github.com/jmuelbert/jmopenorders"
+  summary: 'jmopenorders is a generator to generate infos for the affected persons'
+  dev_url: https://github.com/jmuelbert/jmopenorders
+  doc_url: https://jmopenorders.readthedocs.io
 
 extra:
   recipe-maintainers:
