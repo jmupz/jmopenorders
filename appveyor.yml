@@ -27,7 +27,7 @@ environment:
 init:
   - "%PYTHON%/python -V"
   - mkdir C:\Users\appveyor\.conda
-  - call %MINICONDA%Scripts\activate.bat
+  - call %MINICONDA%\Scripts\activate.bat
 
 install:
   # Linux

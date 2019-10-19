@@ -61,7 +61,7 @@ long_description = read('README.rst')
 def parse_requirements(requirements: str):
     """ load requirements from a pip requirements file """
     # load from requirements.txt
-    with open(requirements) as f:
+    with open(os.path.join(here, requirements), "r") as f:
         lines = [l for l in f]
         # remove spaces
         stripped = map((lambda x: x.strip()), lines)
