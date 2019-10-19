@@ -12,17 +12,14 @@ environment:
   PYTHONUNBUFFERED: 1
   MINICONDA: C:\\Miniconda3-x64
   matrix:
-    - PYTHON: "C:\\Python34"
-      TOX_ENV: "py34"
-
-    - PYTHON: "C:\\Python35"
-      TOX_ENV: "py35"
-
     - PYTHON: "C:\\Python36"
       TOX_ENV: "py36"
 
     - PYTHON: "C:\\Python37"
       TOX_ENV: "py37"
+
+    - PYTHON: "C:\\Python38"
+      TOX_ENV: "py38"
 
 init:
   - "%PYTHON%/python -V"
