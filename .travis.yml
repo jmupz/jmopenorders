@@ -20,7 +20,7 @@ env:
     # to repeat them for all configurations.
     - PYTHON_VERSION=3.7
     - PIP_DEPENDENCIES='tox'
-    - RUN_CMD='pytest'
+    - RUN_CMD='tox -e py37'
     - MINICONDA_VERSION=latest
     - DISPLAY=":99.0"
 

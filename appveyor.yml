@@ -23,7 +23,7 @@ init:
 
 install:
   - cmd: "%PYTHON%/Scripts/pip install -U --user pip"
-  - cmd: "%PYTHON%/Scripts/pip install -U --user tox wheel"
+  - cmd: "%PYTHON%/Scripts/pip install tox wheel"
 
   - conda list # for debug reason
 
