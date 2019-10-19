@@ -22,6 +22,11 @@ init:
   - "%PYTHON%/python -V"
   - mkdir C:\Users\appveyor\.conda
   - call %MINICONDA%\Scripts\activate.bat
+  - python -V
+  - conda update
+  - conda list
+  - conda config --add channels confa-forge
+  - conda update
 
 install:
   - conda env create python=%PYVER% -f environment.yml
