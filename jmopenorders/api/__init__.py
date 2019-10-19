@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """JM OpenOrders Library."""
 # -*- coding: utf-8 -*-
 

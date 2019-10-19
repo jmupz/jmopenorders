@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """Get the Data from csv-file to generate to output."""
 # -*- coding: utf-8 -*-
 
@@ -72,8 +73,8 @@ class GetData:
         """Get the data from the csv-file."""
         # global orders_file
         try:
-            with open(self.file_name, "r") as orders_file:
-                orders = csv.reader(orders_file, delimiter=";", quotechar='"')
+            with open(self.file_name, 'r') as orders_file:
+                orders = csv.reader(orders_file, delimiter=';', quotechar='"')
                 data = list(orders)
 
                 return data

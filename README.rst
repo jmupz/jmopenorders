@@ -2,7 +2,7 @@ jmopenorders
 ============
 
 .. image:: https://img.shields.io/pypi/v/jmopenorders.svg
-        :target: https://pypi.python.org/pypi/jmopenorders
+        :target: https://pypi.python.org/pypi/jmopenorders/
         :alt: PyPi
 
 .. image:: https://img.shields.io/pypi/wheel/jmopenorders.svg
