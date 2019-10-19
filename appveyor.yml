@@ -22,8 +22,8 @@ init:
   - call %MINICONDA%\Scripts\activate.bat
 
 install:
-  - cmd: "%PYTHON%/Scripts/pip install -U --user pip"
-  - cmd: "%PYTHON%/Scripts/pip install tox wheel"
+  - cmd: "%PYTHON%/python -m pip install --upgrade pip"
+  - cmd: "%PYTHON%/python -m pip install --upgrade  tox wheel"
 
   - conda list # for debug reason
 
