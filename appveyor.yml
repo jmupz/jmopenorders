@@ -42,7 +42,7 @@ test_script:
 
 after_test:
   - "python setup.py bdist_wheel"
-  - conda build conda.recipe --no-test
+  - conda build recipe --no-test
   - conda install -q pytest pytest-cov conda-build anaconda-client
   - conda install --use-local jmopenorders
   - conda info -a
