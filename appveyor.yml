@@ -23,8 +23,8 @@ init:
   - mkdir C:\Users\appveyor\.conda
   - call %MINICONDA%\Scripts\activate.bat
   - python -V
-  - conda update --all
-  - conda list
+  - conda config --set always_yes yes --set changeps1 no
+  - conda update -q conda
   - conda config --add channels confa-forge
   - conda update --all
 
@@ -42,6 +42,10 @@ test_script:
 
 after_test:
   - "python setup.py bdist_wheel"
+  - conda build conda.recipe --no-test
+  - conda install -q pytest pytest-cov conda-build anaconda-client
+  - conda install --use-local jmopenorders
+  - conda info -a
 
 artifacts:
   - path: dist\*

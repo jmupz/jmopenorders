@@ -23,25 +23,31 @@ env:
     - MINICONDA_VERSION=latest
     - DISPLAY=":99.0"
 
-  matrix:
-    - PYTHON_VERSION=3.6
-      TOX_ENV=py36
-
-    - PYTHON_VERSION=3.7
-      TOX_ENV=py37
-
 matrix:
   fast_finish: true
   include:
     - env: PIP_DEPENDENCIES='tox twine' TWINE_CHECK=1
 
+    # Try a run on Linux
+    - os: linux
+      env: PYTHON_VERSION=3.6
+        MINICONDA_VERSION=latest
+        TOX_ENV=py36
+
+    - os: linux
+      env: PYTHON_VERSION=3.7
+        MINICONDA_VERSION=latest
+        TOX_ENV=py37
+
     # Try a run on OSX
     - os: osx
+      osx_image: xcode11
       env: PYTHON_VERSION=3.6
         MINICONDA_VERSION=latest
         TOX_ENV=py36
 
     - os: osx
+      osx_image: xcode11
       env: PYTHON_VERSION=3.7
         MINICONDA_VERSION=latest
         TOX_ENV=py37
@@ -67,6 +73,15 @@ script: if [[ $TWINE_CHECK ]]; then
   else
   tox -e "${TOX_ENV}";
   fi
+
+after_success:
+  - conda install -c conda-forge codecov
+  - conda install conda-build anaconda-client pytest pytest-cov
+  - codecov
+  - coveralls
+  - conda build recipe --no-test
+  - conda install --use-local jmopenorders
+  - conda info -a
 
 deploy:
   provider: pypi
