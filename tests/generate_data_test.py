@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """Generator for fake data for testing."""
 # -*- coding: utf-8 -*-
-
 #
 # Copyright (c) 2019 Jürgen Mülbert. All rights reserved.
 #
@@ -39,13 +38,12 @@
 # Die sprachspezifischen Genehmigungen und Beschränkungen
 # unter der Lizenz sind dem Lizenztext zu entnehmen.
 #
-
-
 import csv
-from datetime import date
-from openpyxl import Workbook
 import os
+from datetime import date
+
 from faker import Factory
+from openpyxl import Workbook
 
 
 class CreateFakeOrders:
@@ -60,8 +58,8 @@ class CreateFakeOrders:
         self.workshop_count = 0
         self.part_count = 0
 
-        if l18n == '':
-            l18n = 'de_DE'
+        if l18n == "":
+            l18n = "de_DE"
 
         self.fake = Factory.create(l18n)
 
@@ -69,44 +67,44 @@ class CreateFakeOrders:
         """Generate random names for parts-person."""
         for _ in range(0, count):
             self.part_person.append(
-                self.fake.first_name() + ' ' + self.fake.last_name()
+                self.fake.first_name() + " " + self.fake.last_name(),
             )
 
     def generate_service_person(self, count):
         """Generate random names for service persons."""
         for _ in range(0, count):
             self.service_person.append(
-                self.fake.last_name() + ', ' + self.fake.first_name()
+                self.fake.last_name() + ", " + self.fake.first_name(),
             )
 
     def generate_header(self):
         """Generate Headers."""
-        line = ['', '', '', '', '', '', 'OFFENE AUFTRÄGE']
+        line = ["", "", "", "", "", "", "OFFENE AUFTRÄGE"]
         self.order_list.append(line)
-        line = ['MANDANT', '']
+        line = ["MANDANT", ""]
         self.order_list.append(line)
-        line = ['Filiale', '', self.fake.random_int(1, 10)]
+        line = ["Filiale", "", self.fake.random_int(1, 10)]
         self.order_list.append(line)
-        line = ['BENUTZER-ID', '']
+        line = ["BENUTZER-ID", ""]
         self.order_list.append(line)
-        line = ['Bereich', 'Wekstatt & Teile']
+        line = ["Bereich", "Wekstatt & Teile"]
         self.order_list.append(line)
-        self.order_list.append('')
+        self.order_list.append("")
         line = [
-            '',
-            'Auftrag Nr.',
-            'Hauptbereich',
-            'Auftragsdatum',
-            'Tage offen',
-            'Deb.-Nr.',
-            'Deb.-Name',
-            'Verkäufer Serviceberater',
-            'Arbeitswert',
-            'Teile',
-            'Fremdleistung',
-            'Andere',
-            'Gesamt',
-            'Auftragswert bereits geliefert',
+            "",
+            "Auftrag Nr.",
+            "Hauptbereich",
+            "Auftragsdatum",
+            "Tage offen",
+            "Deb.-Nr.",
+            "Deb.-Name",
+            "Verkäufer Serviceberater",
+            "Arbeitswert",
+            "Teile",
+            "Fremdleistung",
+            "Andere",
+            "Gesamt",
+            "Auftragswert bereits geliefert",
         ]
 
         self.order_list.append(line)
@@ -116,65 +114,84 @@ class CreateFakeOrders:
         for _ in range(0, count):
             if workshop is True:
                 self.workshop_count = count
-                line = ['', 'WK' + self.fake.numerify(text='######'), 'Werkstatt']
+                line = [
+                    "",
+                    "WK" + self.fake.numerify(text="######"),
+                    "Werkstatt"
+                ]
             else:
                 self.part_count = count
-                line = ['', 'ET' + self.fake.numerify(text='######'), 'Teile']
-            fake_date = self.fake.date_between(start_date='-2y', end_date='+1y')
-            line.append(fake_date.strftime('%d.%m.%Y'))
+                line = ["", "ET" + self.fake.numerify(text="######"), "Teile"]
+            fake_date = self.fake.date_between(
+                start_date="-2y", end_date="+1y"
+            )
+            line.append(fake_date.strftime("%d.%m.%Y"))
             date_now = date.today()
             delta = date_now - fake_date
             line.append(delta.days)
-            line.append(self.fake.numerify(text='######'))
+            line.append(self.fake.numerify(text="######"))
             line.append(self.fake.name())
             if workshop is True:
                 line.append(
                     self.service_person[
-                        self.fake.random_int(0, len(self.service_person) - 1)
-                    ]
+                        self.fake.random_int(
+                            0, len(self.service_person) - 1,
+                        )
+                    ],
                 )
             else:
                 line.append(
-                    self.part_person[self.fake.random_int(0, len(self.part_person) - 1)]
+                    self.part_person[
+                        self.fake.random_int(
+                            0, len(self.part_person) - 1,
+                        )
+                    ],
                 )
             if workshop is True:
-                line.append(self.fake.numerify(text='####,##'))
+                line.append(self.fake.numerify(text="####,##"))
             else:
-                line.append('0,00')
-            line.append(self.fake.numerify(text='####,##'))
+                line.append("0,00")
+            line.append(self.fake.numerify(text="####,##"))
             if workshop is True:
-                line.append(self.fake.numerify(text='####,##'))
-                line.append(self.fake.numerify(text='####,##'))
+                line.append(self.fake.numerify(text="####,##"))
+                line.append(self.fake.numerify(text="####,##"))
             else:
-                line.append('0,00')
-                line.append('0,00')
-            line.append(self.fake.numerify(text='####,##'))
-            line.append(self.fake.numerify(text='####,##'))
+                line.append("0,00")
+                line.append("0,00")
+            line.append(self.fake.numerify(text="####,##"))
+            line.append(self.fake.numerify(text="####,##"))
             self.order_list.append(line)
 
     def generate_splitter(self, workshop=True):
         """Generate a sub header."""
-        self.order_list.append('')
+        self.order_list.append("")
         if workshop is True:
-            line = ['Gesamt Werkstatt', self.workshop_count]
+            line = ["Gesamt Werkstatt", self.workshop_count]
         else:
-            line = ['Gesamt Teile', self.part_count]
+            line = ["Gesamt Teile", self.part_count]
         self.order_list.append(line)
         if workshop is True:
             line = [
-                'Durchschnitt Werkstatt',
+                "Durchschnitt Werkstatt",
                 self.fake.random_int(1, self.workshop_count),
             ]
         else:
-            line = ['Durchschnitt Werkstatt', self.fake.random_int(1, self.part_count)]
+            line = [
+                "Durchschnitt Werkstatt",
+                self.fake.random_int(1, self.part_count),
+            ]
 
         self.order_list.append(line)
-        self.order_list.append('')
+        self.order_list.append("")
 
     def csv_output(self, name):
         """Write the data to a csv-file."""
-        with open(os.path.join(self.data_path, name), 'w', newline='') as csvfile:
-            orderswriter = csv.writer(csvfile, delimiter=';')
+        with open(
+                os.path.join(self.data_path, name),
+                "w",
+                newline="",
+        ) as csvfile:
+            orderswriter = csv.writer(csvfile, delimiter=";")
             for row in self.order_list:
                 orderswriter.writerow(row)
 
@@ -197,7 +214,7 @@ class CreateFakeOrders:
 
 def main():
     """Entrypoint to generate test data."""
-    orders = CreateFakeOrders('.', 'de_DE')
+    orders = CreateFakeOrders(".", "de_DE")
     orders.generate_part_person(20)
     orders.generate_service_person(50)
     orders.generate_header()
@@ -205,9 +222,9 @@ def main():
     orders.generate_splitter(workshop=True)
     orders.generate_orders(count=200, workshop=False)
     orders.generate_splitter(workshop=False)
-    orders.csv_output('orders.csv')
-    orders.xlsx_output('orders.xlsx')
+    orders.csv_output("orders.csv")
+    orders.xlsx_output("orders.xlsx")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

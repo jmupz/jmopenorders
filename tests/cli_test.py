@@ -16,7 +16,7 @@ import pytest
 from jmopenorders.cli import main
 
 
-@pytest.fixture(params=('report',))
+@pytest.fixture(params=("report",))
 def command(request):
     """ Return the command to run.
 
@@ -30,7 +30,7 @@ def test_main(command):
     """
     # Call with the --help option as a basic sanity check.
     with pytest.raises(SystemExit) as exinfo:
-        main(('{:s}'.format(command), '--help'))
+        main(("{:s}".format(command), "--help"))
         assert 0 == exinfo.value.code
     return
 
@@ -39,7 +39,7 @@ def test_script(command):
     """ Test command line execution.
     """
     # Call with the --help option as a basic sanity check.
-    cmdl = '{:s} -m jmopenorders.cli {:s} --help'.format(executable, command)
+    cmdl = "{:s} -m jmopenorders.cli {:s} --help".format(executable, command)
     assert 0 == call(cmdl.split())
 
     return
@@ -47,5 +47,5 @@ def test_script(command):
 
 # Make the script executable.
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     raise SystemExit(pytest.main([__file__]))

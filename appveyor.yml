@@ -1,73 +1,54 @@
 shallow_clone: false
 
 image:
-  - Ubuntu
-  - Ubuntu1804
-  - Visual Studio 2015
+  - Visual Studio 2017
+
+# What Python version is installed where:
+# http://www.appveyor.com/docs/installed-software#python
 
 environment:
+  PYTHONUNBUFFERED: 1
+  MINICONDA: C:\\Miniconda3-x64
   matrix:
-    - PYTHON_VERSION: "3.6"
-      PYTEST_QT_API: "pyside2"
-      CONDA_DEPENDENCIES: "pytest-qt pytest pyside2=2.*"
-    - PYTHON_VERSION: "3.7"
-      PYTEST_QT_API: "pyside2"
-      CONDA_DEPENDENCIES: "pytest-qt pytest pyside2=2.*"
-    - PYTHON_VERSION: "3.8"
-      PYTEST_QT_API: "pyside2"
-      CONDA_DEPENDENCIES: "pytest-qt pytest pyside2=2.*"
+    - PYTHON: "C:\\Python36"
+      TOX_ENV: "py36"
+      PYVER: "3.6"
 
-  global:
-    PYTHON: "C:\\conda"
-    CMD_IN_ENV: "cmd /E:ON /V:ON /C .\\ci-helpers\\appveyor\\windows_sdk.cmd"
-    PYTHON_ARCH:
-      "64" # needs to be set for CMD_IN_ENV to succeed. If a mix
-      # of 32 bit and 64 bit builds are needed, move this
-      # to the matrix section.
-    # Used by atropy ci-helpers
-    CONDA_CHANNELS: "conda-forge"
+    - PYTHON: "C:\\Python37"
+      TOX_ENV: "py37"
+      PYVER: "3.7"
 
-platform:
-  - x64
+init:
+  - "%PYTHON%/python -V"
+  - mkdir C:\Users\appveyor\.conda
+  - call %MINICONDA%\Scripts\activate.bat
+  - python -V
+  - conda config --set always_yes yes --set changeps1 no
+  - conda update -q conda
+  - conda config --add channels conda-forge
+  - conda update --all
 
 install:
-  # Linux
-  - sh: sudo apt update
-  - sh: sudo apt -y --force-yes install libglu1-mesa xvfb libgl1-mesa-dri mesa-common-dev libglu1-mesa-dev
-  - sh: wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
-  - sh: bash miniconda.sh -b -p $HOME/miniconda
-  - sh: source "$HOME/miniconda/etc/profile.d/conda.sh"
-
-  # Windows - Miniconda is in Image
-  - cmd: set PATH="C:\Miniconda3-x64;C:\Miniconda3-x64\Scripts;%PATH%"
-  - cmd: dir c:\Miniconda3-x64
-  - cmd: dir c:\Miniconda3-x64\Scripts
-  - cmd: dir c:\Miniconda3-x64\Tools
-  - cmd: dir c:\Miniconda3-x64\etc
-  - sh: export PATH="$HOME/miniconda/bin;$PATH"
-
-  # - conda activate base
-  - conda config --set always_yes yes --set changeps1 no
-  - conda config --add channels conda-forge
-  - conda update -q conda --yes
-  - conda config --set auto_update_conda no
-  - conda info -a # for debug reasons
-  - conda env create -f environment.yml -p conda-env python=${PYTHON_VERSION}
-  - cmd: activate %APPVEYOR_BUILD_FOLDER%\jmopenorders/conda-env
-  - sh: conda activate "$APPVEYOR_BUILD_FOLDER/conda-env"
-  - conda list
-  - pip install -e .
-  - pip install pytest-xvfb pytest-mock pytest-cov pytest-repeat codecov pyvirtualdisplay==0.2.1
+  - conda env create python=%PYVER% -f environment.yml
+  - conda activate jmopenorders
+  - conda update --all
   - conda list # for debug reason
 
 # Not a .NET project, we build in the install step instead
 build: false
 
 test_script:
-  - tox -e py37 # Must update
-  - tox -e docs
+  - "python -m tox -e %TOX_ENV%"
+
+after_test:
+  - "python setup.py bdist_wheel"
+  - conda build recipe --no-test
+  - conda install -q pytest pytest-cov conda-build anaconda-client
+  - conda install --use-local jmopenorders
+  - conda info -a
+
+artifacts:
+  - path: dist\*
 
 on_success:
   - codecov
-
-skip_tags: true

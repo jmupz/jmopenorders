@@ -3,5 +3,5 @@
 Settings
 ========
 
-.. automodule:: jmbde.core.conf.defaults
+.. automodule:: jmopenorders.core.config
     :members:

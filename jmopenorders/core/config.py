@@ -6,18 +6,19 @@ this object to store application-wide configuration values.
 
 """
 from re import compile
+
 from yaml import safe_load
 
 from .logger import logger
 
-
-__all__ = 'config', 'YamlConfig'
+__all__ = "config", "YamlConfig"
 
 
 class _AttrDict(dict):
     """ A dict-like object with attribute access.
 
     """
+
     def __getitem__(self, key):
         """ Access dict values by key.
 
@@ -27,7 +28,8 @@ class _AttrDict(dict):
         if isinstance(value, dict):
             # For mixed recursive assignment (e.g. `a["b"].c = value` to work
             # as expected, all dict-like values must themselves be _AttrDicts.
-            # The "right way" to do this would be to convert to an _AttrDict on
+            # The "right way" to do this would be to convert to an
+            # _AttrDict on
             # assignment, but that requires overriding both __setitem__
             # (straightforward) and __init__ (good luck). An explicit type
             # check is used here instead of EAFP because exceptions would be
@@ -58,6 +60,7 @@ class YamlConfig(_AttrDict):
     Data can be accessed as dict values or object attributes.
 
     """
+
     def __init__(self, path=None, root=None, macros=None):
         """ Initialize this object.
 
@@ -86,16 +89,20 @@ class YamlConfig(_AttrDict):
         :param root: place config values at this root
         :param macros: macro substitutions
         """
+
         def replace(match):
             """ Callback for re.sub to do macro replacement. """
             # This allows for multi-pattern substitution in a single pass.
             return macros[match.group(0)]
 
-        macros = {r'%{:s};'.format(key): val for (key, val) in
-                  macros.items()} if macros else {}
-        regex = compile('|'.join(macros) or r'^(?!)')
+        macros = {
+            r"%{:s};".format(key): val for (
+                key, val,
+            ) in macros.items()
+        } if macros else {}
+        regex = compile("|".join(macros) or r"^(?!)")
         for path in [path] if isinstance(path, str) else path:
-            with open(path, 'r') as stream:
+            with open(path, "r") as stream:
                 # Global text substitution is used for macro replacement. Two
                 # drawbacks of this are 1) the entire config file has to be
                 # read into memory first; 2) it might be nice if comments were
@@ -111,7 +118,7 @@ class YamlConfig(_AttrDict):
                 else:
                     self.update(data)
             except TypeError:  # data is None
-                logger.warning('config file {:s} is empty'.format(path))
+                logger.warning("config file {:s} is empty".format(path))
         return
 
 

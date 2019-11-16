@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """Get the service persion from csv-file."""
 # -*- coding: utf-8 -*-
-
 #
 # Copyright (c) 2019 Jürgen Mülbert. All rights reserved.
 #
@@ -39,7 +38,6 @@
 # Die sprachspezifischen Genehmigungen und Beschränkungen
 # unter der Lizenz sind dem Lizenztext zu entnehmen.
 #
-
 import csv
 
 from ..core.logger import logger
@@ -61,18 +59,19 @@ class GetServicePerson:
         """
         service_person = []
         try:
-            with open(self.file_name, 'r') as berater_file:
+            with open(self.file_name, "r") as berater_file:
                 self.berater = csv.DictReader(
-                    berater_file, delimiter=';', quotechar='"'
+                    berater_file, delimiter=";", quotechar='"',
                 )
 
                 for row in self.berater:
 
-                    service_person.append(row['Name'])
+                    service_person.append(row["Name"])
 
                 return service_person
 
         except IOError:
             logger.debug(
-                'The File for the service persons %s does not exists', self.file_name
+                "The File for the service persons %s does not exists",
+                self.file_name,
             )
