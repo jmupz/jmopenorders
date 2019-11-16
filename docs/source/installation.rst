@@ -15,11 +15,9 @@ Get started
 
 Latest version can be installed through pip::
 
-1. Install jmopenorders::
-
     pip install jmopenorders
 
-2. Start convert::
+Start thw application::
 
     jmopenopenorders
 
