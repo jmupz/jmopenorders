@@ -7,8 +7,7 @@ RUN cd /.pyenv \
     && git fetch \
     && git checkout v1.2.8
 
-ENV PYPY_VERSION=pypy2.7-5.10.0 \
-    PYPY3_VERSION=pypy3.5-5.10.1
+ENV = PYPY3_VERSION=pypy3.6-5.10.1
 
 # install a newer version op pypy and pypy3 that doesn't have troubles
 RUN pyenv install "$PYPY_VERSION"
@@ -16,7 +15,7 @@ RUN pyenv install "$PYPY3_VERSION"
 
 # only install certain versions for tox to use
 RUN pyenv versions
-RUN pyenv global system 2.7.15 3.4.9 3.5.6 3.6.6 3.7.0 "$PYPY_VERSION" "$PYPY3_VERSION"
+RUN pyenv global system 3.6.6 3.7.0 "$PYPY_VERSION" "$PYPY3_VERSION"
 
 ENV PYTHONDONTWRITEBYTECODE = 1  # prevent *.pyc files
 

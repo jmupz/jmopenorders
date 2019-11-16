@@ -4,9 +4,7 @@ Clean the Directory.
 
 Remove the generated files
 """
-
 # -*- coding: utf-8 -*-
-
 #
 # Copyright (c) 2019 Jürgen Mülbert. All rights reserved.
 #
@@ -44,9 +42,8 @@ Remove the generated files
 # Die sprachspezifischen Genehmigungen und Beschränkungen
 # unter der Lizenz sind dem Lizenztext zu entnehmen.
 #
-
-
 import os
+
 from ..core.logger import logger
 
 
@@ -62,6 +59,6 @@ class CleanOutputDir:
         """Before write the new excel files, remove the old ones."""
         files = os.listdir(self.out_dir)
         for file in files:
-            if '.xlsx' in file:
+            if ".xlsx" in file:
                 os.remove(file)
                 logger.debug(file)

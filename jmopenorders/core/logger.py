@@ -10,8 +10,7 @@ from logging import Logger as _Logger
 from logging import NullHandler
 from logging import StreamHandler
 
-
-__all__ = 'logger', 'Logger'
+__all__ = "logger", "Logger"
 
 
 class Logger(_Logger):
@@ -19,9 +18,9 @@ class Logger(_Logger):
 
     """
 
-    LOGFMT = '%(asctime)s;%(levelname)s;%(name)s;%(message)s'
+    LOGFMT = "%(asctime)s;%(levelname)s;%(name)s;%(message)s"
 
-    def __init__(self, name=None):
+    def __init__(self, name=None) -> None:
         """ Initialize this logger.
 
         Loggers with the same name refer to the same underlying object.
@@ -34,11 +33,11 @@ class Logger(_Logger):
         # to whether the logger has been started yet. The standard Logger API
         # may be used to add and remove additional handlers, but the
         # NullHandler should always be left in place.
-        super(Logger, self).__init__(name or __name__.split('.')[0])
+        super(Logger, self).__init__(name or __name__.split(".")[0])
         self.addHandler(NullHandler())  # default to no output
         return
 
-    def start(self, level='WARN', stream=None):
+    def start(self, level="WARN", stream=None) -> None:
         """ Start logging to a stream.
 
         Until the logger is started, no messages will be emitted. This applies

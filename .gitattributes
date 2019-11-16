@@ -28,3 +28,4 @@
 *.mo binary
 
 jmopenorders/_version.py export-subst
+src/jmopenorders/_version.py export-subst

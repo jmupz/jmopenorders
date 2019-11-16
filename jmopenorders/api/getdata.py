@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """Get the Data from csv-file to generate to output."""
 # -*- coding: utf-8 -*-
-
 #
 # Copyright (c) 2019 Jürgen Mülbert. All rights reserved.
 #
@@ -39,9 +38,8 @@
 # Die sprachspezifischen Genehmigungen und Beschränkungen
 # unter der Lizenz sind dem Lizenztext zu entnehmen.
 #
-
-
 import csv
+
 from ..core.logger import logger
 
 
@@ -69,17 +67,17 @@ class GetData:
         self.file_name = filename
 
     def get(self) -> list:
-
         """Get the data from the csv-file."""
         # global orders_file
         try:
-            with open(self.file_name, 'r') as orders_file:
-                orders = csv.reader(orders_file, delimiter=';', quotechar='"')
+            with open(self.file_name, "r") as orders_file:
+                orders = csv.reader(orders_file, delimiter=";", quotechar='"')
                 data = list(orders)
 
                 return data
 
         except IOError:
             logger.debug(
-                "The File with the data '" + self.file_name + "' does not exists"
+                "The File with the data '" +
+                self.file_name + "' does not exists",
             )

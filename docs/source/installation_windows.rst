@@ -8,7 +8,7 @@ Using Anaconda
 --------------
 If the disk space isn't problem, we can install a python distribution with full of packages to boost it, like anaconda:
 
-    * x86: https://repo.anaconda.com/archive/Anaconda3-2019.03-Windows-x86.exe
+    * x86: https://repo.anaconda.com/archive/Anaconda3-2019.03-Windows-x86.exe`
     * amd64: https://repo.anaconda.com/archive/Anaconda3-2019.03-Windows-x86_64.exe
 
 
@@ -25,6 +25,6 @@ Now using the pip command shipped with python we can install dependencies easy. 
     * py -m pip install *
 
 Get jmopenorders code
------------------
+---------------------
 
 To get jmopenorders download the zip file from https://github.com/jmuelbert/jmbdeopenorders/archive/master.zip and unzip whatever you want. To run doble click over the main script jmopenorders.py.
