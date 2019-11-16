@@ -61,7 +61,7 @@ long_description = read('README.rst')
 def parse_requirements(requirements: str):
     """ load requirements from a pip requirements file """
     # load from requirements.txt
-    with open(requirements) as f:
+    with open(os.path.join(here, requirements), "r") as f:
         lines = [l for l in f]
         # remove spaces
         stripped = map((lambda x: x.strip()), lines)
@@ -115,8 +115,6 @@ setup(
     author_email='juergen.muelbert@gmail.com',
     install_requirements=REQUIREMENTS,
 
-    package_dir={'': 'src'},
-
     packages=find_packages(
         exclude=["contrib", "docs", "tests*", "tasks"],
     ),
@@ -125,5 +123,5 @@ setup(
         ['jmopenorders=jmopenorders.cli:main']
     },
     zip_safe=False,
-    python_requires='>=3.4.*',
+    python_requires='>=3.5.*',
 )
