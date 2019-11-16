@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
 import os
 
-from jmopenorders.core.logger import logger
-
 from . import cleanoutputdir
 from . import generateorders
 from . import getdata
 from . import getserviceperson
+from jmopenorders.core.logger import logger
 
 
 def report(
