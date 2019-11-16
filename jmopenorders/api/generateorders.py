@@ -61,6 +61,9 @@ The Format of the data file is:
     - Auftragswert bereit geliefert pos 12 (float)
 """
 import os
+from locale import *
+setlocale(LC_NUMERIC,'German_Germany.1252')
+from decimal import *
 
 from openpyxl import Workbook
 from openpyxl.styles import Font
@@ -75,6 +78,8 @@ class GenerateOrders:
         """Init the GenerateOrders Class."""
         self.dest_name = ""
         self.dest_dir = destdir
+        self.thousandSep = localeconv()['thousands_sep']
+        self.decimalPoint = localeconv()['decimal_point']
 
     def create(self, actual_name, actual_content):
         """Put all the data for the actual_name to the excel-file."""
@@ -99,7 +104,7 @@ class GenerateOrders:
         line_count = 0
         for print_line in actual_content:
             logger.debug(print_line)
-            if "Auftrag Nr." in print_line[0]:
+            if "Auftrag Nr." in print_line[1]:
                 # Write Header
                 for item in print_line:
                     logger.debug("Header: " + item)
@@ -114,11 +119,11 @@ class GenerateOrders:
                 col_num = 1
 
             # Alle Zeilen mit dem BERATER Namen in die Exceldatei schreiben.
-            if actual_name in print_line[6]:
+            if actual_name in print_line[7]:
                 line_count += 1
                 for item in print_line:
                     logger.debug(
-                        "Name: {0} Data: {1} Count: {2}".formmat(
+                        "Name: {0} Data: {1} Count: {2}".format(
                             actual_name, item, line_count)
                     )
                     logger.debug(
@@ -127,19 +132,21 @@ class GenerateOrders:
                     )
 
                     # Tage offen ist eine ganze Zahl
-                    if col_num == 3:
+                    if col_num == 4:
                         cell = sheet.cell(row=row_num, column=col_num)
                         cell.value = item
                         cell.number_format = "dd.mm.yyyy"
                     # Tage offen ist eine ganze Zahl
-                    elif col_num == 4:
+                    elif col_num == 5:
                         cell = sheet.cell(row=row_num, column=col_num)
-                        cell.value = float(item)
+                        mystr = item.replace(self.thousandSep, '').replace(self.decimalPoint, '.')
+                        cell.value = float(mystr)
                         cell.number_format = "#,##0.00"
                     # Alles was nach Deb-Name ist, ist eine reale Zahl
-                    elif col_num > 7:
+                    elif col_num > 8:
                         cell = sheet.cell(row=row_num, column=col_num)
-                        cell.value = float(item)
+                        mystr = item.replace(self.thousandSep, '').replace(self.decimalPoint, '.')
+                        cell.value = float(mystr)
                         cell.number_format = "#,##0.00_€"
                     else:
                         sheet.cell(row=row_num, column=col_num).value = item
