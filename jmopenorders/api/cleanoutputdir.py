@@ -4,7 +4,6 @@ Clean the Directory.
 
 Remove the generated files
 """
-# -*- coding: utf-8 -*-
 #
 # Copyright (c) 2019 Jürgen Mülbert. All rights reserved.
 #

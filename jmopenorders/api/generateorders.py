@@ -61,14 +61,15 @@ The Format of the data file is:
     - Auftragswert bereit geliefert pos 12 (float)
 """
 import os
-from locale import *
-setlocale(LC_NUMERIC,'German_Germany.1252')
-from decimal import *
+from locale import LC_NUMERIC
+from locale import localeconv
+from locale import setlocale
 
 from openpyxl import Workbook
 from openpyxl.styles import Font
 
 from ..core.logger import logger
+setlocale(LC_NUMERIC, 'de_DE')
 
 
 class GenerateOrders:
@@ -123,7 +124,7 @@ class GenerateOrders:
                 line_count += 1
                 for item in print_line:
                     logger.debug(
-                        "Name: {0} Data: {1} Count: {2}".format(
+                        "Name: {} Data: {} Count: {}".format(
                             actual_name, item, line_count)
                     )
                     logger.debug(
@@ -139,13 +140,15 @@ class GenerateOrders:
                     # Tage offen ist eine ganze Zahl
                     elif col_num == 5:
                         cell = sheet.cell(row=row_num, column=col_num)
-                        mystr = item.replace(self.thousandSep, '').replace(self.decimalPoint, '.')
+                        mystr = item.replace(self.thousandSep, '').replace(
+                            self.decimalPoint, '.')
                         cell.value = float(mystr)
                         cell.number_format = "#,##0.00"
                     # Alles was nach Deb-Name ist, ist eine reale Zahl
                     elif col_num > 8:
                         cell = sheet.cell(row=row_num, column=col_num)
-                        mystr = item.replace(self.thousandSep, '').replace(self.decimalPoint, '.')
+                        mystr = item.replace(self.thousandSep, '').replace(
+                            self.decimalPoint, '.')
                         cell.value = float(mystr)
                         cell.number_format = "#,##0.00_€"
                     else:
