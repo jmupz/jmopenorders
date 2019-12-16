@@ -9,7 +9,7 @@
     "python.linting.pydocstyleArgs": ["--ignore=D400", "--ignore=D4"],
     "python.linting.enabled": true,
     "python.linting.lintOnSave": true,
-    "python.formatting.provider": "autopep8",
+    "python.formatting.provider": "black",
     "python.testing.pytestEnabled": true,
     "python.testing.nosetestsEnabled": false,
     "qtForPython.path.designer": "${env:HOME}/Qt/5.12.3/clang_64/bin/Designer",

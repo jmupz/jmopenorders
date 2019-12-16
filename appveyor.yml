@@ -1,7 +1,7 @@
 shallow_clone: false
 
 image:
-  - Visual Studio 2017
+  - Visual Studio 2019
 
 # What Python version is installed where:
 # http://www.appveyor.com/docs/installed-software#python
@@ -11,12 +11,16 @@ environment:
   MINICONDA: C:\\Miniconda3-x64
   matrix:
     - PYTHON: "C:\\Python36"
-      TOX_ENV: "py36"
+      TOX_ENV: py36
       PYVER: "3.6"
 
     - PYTHON: "C:\\Python37"
-      TOX_ENV: "py37"
+      TOX_ENV: py37
       PYVER: "3.7"
+
+    - PYTHON: "C:\\Python37"
+      TOX_ENV: py38
+      PYVER: "3.8"
 
 init:
   - "%PYTHON%/python -V"
@@ -38,7 +42,7 @@ install:
 build: false
 
 test_script:
-  - "python -m tox -e %TOX_ENV%"
+  - tox
 
 after_test:
   - "python setup.py bdist_wheel"
