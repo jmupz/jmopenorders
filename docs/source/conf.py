@@ -24,7 +24,7 @@ import sys
 # import sphinx_rtd_theme
 
 
-__version__ = "0.2.0"
+__version__ = "0.2.1.dev0"
 __short_version__ = __version__
 
 PROJECT_NAME = "JM OpenOrders"
