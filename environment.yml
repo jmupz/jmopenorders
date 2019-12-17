@@ -38,12 +38,6 @@ dependencies:
   - jinja2
   - jsonschema
   - jupyter_core
-  - libarchive
-  - libcxx
-  - libffi
-  - libiconv
-  - liblief
-  - libxml2
   - lz4-c
   - lzo
   - markupsafe
@@ -52,8 +46,7 @@ dependencies:
   - nodeenv
   - openpyxl
   - openssl
-  - packaging
-  - pip
+  - packagin
   - pkginfo
   - pluggy
   - pre-commit
