@@ -1,87 +1,70 @@
 # We set the language to c because python isn't supported on the MacOS X nodes
 # on Travis. However, the language ends up being irrelevant anyway, since we
 # install Python ourselves using conda.
-language: c
-
-os:
-  - linux
+language: python
 
 # Use Travis' container-based architecture
 sudo: false
 
+services:
+  - xvfb
+
 # Turn off email notifications
 notifications:
   email: false
+
+cache:
+  directories:
+    - $HOME/.cache/pip
 
 env:
   global:
     # The following versions are the 'default' for tests, unless
     # overidden underneath. They are defined here in order to save having
     # to repeat them for all configurations.
-    - PYTHON_VERSION=3.7
     - PIP_DEPENDENCIES='tox'
-    - MINICONDA_VERSION=latest
     - DISPLAY=":99.0"
 
-matrix:
-  fast_finish: true
+jobs:
   include:
-    - env: PIP_DEPENDENCIES='tox twine' TWINE_CHECK=1
+    - name: "Python 3.8.0 on Bionic Linux"
+      python: 3.8 # this works for Linux but is ignored on macOS or Windows
+      env: TOX_ENV=py38
+    - name: "Python 3.6.0 on Xenial Linux"
+      python: 3.6
+      env: TOX_ENV=py36
 
-    # Try a run on Linux
-    - os: linux
-      env: PYTHON_VERSION=3.6
-        MINICONDA_VERSION=latest
-        TOX_ENV=py36
+    - name: "Python 3.7.4 on macOS"
+      os: osx
+      osx_image: xcode11.2 # Python 3.7.4 running on macOS 10.14.4
+      language: shell # 'language: python' is an error on Travis CI macOS
+      env: TOX_ENV=py37
 
-    - os: linux
-      env: PYTHON_VERSION=3.7
-        MINICONDA_VERSION=latest
-        TOX_ENV=py37
-
-    # Try a run on OSX
-    - os: osx
-      osx_image: xcode11
-      env: PYTHON_VERSION=3.6
-        MINICONDA_VERSION=latest
-        TOX_ENV=py36
-
-    - os: osx
-      osx_image: xcode11
-      env: PYTHON_VERSION=3.7
-        MINICONDA_VERSION=latest
-        TOX_ENV=py37
-
-    # Run a series of tests on Windows
-    #  - os: windows
-    #  env: PYTHON_VERSION=3.6
-    #    MINICONDA_VERSION=4.7.10
-    #    TOX_ENV=py36
-    # - os: windows
-    #  env: PYTHON_VERSION=3.7
-    #    MINICONDA_VERSION=4.7.10
+    # - name: "Python 3.8.0 on Windows"
+    #  os: windows
+    #  before_install:
+    #    - choco install python --version 3.8.0
+    #    - python -m pip install --upgrade PIP_DEPENDENCIES='tox'
+    #  env:
+    #    - PATH=/c/Python38:/c/Python38/Scripts:$PATH
+    #    - TOX_ENV=py38
     #    TOX_ENV=py37
 
 install:
-  - git clone git://github.com/astropy/ci-helpers.git
-  - source ci-helpers/travis/setup_conda.sh
-  - pip install .
+  - pip3 install --upgrade pip # all three OSes agree about 'pip3'
+  - pip3 install tox
+  - pip3 install codecov
 
-script: if [[ $TWINE_CHECK ]]; then
-  python setup.py build sdist;
-  twine check dist/*;
-  else
-  tox -e "${TOX_ENV}";
-  fi
+script:
+  - if [["$TRAVIS_OS_NAME" == "linux"]]; then
+    tox -e $TOX_ENV;
+    fi
 
 after_success:
-  - conda install -c conda-forge codecov
-  - conda install conda-build anaconda-client pytest pytest-cov
-  - codecov
-  - coveralls
-  - conda build recipe --no-test
-  - conda install --use-local jmopenorders
-  - conda info -a
+  - tox -e release
+  - if [["$TRAVIS_OS_NAME" == "linux"]]; then
+    tox -e report
+    fi
 
 deploy:
   provider: pypi
