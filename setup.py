@@ -116,7 +116,6 @@ setup(
     install_requirements=REQUIREMENTS,
     package_dir={'': 'src'},
     packages=find_packages(
-        'jmopenorders',
         exclude=["contrib", "docs", "tests*", "tasks"],
     ),
     entry_points={
