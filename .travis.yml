@@ -58,7 +58,7 @@ install:
   - pip3 install codecov
 
 script:
-    tox -e $TOX_ENV;
+    tox -e $TOX_ENVs
 
 after_success:
   - tox -e release
