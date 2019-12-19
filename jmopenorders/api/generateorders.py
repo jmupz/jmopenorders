@@ -61,15 +61,15 @@ The Format of the data file is:
     - Auftragswert bereit geliefert pos 12 (float)
 """
 import os
-from locale import LC_ALL
 from locale import localeconv
-from locale import setlocale
 
 from openpyxl import Workbook
 from openpyxl.styles import Font
 
 from ..core.logger import logger
-setlocale(LC_ALL, 'de_DE.utf8')
+# from locale import LC_ALL
+# from locale import setlocale
+# setlocale(LC_ALL, 'de_DE.utf8')
 
 
 class GenerateOrders:
