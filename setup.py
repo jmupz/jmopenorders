@@ -114,9 +114,7 @@ setup(
     author='Jürgen Mülbert',
     author_email='juergen.muelbert@gmail.com',
     install_requirements=REQUIREMENTS,
-    package_dir={'': 'src'},
     packages=find_packages(
-        'src',
         exclude=["contrib", "docs", "tests*", "tasks"],
     ),
     entry_points={
