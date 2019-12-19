@@ -62,7 +62,7 @@ repos:
     rev: v0.750
     hooks:
       - id: mypy
-        exclude: docs|tests|src|setup.py
+        exclude: docs|tests|jmopenorders|setup.py
         args: []
         language_version: python3
 

@@ -103,7 +103,7 @@ setup(
     ],
     url='https://github.com/jmuelbert/jmopenorders',
     download_url='https://github.com/jmuelbert/jmopenorders/archiv/' +
-        version + ".zip",
+    version + ".zip",
     project_urls={
         'Source Code': 'https://github.com/jmuelbert/jmopenorders',
         'Bug Reports': 'https://github.com/jmuelbert/jmopenorders/issues',

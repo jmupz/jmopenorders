@@ -9,39 +9,40 @@ environment or setuptools develop mode to test against the development version.
 
 """
 import pytest
-from jmopenorders.api.Hello import hello  # tests __all__
-from jmopenorders.api.Report import report
+
+from jmopenorders.api.hello import Hello  # tests __all__
+from jmopenorders.api.report import Report
 
 
-def test_hello():
+def test_Hello():
     """ Test the hello() function.
 
     """
-    assert hello() == "Hello, World!"
+    assert Hello() == "Hello, World!"
     return
 
 
-def test_hello_name():
+def test_Hello_name():
     """ Test the hello() function with a name.
 
     """
-    assert hello("foo") == "Hello, foo!"
+    assert Hello("foo") == "Hello, foo!"
     return
 
 
-def test_report():
+def test_Report():
     """ Test the report() function.
 
     """
-    assert report() == "Hello, names.csv!"
+    assert Report() == "Hello, names.csv!"
     return
 
 
-def test_report_name():
+def test_Report_name():
     """ Test the report() function with a name.
 
     """
-    assert report("foo") == "Hello, foo!"
+    assert Report("foo") == "Hello, foo!"
     return
 
 
