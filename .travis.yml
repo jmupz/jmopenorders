@@ -58,12 +58,12 @@ install:
   - pip3 install codecov
 
 script:
-    tox -e $TOX_ENV;
+    tox -e $TOX_ENV
 
 after_success:
   - tox -e release
   - if [["$TRAVIS_OS_NAME" == "linux"]]; then
-    tox -e report
+    tox -e report;
     fi
 
 deploy:
