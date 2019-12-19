@@ -96,8 +96,10 @@ cache:
   - '%LOCALAPPDATA%\pip\Cache'
 
 test_script:
-  - "python -m pip install tox tox-venv"
-  - "tox -e %TOXENV%"
+  - python --version
+  - python -m pip install --disable-pip-version-check --upgrade pip setuptools wheel
+  - pip install --upgrade tox tox-venv virtualenv
+  - tox -e %TOXENV%
 
 after_test:
   # If tests are successful, create binary packages for the project.
