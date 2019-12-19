@@ -9,9 +9,8 @@ environment or setuptools develop mode to test against the development version.
 
 """
 import pytest
-
-from jmopenorders.api.hello import hello  # tests __all__
-from jmopenorders.api.report import report
+from jmopenorders.api.Hello import hello  # tests __all__
+from jmopenorders.api.Report import report
 
 
 def test_hello():

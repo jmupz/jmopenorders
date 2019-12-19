@@ -42,8 +42,8 @@ from argparse import ArgumentParser
 from inspect import getfullargspec
 
 from . import __version__
-from .api.hello import hello
-from .api.report import report
+from .api.Hello import hello
+from .api.Report import report
 from .core.config import config
 from .core.logger import logger
 
