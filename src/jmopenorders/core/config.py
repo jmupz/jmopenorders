@@ -6,6 +6,7 @@ this object to store application-wide configuration values.
 
 """
 from re import compile
+from typing import Dict, Any
 
 from yaml import safe_load
 
@@ -14,12 +15,12 @@ from .logger import logger
 __all__ = "config", "YamlConfig"
 
 
-class _AttrDict(dict):
+class _AttrDict(Dict):
     """ A dict-like object with attribute access.
 
     """
 
-    def __getitem__(self, key):
+    def __getitem__(self, key: str) -> Any:
         """ Access dict values by key.
 
         :param key: key to retrieve
@@ -37,14 +38,14 @@ class _AttrDict(dict):
             self[key] = value = _AttrDict(value)
         return value
 
-    def __getattr__(self, key):
+    def __getattr__(self, key: str) -> Any:
         """ Get dict values as attributes.
 
         :param key: key to retrieve
         """
         return self[key]
 
-    def __setattr__(self, key, value):
+    def __setattr__(self, key: str, value: str) -> None:
         """ Set dict values as attributes.
 
         :param key: key to set
@@ -61,7 +62,7 @@ class YamlConfig(_AttrDict):
 
     """
 
-    def __init__(self, path=None, root=None, macros=None):
+    def __init__(self, path: str = "", root: str = "", macros: Dict):
         """ Initialize this object.
 
         :param path: config file path to load
@@ -73,7 +74,7 @@ class YamlConfig(_AttrDict):
             self.load(path, root, macros)
         return
 
-    def load(self, path, root=None, macros=None):
+    def load(self, path, root: str = "", macros: Dict):
         """ Load data from YAML configuration files.
 
         Configuration values are read from a sequence of one or more YAML
@@ -90,16 +91,16 @@ class YamlConfig(_AttrDict):
         :param macros: macro substitutions
         """
 
-        def replace(match):
+        def replace(match: Dict) -> str:
             """ Callback for re.sub to do macro replacement. """
             # This allows for multi-pattern substitution in a single pass.
             return macros[match.group(0)]
 
-        macros = {
-            r"%{:s};".format(key): val for (
-                key, val,
-            ) in macros.items()
-        } if macros else {}
+        macros = (
+            {r"%{:s};".format(key): val for (key, val,) in macros.items()}
+            if macros
+            else {}
+        )
         regex = compile("|".join(macros) or r"^(?!)")
         for path in [path] if isinstance(path, str) else path:
             with open(path, "r") as stream:

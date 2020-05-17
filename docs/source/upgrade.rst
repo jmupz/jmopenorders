@@ -10,7 +10,7 @@ Upgrade
 .. Note::
     Make sure to check the changelog for every patch version
     of the upgrading target and make changes accordingly.
-    Check the logs for Spirit deprecation warnings.
+    Check the logs for deprecation warnings.
 
 .. Warning::
     Trying to skip a minor version while upgrading will break things. For example, it's

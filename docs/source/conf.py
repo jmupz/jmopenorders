@@ -42,8 +42,7 @@ PROJECT_GITHUB_USERNAME = "jmuelbert"
 PROJECT_GITHUB_REPOSITORY = "jmopenorders"
 
 GITHUB_PATH = "{}/{}".format(
-    PROJECT_GITHUB_USERNAME,
-    PROJECT_GITHUB_REPOSITORY,
+    PROJECT_GITHUB_USERNAME, PROJECT_GITHUB_REPOSITORY,
 )
 GITHUB_URL = "https://github.com/{}".format(GITHUB_PATH)
 
@@ -64,7 +63,6 @@ extensions = [
     "sphinx.ext.linkcode",
     "edit_on_github",
     "sphinx.ext.githubpages",
-    "sphinx_rtd_theme",
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -163,8 +161,7 @@ todo_include_todos = False
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = "sphinx_rtd_theme"
-
+html_theme = "alabaster"
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -278,8 +275,11 @@ latex_elements = {
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
     (
-        master_doc, "jmopenorders.tex",
-        "jmopenorders Documentation", "Jürgen Mülbert", "manual",
+        master_doc,
+        "jmopenorders.tex",
+        "jmopenorders Documentation",
+        "Jürgen Mülbert",
+        "manual",
     ),
 ]
 
@@ -288,10 +288,9 @@ latex_documents = [
 
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
-man_pages = [(
-    master_doc, "jmopenorders.tex",
-    "jmopenorders Documentation", [author], 1,
-)]
+man_pages = [
+    (master_doc, "jmopenorders.tex", "jmopenorders Documentation", [author], 1,)
+]
 
 
 # -- Options for Texinfo output -------------------------------------------

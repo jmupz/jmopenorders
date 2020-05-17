@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 """Generator for fake data for testing."""
-# -*- coding: utf-8 -*-
 #
 # Copyright (c) 2019 Jürgen Mülbert. All rights reserved.
 #
@@ -117,14 +116,12 @@ class CreateFakeOrders:
                 line = [
                     "",
                     "WK" + self.fake.numerify(text="######"),
-                    "Werkstatt"
+                    "Werkstatt",
                 ]
             else:
                 self.part_count = count
                 line = ["", "ET" + self.fake.numerify(text="######"), "Teile"]
-            fake_date = self.fake.date_between(
-                start_date="-2y", end_date="+1y"
-            )
+            fake_date = self.fake.date_between(start_date="-2y", end_date="+1y")
             line.append(fake_date.strftime("%d.%m.%Y"))
             date_now = date.today()
             delta = date_now - fake_date
@@ -134,17 +131,13 @@ class CreateFakeOrders:
             if workshop is True:
                 line.append(
                     self.service_person[
-                        self.fake.random_int(
-                            0, len(self.service_person) - 1,
-                        )
+                        self.fake.random_int(0, len(self.service_person) - 1,)
                     ],
                 )
             else:
                 line.append(
                     self.part_person[
-                        self.fake.random_int(
-                            0, len(self.part_person) - 1,
-                        )
+                        self.fake.random_int(0, len(self.part_person) - 1,)
                     ],
                 )
             if workshop is True:
@@ -187,9 +180,7 @@ class CreateFakeOrders:
     def csv_output(self, name):
         """Write the data to a csv-file."""
         with open(
-                os.path.join(self.data_path, name),
-                "w",
-                newline="",
+            os.path.join(self.data_path, name), "w", newline="",
         ) as csvfile:
             orderswriter = csv.writer(csvfile, delimiter=";")
             for row in self.order_list:

@@ -40,16 +40,25 @@
 #
 from argparse import ArgumentParser
 from inspect import getfullargspec
+from typing import List
 
 from . import __version__
+<<<<<<< Updated upstream:jmopenorders/cli.py
 from .api.hello import Hello
 from .api.report import Report
+=======
+from .api import hello
+from .api import report
+>>>>>>> Stashed changes:src/jmopenorders/cli.py
 from .core.config import config
 from .core.logger import logger
 
+__all__ = ("main",)
 
-def main(argv=None) -> int:
-    """Execute the application CLI.
+
+def main(argv: List) -> int:
+    """
+    Execute the application CLI.
 
     :param argv: argument list to parse (sys.argv by default)
     :return: exit status
@@ -63,7 +72,7 @@ def main(argv=None) -> int:
         config.core.logging = args.warn
     logger.stop()  # clear handlers to prevent duplicate records
     logger.start(config.core.logging)
-    command = args.command
+    command = args.commands
     args = vars(args)
     spec = getfullargspec(command)
     if not spec.varkw:
@@ -78,16 +87,12 @@ def main(argv=None) -> int:
     return 0
 
 
-def _args(argv):
+def _args(argv: List[str]) -> List[str]:
     """ Parse command line arguments.
 
     :param argv: argument list to parse
     """
     parser = ArgumentParser()
-    parser.add_argument(
-        "-c", "--config", action="append",
-        help="config file [etc/config.yml]",
-    )
     parser.add_argument(
         "-v",
         "--version",
@@ -95,28 +100,16 @@ def _args(argv):
         version="jmopenorders {:s}".format(__version__),
         help="print version and exit",
     )
-    parser.add_argument(
-        "-w", "--warn", default="WARN",
-        help="logger warning level [WARN]",
-    )
-    parser.add_argument(
-        "-i", "--inputpath", type=str,
-        help="inputpath for data",
-    )
-    parser.add_argument(
-        "-o", "--outputpath", type=str,
-        help="outputpath to write files",
-    )
-    parser.add_argument(
-        "-p", "--personfile", type=str,
-        help="the names to report",
-    )
-    parser.add_argument("-d", "--datafile", type=str, help="the datafile")
+
     common = ArgumentParser(add_help=False)  # common subcommand arguments
-    common.add_argument("-n", "--name", default="World", help="greeting name")
-    subparsers = parser.add_subparsers(title="subcommand")
+    common.add_argument(
+        "-c", "--config", action="append", help="config file [etc/config.yml]",
+    )
+    subparsers = parser.add_subparsers(title="subcommands")
+    _hello(subparsers, common)
     _report(subparsers, common)
     args = parser.parse_args(argv)
+    print("args: " + str(args))
     if not args.config:
         # Don't specify this as an argument default or else it will always be
         # included it the list.
@@ -124,7 +117,7 @@ def _args(argv):
     return args
 
 
-def _hello(subparsers, common):
+def _hello(subparsers, common) -> None:
     """ CLI adaptor for the api.hello command.
 
     :param subparsers: subcommand parsers
@@ -132,11 +125,16 @@ def _hello(subparsers, common):
     """
 
     parser = subparsers.add_parser("hello", parents=[common])
+<<<<<<< Updated upstream:jmopenorders/cli.py
     parser.set_defaults(commands=Hello)
+=======
+    parser.add_argument("-n", "--name", default="World", help="greeting name")
+    parser.set_defaults(commands=hello)
+>>>>>>> Stashed changes:src/jmopenorders/cli.py
     return
 
 
-def _report(subparsers, common):
+def _report(subparsers, common) -> None:
     """ CLI adaptor for the api.hello command.
 
     :param subparsers: subcommand parsers
@@ -144,7 +142,24 @@ def _report(subparsers, common):
     """
 
     parser = subparsers.add_parser("report", parents=[common])
+<<<<<<< Updated upstream:jmopenorders/cli.py
     parser.set_defaults(commands=Report)
+=======
+    parser.add_argument(
+        "-w", "--warn", default="WARN", help="logger warning level [WARN]",
+    )
+    parser.add_argument(
+        "-i", "--inputpath", type=str, help="inputpath for data",
+    )
+    parser.add_argument(
+        "-o", "--outputpath", type=str, help="outputpath to write files",
+    )
+    parser.add_argument(
+        "-p", "--personfile", type=str, help="the names to report",
+    )
+    parser.add_argument("-d", "--datafile", type=str, help="the datafile")
+    parser.set_defaults(commands=report)
+>>>>>>> Stashed changes:src/jmopenorders/cli.py
     return
 
 

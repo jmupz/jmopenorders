@@ -1,24 +1,51 @@
-.. _installation:
+.. highlight:: shell
 
+============
 Installation
 ============
 
-Compatibility
--------------
 
-* Python 3.7 and newer
+Stable release
+--------------
 
-Get started
------------
+To install jmopenorders, run this command in your terminal:
 
-    New in jmopenorders
+.. code-block:: console
 
-Latest version can be installed through pip::
+    $ pip install jmopenorders
 
-    pip install jmopenorders
+This is the preferred method to install jmopenorders, as it will always install the most recent stable release.
 
-Start thw application::
+If you don't have `pip`_ installed, this `Python installation guide`_ can guide
+you through the process.
 
-    jmopenopenorders
+.. _pip: https://pip.pypa.io
+.. _Python installation guide: http://docs.python-guide.org/en/latest/starting/installation/
 
-Here are some hints:
+
+From sources
+------------
+
+The sources for jmopenorders can be downloaded from the `Github repo`_.
+
+You can either clone the public repository:
+
+.. code-block:: console
+
+    $ git clone git://github.com/jmuelbert/jmopenorders
+
+Or download the `tarball`_:
+
+.. code-block:: console
+
+    $ curl -OJL https://github.com/jmuelbert/jmopenorders/tarball/master
+
+Once you have a copy of the source, you can install it with:
+
+.. code-block:: console
+
+    $ python setup.py install
+
+
+.. _Github repo: https://github.com/jmuelbert/jmopenorders
+.. _tarball: https://github.com/jmuelbert/jmopenorders/tarball/master

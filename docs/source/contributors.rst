@@ -1,4 +1,4 @@
 Contributors
 ************
 
-.. include:: ../../AUTHORS.md
+.. include:: ../../AUTHORS.rst

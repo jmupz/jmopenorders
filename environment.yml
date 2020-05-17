@@ -1,0 +1,22 @@
+name: jmopenorders
+channels:
+    - conda-forge
+    - defaults
+dependencies:
+    - anaconda-client
+    - codecov
+    - conda
+    - conda-build
+    - conda-package-handling
+    - coveralls
+    - coverage
+    - packaging
+    - pip
+    - pre-commit
+    - setuptools
+    - toml
+    - tox
+    - wheel
+    - openpyxl
+    - pyyaml
+prefix: ./conda-envs/jmopenorders

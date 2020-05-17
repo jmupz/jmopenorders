@@ -7,7 +7,7 @@ RUN cd /.pyenv \
     && git fetch \
     && git checkout v1.2.8
 
-ENV = PYPY3_VERSION=pypy3.6-5.10.1
+ENV PYPY3_VERSION=pypy3.6-5.10.1
 
 # install a newer version op pypy and pypy3 that doesn't have troubles
 RUN pyenv install "$PYPY_VERSION"
@@ -17,8 +17,11 @@ RUN pyenv install "$PYPY3_VERSION"
 RUN pyenv versions
 RUN pyenv global system 3.6.6 3.7.0 "$PYPY_VERSION" "$PYPY3_VERSION"
 
-ENV PYTHONDONTWRITEBYTECODE = 1  # prevent *.pyc files
+# prevent *.pyc files
+ENV PYTHONDONTWRITEBYTECODE=1
 
 WORKDIR /code
 COPY . .
 CMD tox
+
+EXPOSE 80/udp

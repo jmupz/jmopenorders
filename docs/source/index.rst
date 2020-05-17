@@ -24,7 +24,9 @@ Documentation
     installation_windows
     upgrade
     settings
+    contributing
     contributors
+    changelog
 
 * :ref:`genindex`
 * :ref:`modindex`

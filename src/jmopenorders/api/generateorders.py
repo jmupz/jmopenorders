@@ -36,8 +36,7 @@
 # Die sprachspezifischen Genehmigungen und Beschränkungen
 # unter der Lizenz sind dem Lizenztext zu entnehmen.
 #
-"""
-This Program will read a csv that contents service persons as csv.
+"""This Program will read a csv that contents service persons as csv.
 
 Then reads an csv with informations of this people and split
 the csv. for each person writes a seperate excel-file.
@@ -61,7 +60,11 @@ The Format of the data file is:
     - Auftragswert bereit geliefert pos 12 (float)
 """
 import os
+<<<<<<< Updated upstream:jmopenorders/api/generateorders.py
 from locale import localeconv
+=======
+from typing import List
+>>>>>>> Stashed changes:src/jmopenorders/api/generateorders.py
 
 from openpyxl import Workbook
 from openpyxl.styles import Font
@@ -75,14 +78,14 @@ from ..core.logger import logger
 class GenerateOrders:
     """Generate the orders for output."""
 
-    def __init__(self, destdir):
+    def __init__(self, destdir: str):
         """Init the GenerateOrders Class."""
         self.dest_name = ""
         self.dest_dir = destdir
         self.thousandSep = localeconv()['thousands_sep']
         self.decimalPoint = localeconv()['decimal_point']
 
-    def create(self, actual_name, actual_content):
+    def create(self, actual_name: str, actual_content: List[str]):
         """Put all the data for the actual_name to the excel-file."""
         row_num = 1
         col_num = 1
@@ -90,9 +93,7 @@ class GenerateOrders:
         # Create a workbook and add a worksheet.
         if self.dest_dir:
             self.dest_name = os.path.join(
-                os.path.abspath(
-                    self.dest_dir,
-                ), actual_name + ".xlsx",
+                os.path.abspath(self.dest_dir,), actual_name + ".xlsx",
             )
         else:
             self.dest_name = actual_name + ".xlsx"
@@ -125,11 +126,15 @@ class GenerateOrders:
                 for item in print_line:
                     logger.debug(
                         "Name: {} Data: {} Count: {}".format(
+<<<<<<< Updated upstream:jmopenorders/api/generateorders.py
                             actual_name, item, line_count)
+=======
+                            actual_name, item, line_count
+                        )
+>>>>>>> Stashed changes:src/jmopenorders/api/generateorders.py
                     )
                     logger.debug(
-                        "row_num: " + str(row_num) +
-                        " col_num: " + str(col_num)
+                        "row_num: {} col_num: {}".format(row_num, col_num)
                     )
 
                     # Tage offen ist eine ganze Zahl

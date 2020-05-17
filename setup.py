@@ -51,45 +51,25 @@ here = os.path.abspath(os.path.dirname(__file__))
 def read(*parts: str) -> str:
     # intentionally *not* adding an encoding option to open, See:
     #   https://github.com/pypa/virtualenv/issues/201#issuecomment-3145690
-    with codecs.open(os.path.join(here, *parts), 'r') as fp:
+    with codecs.open(os.path.join(here, *parts), "r") as fp:
         return fp.read()
 
 
-long_description = read('README.rst')
-
-
-def parse_requirements(requirements: str):
-    """ load requirements from a pip requirements file """
-    # load from requirements.txt
-    with open(os.path.join(here, requirements), "r") as f:
-        lines = [l for l in f]
-        # remove spaces
-        stripped = map((lambda x: x.strip()), lines)
-        # remove comments
-        nocomments = filter((lambda x: not x.startswith("#")), stripped)
-        # remove empty lines
-        reqs = filter((lambda x: x), nocomments)
-        return reqs
-
-
-REQUIREMENTS = parse_requirements(os.path.join(here, "requirements.txt"))
-TESTS_REQUIRES = parse_requirements(os.path.join(here, "requirements_dev.txt"))
-
+long_description = read("README.rst")
 
 setup(
     name="jmopenorders",
     version=version,
     description="A generator to generate infos for the affected persons.",
     long_description=long_description,
-
-    license='EUPL-1.2',
+    license="EUPL-1.2",
     classifiers=[
         "Development Status :: 4 - Beta",
         "Environment :: Console",
         "Intended Audience :: Developers",
         "Intended Audience :: End Users/Desktop",
-        "License :: OSI Approved :: European Union Public Licence 1.2 " +
-        "(EUPL 1.2)",
+        "License :: OSI Approved :: European Union Public Licence 1.2 "
+        + "(EUPL 1.2)",
         "Natural Language :: English",
         "Operating System :: OS Independent",
         "Programming Language :: Python",
@@ -121,6 +101,11 @@ setup(
         'console_scripts':
         ['jmopenorders=jmopenorders.cli:main']
     },
+    keywords="reporting excel",
+    author="Jürgen Mülbert",
+    author_email="juergen.muelbert@gmail.com",
+    packages=find_packages(exclude=["contrib", "docs", "tests*", "tasks"],),
+    entry_points={"console_scripts": ["jmopenorders=jmopenorders.cli:main"]},
     zip_safe=False,
-    python_requires='>=3.5.*',
+    python_requires=">=2.7,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*",
 )

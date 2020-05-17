@@ -1,9 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Clean the Directory.
-
-Remove the generated files
-"""
 #
 # Copyright (c) 2019 Jürgen Mülbert. All rights reserved.
 #
@@ -41,23 +36,19 @@ Remove the generated files
 # Die sprachspezifischen Genehmigungen und Beschränkungen
 # unter der Lizenz sind dem Lizenztext zu entnehmen.
 #
-import os
+<<<<<<< Updated upstream:jmopenorders/__init__.py
+"""
+Put the version to the __version__ variable.
+"""
 
-from ..core.logger import logger
 
+__all__ = (
+    "__version__",
+)
 
-class CleanOutputDir:
-
-    """Clean the output directory."""
-
-    def __init__(self, outdir):
-        """Init the CleanOutputDir Class."""
-        self.out_dir = os.path.abspath(outdir)
-
-    def clean(self):
-        """Before write the new excel files, remove the old ones."""
-        files = os.listdir(self.out_dir)
-        for file in files:
-            if ".xlsx" in file:
-                os.remove(file)
-                logger.debug(file)
+__version__ = "0.2.1.dev0"
+=======
+"""Put the version to the __version__ variable."""
+# from .__main__ import main
+# from .__version__ import __version__
+>>>>>>> Stashed changes:src/jmopenorders/__init__.py

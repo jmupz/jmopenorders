@@ -1,18 +1,27 @@
 # -*- coding: utf-8 -*-
 import os
 
+from jmopenorders.core.logger import logger
+
 from . import cleanoutputdir
 from . import generateorders
 from . import getdata
 from . import getserviceperson
-from jmopenorders.core.logger import logger
 
 
+<<<<<<< Updated upstream:jmopenorders/api/report.py
 def Report(
         personfile="names.csv",
         datafile="data.csv",
         inputpath="home",
         outputpath="out",
+=======
+def report(
+    personfile: str = "names.csv",
+    datafile: str = "data.csv",
+    inputpath: str = "home",
+    outputpath: str = "out",
+>>>>>>> Stashed changes:src/jmopenorders/api/report.py
 ) -> str:
 
     logger.debug("executing report command")
@@ -20,7 +29,7 @@ def Report(
     # combine the inputpath with the personfile name
     persondata_file = os.path.join(os.path.abspath(inputpath), personfile)
 
-    logger.debug("Personfile= %s", persondata_file)
+    logger.debug("Personfile= {}".format(persondata_file))
 
     # Get the names of the persons to an arrary
     names = getserviceperson.GetServicePerson(persondata_file)
@@ -40,8 +49,7 @@ def Report(
             logger.debug("Berater Name: " + berater_name)
             create_table = generateorders.GenerateOrders(outputpath)
             create_table.create(
-                actual_name=berater_name,
-                actual_content=orders,
+                actual_name=berater_name, actual_content=orders,
             )
     else:
         logger.critical("Berater file is empty or not exist")

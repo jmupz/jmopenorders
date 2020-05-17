@@ -10,6 +10,7 @@
 *.html text eol=lf
 *.md text eol=lf
 *.rst text eol=lf
+*.rst conflict-marker-size=100
 *.text text eol=lf
 *.yml text eol=lf
 *.po text eol=lf
@@ -26,6 +27,3 @@
 *.ttf binary
 *.woff binary
 *.mo binary
-
-jmopenorders/_version.py export-subst
-src/jmopenorders/_version.py export-subst

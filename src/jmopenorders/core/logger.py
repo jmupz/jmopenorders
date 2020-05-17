@@ -20,7 +20,7 @@ class Logger(_Logger):
 
     LOGFMT = "%(asctime)s;%(levelname)s;%(name)s;%(message)s"
 
-    def __init__(self, name=None) -> None:
+    def __init__(self, name: str = "") -> None:
         """ Initialize this logger.
 
         Loggers with the same name refer to the same underlying object.
@@ -37,7 +37,7 @@ class Logger(_Logger):
         self.addHandler(NullHandler())  # default to no output
         return
 
-    def start(self, level="WARN", stream=None) -> None:
+    def start(self, level: str = "WARN", stream=None) -> None:
         """ Start logging to a stream.
 
         Until the logger is started, no messages will be emitted. This applies
@@ -68,7 +68,7 @@ class Logger(_Logger):
         self.setLevel(level.upper())
         return
 
-    def stop(self):
+    def stop(self) -> None:
         """ Stop logging with this logger.
 
         """

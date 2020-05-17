@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-"""Get the Data from csv-file to generate to output."""
-# -*- coding: utf-8 -*-
 #
 # Copyright (c) 2019 Jürgen Mülbert. All rights reserved.
 #
@@ -38,46 +36,21 @@
 # Die sprachspezifischen Genehmigungen und Beschränkungen
 # unter der Lizenz sind dem Lizenztext zu entnehmen.
 #
-import csv
+""" Current version of the jmopenorders application.
 
-from ..core.logger import logger
+This project uses the Semantic Versioning scheme in conjunction with PEP 0440:
 
+    <http://semver.org/>
+    <https://www.python.org/dev/peps/pep-0440>
 
-class GetData:
-    """
-    Get the data from csv-file.
+Major versions introduce significant changes to the API, and backwards
+compatibility is not guaranteed. Minor versions are for new features and other
+backwards-compatible changes to the API. Patch versions are for bug fixes and
+internal code changes that do not affect the API. Development versions are
+incomplete states of a release .
 
-    Auftrag Nummer,
-    Hauptbereich ,
-    Auftragsdatum,
-    Tage offen ,
-    Deb.-Nr.,
-    Deb.-Name,
-    Verkäufer Serviceberater,
-    Arbeitswert,
-    Teile ,
-    Fremdleistung,
-    Andere,
-    Gesamt,
-    Auftragswert bereit geliefert
-    """
+Version 0.x should be considered a development version with an unstable API,
+and backwards compatibility is not guaranteed for minor versions.
 
-    def __init__(self, filename):
-        """Init the GetData Class."""
-        self.file_name = filename
-
-    def get(self) -> list:
-        """Get the data from the csv-file."""
-        # global orders_file
-        try:
-            with open(self.file_name, "r") as orders_file:
-                orders = csv.reader(orders_file, delimiter=";", quotechar='"')
-                data = list(orders)
-
-                return data
-
-        except IOError:
-            logger.debug(
-                "The File with the data '" +
-                self.file_name + "' does not exists",
-            )
+"""
+__version__ = "0.2.0"

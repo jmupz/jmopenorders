@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-"""JM OpenOrders Library."""
 #
 # Copyright (c) 2019 Jürgen Mülbert. All rights reserved.
 #
@@ -37,3 +36,45 @@
 # Die sprachspezifischen Genehmigungen und Beschränkungen
 # unter der Lizenz sind dem Lizenztext zu entnehmen.
 #
+import csv
+from typing import List
+
+from ..core.logger import logger
+
+
+class GetServicePerson:
+
+    """Get the service persion from csv-file."""
+
+    def __init__(self, filename: str):
+        """Init the GetServicePerson Class."""
+        self.file_name = filename
+        self.berater: List[str]
+
+    def get(self) -> List[str]:
+        """
+        Read the Service Person from csv-file.
+
+        Then create a array and get this back
+        """
+        service_person = []
+        try:
+            with open(self.file_name, "r") as berater_file:
+                self.berater = csv.DictReader(
+                    berater_file, delimiter=";", quotechar='"',
+                )
+
+                for row in self.berater:
+
+                    service_person.append(row["Name"])
+
+                return service_person
+
+        except IOError:
+            logger.debug(
+                "The File for the service persons {} does not exists".format(
+                    self.file_name
+                )
+            )
+
+            return []

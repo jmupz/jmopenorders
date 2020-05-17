@@ -2,27 +2,35 @@
     "python.pythonPath": "/Users/juergen/miniconda/envs/develop/bin/python",
     "python.linting.pylintEnabled": false,
     "python.linting.pylintArgs": ["--reports", "12", "--disable-msg", "I0011"],
-    "python.linting.flake8Enabled": false,
-    "python.linting.flake8Args": ["--ignore=E24,W504", "--verbose"],
-    "python.linting.pycodestyleEnabled": false,
+    "python.linting.flake8Enabled": true,
+    "python.linting.flake8Args": [
+        "--ignore=E24,W504",
+        "--verbose",
+        "--max-line-length = 80"
+    ],
+    "python.linting.pycodestyleEnabled": true,
     "python.linting.pydocstyleEnabled": true,
-    "python.linting.pydocstyleArgs": ["--ignore=D400", "--ignore=D4"],
+    "python.linting.pydocstyleArgs": [
+        "--ignore=D100",
+        "--ignore=D203",
+        "--ignore=D405"
+    ],
     "python.linting.enabled": true,
     "python.linting.lintOnSave": true,
     "python.formatting.provider": "black",
     "python.testing.pytestEnabled": true,
     "python.testing.nosetestsEnabled": false,
-    "qtForPython.path.designer": "${env:HOME}/Qt/5.12.3/clang_64/bin/Designer",
-    "qtForPython.path.linguist": "${env:HOME}/Qt/5.12.3/clang_64/bin/Linguist",
-    "qtForPython.path.lrelease": "${env:HOME}/Qt/5.12.3/clang_64/bin/lrelease",
-    "qtForPython.path.pylupdate": "",
-    "qtForPython.path.pyrcc": "",
-    "qtForPython.path.pyuic": "",
-    "qtForPython.path.qmlscene": "${env:HOME}/Qt/5.12.3/clang_64/bin/qmlscene --verbose ${file}",
+    "qtForPython.path.designer": "~/miniconda/envs/develop/bin/Designer",
+    "qtForPython.path.linguist": "~/miniconda/envs/develop/bin/Linguist",
+    "qtForPython.path.lrelease": "~/miniconda/envs/develop/bin/lrelease",
+    "qtForPython.path.pylupdate": "~/miniconda/envs/develop/bin/pyside2-lupdate",
+    "qtForPython.path.pyrcc": "~/miniconda/envs/develop/bin/pyside2-rcc",
+    "qtForPython.path.pyuic": "~/miniconda/envs/develop/bin/pyside2-uic",
+    "qtForPython.path.qmlscene": "~/miniconda//envs/develop/bin/qmlscene --verbose ${file}",
     "pyside2-vsc.designer-creator.path": "",
-    "pyside2-vsc.rcc.cmd": "pyside2-rcc",
+    "pyside2-vsc.rcc.cmd": "~/miniconda/envs/develop/bin/pyside2-rcc",
     "pyqt-integration.linguist.cmd": "linguist",
-    "pyside2-vsc.uic.cmd": "pyside2-uic",
+    "pyside2-vsc.uic.cmd": "~/miniconda/envs/develop/bin/pyside2-uic",
 
     "files.trimTrailingWhitespace": true,
     "files.autoSave": "afterDelay",
@@ -59,6 +67,33 @@
 
     "editor.wordBasedSuggestions": true,
 
-    "editor.parameterHints.enabled": true
+    "editor.parameterHints.enabled": true,
+    "docker-linter.debug": true,
+    "docker-linter.flake8.enable": true,
+    "docker-linter.rubocop.enable": true,
+    "graphvizPreview.engine": "dot",
+    "python.condaPath": "~/miniconda/bin/conda",
+    "python.formatting.blackArgs": [
+        "--line-length 80"
+    ],
+    "python.linting.ignorePatterns": [
+        ".vscode/*.py",
+        "**/site-packages/**/*.py",
+        "build/*",
+        ".tox/*",
+        ".scratch/*",
+        "_vendor/*",
+        "data/*"
+    ],
+    "python.linting.mypyEnabled": true,
+    "python.linting.pylintUseMinimalCheckers": false,
+    "python.workspaceSymbols.enabled": false,
+    "python.linter": "flake8",
+    "pythonTestExplorer.testFramework": "pytest",
+    "restructuredtext.linter.executablePath": "doc8",
+    "ruby.format": "rubocop",
+    "ruby.intellisense": "rubyLocate",
+    "ruby.codeCompletion": "rcodetools",
+    "swiftlint.enable": true
 
 }

@@ -43,10 +43,11 @@ python -m jmopenorders
 """
 
 
-def main() -> None:
-    """ Execute the application.
-    """
-    raise NotImplementedError("Not Implenmented")
+def main() -> int:
+    """Execute the application."""
+    raise NotImplementedError("To be implemented")
+
+    return 1
 
 
 # Make the script executable
