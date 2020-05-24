@@ -33,6 +33,7 @@ jmopenorders
         :target: https://ci.appveyor.com/project/jmuelbert/jmopenorders/branch/master
         :alt: Build status
 
+
 jmopenorders is a generator to generate infos for the affected persons.
 
 jmopenorders is written in `python <https://www.python.org>`_.
@@ -73,6 +74,8 @@ or
 
 This build an python installer
 
+ [ ~ Dependencies scanned by PyUp.io ~ ]
+
 License
 -------
 
@@ -80,4 +83,4 @@ openorders is free software; you can redistribute ot and/or modify ir under the 
 of the `European Public License Version 1.2 <https://joinup.ec.europa.eu/page/eupl-text-11-12>`_.
 Please read the `<https://github.com/jmuelbert/jmopenorders/blob/master/LICENSE>`_ for additional information.
 
-EUPL-1.2 © Jürgen Mülbert
+EUPL-1.2 © Jürgen Mülbert
