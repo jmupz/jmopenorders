@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """ Global application configuration.
 
 This module defines a global configuration object. Other modules should use
@@ -6,7 +5,8 @@ this object to store application-wide configuration values.
 
 """
 from re import compile
-from typing import Dict, Any
+from typing import Any
+from typing import Dict
 
 from yaml import safe_load
 
@@ -25,7 +25,7 @@ class _AttrDict(Dict):
 
         :param key: key to retrieve
         """
-        value = super(_AttrDict, self).__getitem__(key)
+        value = super().__getitem__(key)
         if isinstance(value, dict):
             # For mixed recursive assignment (e.g. `a["b"].c = value` to work
             # as expected, all dict-like values must themselves be _AttrDicts.
@@ -62,19 +62,19 @@ class YamlConfig(_AttrDict):
 
     """
 
-    def __init__(self, path: str = "", root: str = "", macros: Dict):
+    def __init__(self, path: str = "", root: str = "", macros: Dict = {}):
         """ Initialize this object.
 
         :param path: config file path to load
         :param root: place config values at this root
         :param macros: macro substitutions
         """
-        super(YamlConfig, self).__init__()
+        super().__init__()
         if path:
             self.load(path, root, macros)
         return
 
-    def load(self, path, root: str = "", macros: Dict):
+    def load(self, path, root: str, macros: Dict):
         """ Load data from YAML configuration files.
 
         Configuration values are read from a sequence of one or more YAML
@@ -103,7 +103,7 @@ class YamlConfig(_AttrDict):
         )
         regex = compile("|".join(macros) or r"^(?!)")
         for path in [path] if isinstance(path, str) else path:
-            with open(path, "r") as stream:
+            with open(path) as stream:
                 # Global text substitution is used for macro replacement. Two
                 # drawbacks of this are 1) the entire config file has to be
                 # read into memory first; 2) it might be nice if comments were

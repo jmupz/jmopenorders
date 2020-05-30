@@ -1,6 +1,10 @@
-FROM themattrix/tox-base
+FROM themattrix:tox-base
 
-RUN apt-get update && apt-get install -y git-core mercurial
+RUN apt-get update  \
+    && apt-get install -y git-core mercurial --no-install-recommends \
+    && apt-get clean \
+    && rm -rf  /var/lib/apt/lists/* \
+    && rm -rf /tmp/* /var/tmp/*
 
 # Update pyenv for access to newer Python releases.
 RUN cd /.pyenv \

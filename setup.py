@@ -1,7 +1,6 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 #
-# Copyright (c) 2019 Jürgen Mülbert. All rights reserved.
+# Copyright (c) 2019-2020 Jürgen Mülbert. All rights reserved.
 #
 # Licensed under the EUPL, Version 1.2 or – as soon they
 # will be approved by the European Commission - subsequent
@@ -44,7 +43,7 @@ import os
 from setuptools import find_packages
 from setuptools import setup
 
-version = '0.2.1.dev0'
+version = "0.2.1.dev0"
 here = os.path.abspath(os.path.dirname(__file__))
 
 
@@ -57,6 +56,24 @@ def read(*parts: str) -> str:
 
 long_description = read("README.rst")
 
+
+def parse_requirements(requirements: str):
+    """ load requirements from a pip requirements file """
+    # load from requirements.txt
+    with open(os.path.join(here, requirements)) as f:
+        lines = [l for l in f]
+        # remove spaces
+        stripped = map((lambda x: x.strip()), lines)
+        # remove comments
+        nocomments = filter((lambda x: not x.startswith("#")), stripped)
+        # remove empty lines
+        reqs = filter((lambda x: x), nocomments)
+        return reqs
+
+
+REQUIREMENTS = parse_requirements(os.path.join(here, "requirements.txt"))
+TESTS_REQUIRES = parse_requirements(os.path.join(here, "requirements_dev.txt"))
+
 setup(
     name="jmopenorders",
     version=version,
@@ -68,8 +85,8 @@ setup(
         "Environment :: Console",
         "Intended Audience :: Developers",
         "Intended Audience :: End Users/Desktop",
-        "License :: OSI Approved :: European Union Public Licence 1.2 "
-        + "(EUPL 1.2)",
+        "License :: OSI Approved :: European Union Public Licence 1.2 " +
+        "(EUPL 1.2)",
         "Natural Language :: English",
         "Operating System :: OS Independent",
         "Programming Language :: Python",
@@ -81,31 +98,24 @@ setup(
         "Programming Language :: Python :: Implementation :: PyPy",
         "Topic :: Office/Business",
     ],
-    url='https://github.com/jmuelbert/jmopenorders',
-    download_url='https://github.com/jmuelbert/jmopenorders/archiv/' +
-    version + ".zip",
+    url="https://github.com/jmuelbert/jmopenorders",
+    download_url="https://github.com/jmuelbert/jmopenorders/archiv/" +
+    version +
+    ".zip",
     project_urls={
-        'Source Code': 'https://github.com/jmuelbert/jmopenorders',
-        'Bug Reports': 'https://github.com/jmuelbert/jmopenorders/issues',
-        'Documentation': 'https://jmopenorders.readthedocs.io/en/latest/'
-    },
-    keywords='reporting excel',
-
-    author='Jürgen Mülbert',
-    author_email='juergen.muelbert@gmail.com',
-    install_requirements=REQUIREMENTS,
-    packages=find_packages(
-        exclude=["contrib", "docs", "tests*", "tasks"],
-    ),
-    entry_points={
-        'console_scripts':
-        ['jmopenorders=jmopenorders.cli:main']
+        "Source Code": "https://github.com/jmuelbert/jmopenorders",
+        "Bug Reports": "https://github.com/jmuelbert/jmopenorders/issues",
+        "Documentation": "https://jmopenorders.readthedocs.io/en/latest/",
     },
     keywords="reporting excel",
     author="Jürgen Mülbert",
     author_email="juergen.muelbert@gmail.com",
-    packages=find_packages(exclude=["contrib", "docs", "tests*", "tasks"],),
+    install_requirements=REQUIREMENTS,
+    package_dir={"": "src"},
+    packages=find_packages(
+        "src", exclude=["contrib", "docs", "tests*", "tasks"],
+    ),
     entry_points={"console_scripts": ["jmopenorders=jmopenorders.cli:main"]},
     zip_safe=False,
-    python_requires=">=2.7,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*",
+    python_requires=">=3.5.*",
 )

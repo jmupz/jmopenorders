@@ -25,6 +25,6 @@ Now using the pip command shipped with python we can install dependencies easy. 
     * py -m pip install *
 
 Get jmopenorders code
------------------
+---------------------
 
 To get jmopenorders download the zip file from https://github.com/jmuelbert/jmbdeopenorders/archive/master.zip and unzip whatever you want. To run doble click over the main script jmopenorders.py.

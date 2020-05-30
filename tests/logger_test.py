@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """ Test suite for the core._logger module.
 
 The script can be executed on its own or incorporated into a larger test suite.
@@ -12,10 +11,11 @@ from io import StringIO
 from logging import DEBUG
 
 import pytest
+
 from jmopenorders.core.logger import Logger
 
 
-class LoggerTest(object):
+class LoggerTest:
     """ Test suite for the Logger class.
 
     """

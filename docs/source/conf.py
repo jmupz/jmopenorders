@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 #
 # Spirit documentation build configuration file, created by
 # sphinx-quickstart on Sun Sep 24 08:30:18 2017.
@@ -289,7 +288,8 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, "jmopenorders.tex", "jmopenorders Documentation", [author], 1,)
+    (master_doc, "jmopenorders.tex",
+     "jmopenorders Documentation", [author], 1,)
 ]
 
 

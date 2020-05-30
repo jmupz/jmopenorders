@@ -1,6 +1,5 @@
-# -*- coding: utf-8 -*-
 #
-# Copyright (c) 2019 Jürgen Mülbert. All rights reserved.
+# Copyright (c) 2019-2020 Jürgen Mülbert. All rights reserved.
 #
 # Licensed under the EUPL, Version 1.2 or – as soon they
 # will be approved by the European Commission - subsequent
@@ -60,19 +59,13 @@ The Format of the data file is:
     - Auftragswert bereit geliefert pos 12 (float)
 """
 import os
-<<<<<<< Updated upstream:jmopenorders/api/generateorders.py
 from locale import localeconv
-=======
 from typing import List
->>>>>>> Stashed changes:src/jmopenorders/api/generateorders.py
 
 from openpyxl import Workbook
 from openpyxl.styles import Font
 
 from ..core.logger import logger
-# from locale import LC_ALL
-# from locale import setlocale
-# setlocale(LC_ALL, 'de_DE.utf8')
 
 
 class GenerateOrders:
@@ -82,8 +75,8 @@ class GenerateOrders:
         """Init the GenerateOrders Class."""
         self.dest_name = ""
         self.dest_dir = destdir
-        self.thousandSep = localeconv()['thousands_sep']
-        self.decimalPoint = localeconv()['decimal_point']
+        self.thousandSep = localeconv()["thousands_sep"]
+        self.decimalPoint = localeconv()["decimal_point"]
 
     def create(self, actual_name: str, actual_content: List[str]):
         """Put all the data for the actual_name to the excel-file."""
@@ -126,12 +119,8 @@ class GenerateOrders:
                 for item in print_line:
                     logger.debug(
                         "Name: {} Data: {} Count: {}".format(
-<<<<<<< Updated upstream:jmopenorders/api/generateorders.py
-                            actual_name, item, line_count)
-=======
                             actual_name, item, line_count
                         )
->>>>>>> Stashed changes:src/jmopenorders/api/generateorders.py
                     )
                     logger.debug(
                         "row_num: {} col_num: {}".format(row_num, col_num)
@@ -145,15 +134,17 @@ class GenerateOrders:
                     # Tage offen ist eine ganze Zahl
                     elif col_num == 5:
                         cell = sheet.cell(row=row_num, column=col_num)
-                        mystr = item.replace(self.thousandSep, '').replace(
-                            self.decimalPoint, '.')
+                        mystr = item.replace(self.thousandSep, "").replace(
+                            self.decimalPoint, "."
+                        )
                         cell.value = float(mystr)
                         cell.number_format = "#,##0.00"
                     # Alles was nach Deb-Name ist, ist eine reale Zahl
                     elif col_num > 8:
                         cell = sheet.cell(row=row_num, column=col_num)
-                        mystr = item.replace(self.thousandSep, '').replace(
-                            self.decimalPoint, '.')
+                        mystr = item.replace(self.thousandSep, "").replace(
+                            self.decimalPoint, "."
+                        )
                         cell.value = float(mystr)
                         cell.number_format = "#,##0.00_€"
                     else:

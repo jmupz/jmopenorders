@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """Generator for fake data for testing."""
 #
 # Copyright (c) 2019 Jürgen Mülbert. All rights reserved.
@@ -121,7 +120,8 @@ class CreateFakeOrders:
             else:
                 self.part_count = count
                 line = ["", "ET" + self.fake.numerify(text="######"), "Teile"]
-            fake_date = self.fake.date_between(start_date="-2y", end_date="+1y")
+            fake_date = self.fake.date_between(
+                start_date="-2y", end_date="+1y")
             line.append(fake_date.strftime("%d.%m.%Y"))
             date_now = date.today()
             delta = date_now - fake_date

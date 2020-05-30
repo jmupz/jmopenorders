@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """ Global application logging.
 
 All modules use the same global logging object. No messages will be emitted
@@ -33,7 +32,7 @@ class Logger(_Logger):
         # to whether the logger has been started yet. The standard Logger API
         # may be used to add and remove additional handlers, but the
         # NullHandler should always be left in place.
-        super(Logger, self).__init__(name or __name__.split(".")[0])
+        super().__init__(name or __name__.split(".")[0])
         self.addHandler(NullHandler())  # default to no output
         return
 

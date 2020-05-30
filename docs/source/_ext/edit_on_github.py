@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 Sphinx extension to add ReadTheDocs-style "Edit on GitHub" links to the
 sidebar.

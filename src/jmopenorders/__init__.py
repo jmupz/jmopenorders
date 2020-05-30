@@ -1,6 +1,5 @@
-# -*- coding: utf-8 -*-
 #
-# Copyright (c) 2019 Jürgen Mülbert. All rights reserved.
+# Copyright (c) 2019-2020 Jürgen Mülbert. All rights reserved.
 #
 # Licensed under the EUPL, Version 1.2 or – as soon they
 # will be approved by the European Commission - subsequent
@@ -36,19 +35,11 @@
 # Die sprachspezifischen Genehmigungen und Beschränkungen
 # unter der Lizenz sind dem Lizenztext zu entnehmen.
 #
-<<<<<<< Updated upstream:jmopenorders/__init__.py
 """
 Put the version to the __version__ variable.
 """
 
 
-__all__ = (
-    "__version__",
-)
+__all__ = ("__version__",)
 
 __version__ = "0.2.1.dev0"
-=======
-"""Put the version to the __version__ variable."""
-# from .__main__ import main
-# from .__version__ import __version__
->>>>>>> Stashed changes:src/jmopenorders/__init__.py

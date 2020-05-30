@@ -1,14 +1,5 @@
-# -*- coding: utf-8 -*-
-<<<<<<< Updated upstream:jmopenorders/api/cleanoutputdir.py
-"""
-Clean the Directory.
-
-Remove the generated files
-"""
-=======
->>>>>>> Stashed changes:src/jmopenorders/api/cleanoutputdir.py
 #
-# Copyright (c) 2019 Jürgen Mülbert. All rights reserved.
+# Copyright (c) 2019-2020 Jürgen Mülbert. All rights reserved.
 #
 # Licensed under the EUPL, Version 1.2 or – as soon they
 # will be approved by the European Commission - subsequent

@@ -1,8 +1,7 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 """Implementation of the command line interface."""
 #
-# Copyright (c) 2019 Jürgen Mülbert. All rights reserved.
+# Copyright (c) 2019-2020 Jürgen Mülbert. All rights reserved.
 #
 # Licensed under the EUPL, Version 1.2 or – as soon they
 # will be approved by the European Commission - subsequent
@@ -43,13 +42,8 @@ from inspect import getfullargspec
 from typing import List
 
 from . import __version__
-<<<<<<< Updated upstream:jmopenorders/cli.py
-from .api.hello import Hello
-from .api.report import Report
-=======
 from .api import hello
 from .api import report
->>>>>>> Stashed changes:src/jmopenorders/cli.py
 from .core.config import config
 from .core.logger import logger
 
@@ -125,12 +119,8 @@ def _hello(subparsers, common) -> None:
     """
 
     parser = subparsers.add_parser("hello", parents=[common])
-<<<<<<< Updated upstream:jmopenorders/cli.py
-    parser.set_defaults(commands=Hello)
-=======
-    parser.add_argument("-n", "--name", default="World", help="greeting name")
     parser.set_defaults(commands=hello)
->>>>>>> Stashed changes:src/jmopenorders/cli.py
+
     return
 
 
@@ -142,9 +132,8 @@ def _report(subparsers, common) -> None:
     """
 
     parser = subparsers.add_parser("report", parents=[common])
-<<<<<<< Updated upstream:jmopenorders/cli.py
-    parser.set_defaults(commands=Report)
-=======
+
+    parser.set_defaults(commands=report)
     parser.add_argument(
         "-w", "--warn", default="WARN", help="logger warning level [WARN]",
     )
@@ -158,8 +147,7 @@ def _report(subparsers, common) -> None:
         "-p", "--personfile", type=str, help="the names to report",
     )
     parser.add_argument("-d", "--datafile", type=str, help="the datafile")
-    parser.set_defaults(commands=report)
->>>>>>> Stashed changes:src/jmopenorders/cli.py
+    parser.set_defaults(commands=Report)
     return
 
 

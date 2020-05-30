@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #
 # Copyright (c) 2019 Jürgen Mülbert. All rights reserved.
 #
@@ -59,7 +58,7 @@ class GetServicePerson:
         """
         service_person = []
         try:
-            with open(self.file_name, "r") as berater_file:
+            with open(self.file_name) as berater_file:
                 self.berater = csv.DictReader(
                     berater_file, delimiter=";", quotechar='"',
                 )
@@ -70,7 +69,7 @@ class GetServicePerson:
 
                 return service_person
 
-        except IOError:
+        except OSError:
             logger.debug(
                 "The File for the service persons {} does not exists".format(
                     self.file_name

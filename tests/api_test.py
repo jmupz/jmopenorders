@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """ Test suite for the api module.
 
 The script can be executed on its own or incorporated into a larger test suite.

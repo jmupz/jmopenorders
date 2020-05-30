@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": "/Users/juergen/miniconda/envs/develop/bin/python",
+    "python.pythonPath": "/Users/juergen/opt/miniconda3/envs/pyside2/bin/python",
     "python.linting.pylintEnabled": false,
     "python.linting.pylintArgs": ["--reports", "12", "--disable-msg", "I0011"],
     "python.linting.flake8Enabled": true,

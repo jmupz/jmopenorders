@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """ Test suite for the core._config module.
 
 The script can be executed on its own or incorporated into a larger test suite.
@@ -9,11 +8,12 @@ environment or setuptools develop mode to test against the development version.
 
 """
 import pytest
-from jmopenorders.core.config import YamlConfig
 from yaml import dump
 
+from jmopenorders.core.config import YamlConfig
 
-class YamlConfigTest(object):
+
+class YamlConfigTest:
     """ Test suite for the YamlConfig class.
 
     """
