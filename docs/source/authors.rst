@@ -1,4 +1,1 @@
-Contributors
-************
-
 .. include:: ../../AUTHORS.rst

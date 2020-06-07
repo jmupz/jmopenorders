@@ -86,7 +86,7 @@ class GenerateOrders:
         # Create a workbook and add a worksheet.
         if self.dest_dir:
             self.dest_name = os.path.join(
-                os.path.abspath(self.dest_dir,), actual_name + ".xlsx",
+                os.path.abspath(self.dest_dir), actual_name + ".xlsx"
             )
         else:
             self.dest_name = actual_name + ".xlsx"
@@ -122,9 +122,7 @@ class GenerateOrders:
                             actual_name, item, line_count
                         )
                     )
-                    logger.debug(
-                        "row_num: {} col_num: {}".format(row_num, col_num)
-                    )
+                    logger.debug(f"row_num: {row_num} col_num: {col_num}")
 
                     # Tage offen ist eine ganze Zahl
                     if col_num == 4:

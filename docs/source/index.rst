@@ -3,7 +3,7 @@
     You can adept this file completely to your liking,
     but it should at least contain the root `toctree`derictive.
 
-.. title;; jmopenorders
+.. title:: jmopenorders
 
 Welcome to jmopenorders documentation.
 ======================================
@@ -20,13 +20,14 @@ Documentation
 ..  toctree::
     :maxdepth: 2
 
+    readme
     installation
     installation_windows
     upgrade
     settings
     contributing
-    contributors
-    changelog
+    authors
+    history
 
 * :ref:`genindex`
 * :ref:`modindex`

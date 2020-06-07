@@ -1,6 +1,6 @@
 """JM OpenOrders Library."""
 #
-# Copyright (c) 2019 Jürgen Mülbert. All rights reserved.
+# Copyright (c) 2019-2020 Jürgen Mülbert. All rights reserved.
 #
 # Licensed under the EUPL, Version 1.2 or – as soon they
 # will be approved by the European Commission - subsequent
@@ -36,7 +36,6 @@
 # Die sprachspezifischen Genehmigungen und Beschränkungen
 # unter der Lizenz sind dem Lizenztext zu entnehmen.
 #
-from .hello import hello
 from .report import report
 
-__all__ = ["report", "hello"]
+__all__ = ["report"]

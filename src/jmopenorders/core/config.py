@@ -1,29 +1,67 @@
-""" Global application configuration.
+#
+# Copyright (c) 2019-2020 Jürgen Mülbert. All rights reserved.
+#
+# Licensed under the EUPL, Version 1.2 or – as soon they
+# will be approved by the European Commission - subsequent
+# versions of the EUPL (the "Licence");
+# You may not use this work except in compliance with the
+# Licence.
+# You may obtain a copy of the Licence at:
+#
+# https://joinup.ec.europa.eu/page/eupl-text-11-12
+#
+# Unless required by applicable law or agreed to in
+# writing, software distributed under the Licence is
+# distributed on an "AS IS" basis,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+# express or implied.
+# See the Licence for the specific language governing
+# permissions and limitations under the Licence.
+#
+# Lizenziert unter der EUPL, Version 1.2 oder - sobald
+#  diese von der Europäischen Kommission genehmigt wurden -
+# Folgeversionen der EUPL ("Lizenz");
+# Sie dürfen dieses Werk ausschließlich gemäß
+# dieser Lizenz nutzen.
+# Eine Kopie der Lizenz finden Sie hier:
+#
+# https://joinup.ec.europa.eu/page/eupl-text-11-12
+#
+# Sofern nicht durch anwendbare Rechtsvorschriften
+# gefordert oder in schriftlicher Form vereinbart, wird
+# die unter der Lizenz verbreitete Software "so wie sie
+# ist", OHNE JEGLICHE GEWÄHRLEISTUNG ODER BEDINGUNGEN -
+# ausdrücklich oder stillschweigend - verbreitet.
+# Die sprachspezifischen Genehmigungen und Beschränkungen
+# unter der Lizenz sind dem Lizenztext zu entnehmen.
+#
+"""Global application configuration.
 
 This module defines a global configuration object. Other modules should use
 this object to store application-wide configuration values.
 
 """
 from re import compile
-from typing import Any
-from typing import Dict
+from typing import Any, Dict
 
 from yaml import safe_load
 
 from .logger import logger
 
-__all__ = "config", "YamlConfig"
+__all__ = ["config", "YamlConfig"]
 
 
 class _AttrDict(Dict):
-    """ A dict-like object with attribute access.
-
-    """
+    """A dict-like object with attribute access."""
 
     def __getitem__(self, key: str) -> Any:
-        """ Access dict values by key.
+        """Access dict values by key.
 
-        :param key: key to retrieve
+        Args:
+            key: key to retrieve
+
+        Returns:
+            Any: The item
         """
         value = super().__getitem__(key)
         if isinstance(value, dict):
@@ -39,35 +77,40 @@ class _AttrDict(Dict):
         return value
 
     def __getattr__(self, key: str) -> Any:
-        """ Get dict values as attributes.
+        """Get dict values as attributes.
 
-        :param key: key to retrieve
+        Args:
+            key: key to retrieve
+
+        Returns:
+            Any: The DictValue from the key.
         """
         return self[key]
 
     def __setattr__(self, key: str, value: str) -> None:
-        """ Set dict values as attributes.
+        """Set dict values as attributes.
 
-        :param key: key to set
-        :param value: new value for key
+        Args:
+            key: key to set
+            value: new value for key
         """
         self[key] = value
         return
 
 
 class YamlConfig(_AttrDict):
-    """ Store YAML configuration data.
+    """Store YAML configuration data.
 
     Data can be accessed as dict values or object attributes.
-
     """
 
-    def __init__(self, path: str = "", root: str = "", macros: Dict = {}):
-        """ Initialize this object.
+    def __init__(self, path: str, root: str, macros: Dict):
+        """Initialize this object.
 
-        :param path: config file path to load
-        :param root: place config values at this root
-        :param macros: macro substitutions
+        Args:
+            path: config file path to load
+            root: place config values at this root
+            macros: macro substitutions
         """
         super().__init__()
         if path:
@@ -75,7 +118,7 @@ class YamlConfig(_AttrDict):
         return
 
     def load(self, path, root: str, macros: Dict):
-        """ Load data from YAML configuration files.
+        """Load data from YAML configuration files.
 
         Configuration values are read from a sequence of one or more YAML
         files. Files are read in the given order, and a duplicate value will
@@ -86,18 +129,19 @@ class YamlConfig(_AttrDict):
         substitution in the config files. Any text matching "%key;" will be
         replaced with the value for 'key' in 'macros'.
 
-        :param path: config file path to load
-        :param root: place config values at this root
-        :param macros: macro substitutions
+        Args:
+            path: config file path to load
+            root: place config values at this root
+            macros: macro substitutions
         """
 
         def replace(match: Dict) -> str:
-            """ Callback for re.sub to do macro replacement. """
+            """Callback for re.sub to do macro replacement."""
             # This allows for multi-pattern substitution in a single pass.
             return macros[match.group(0)]
 
         macros = (
-            {r"%{:s};".format(key): val for (key, val,) in macros.items()}
+            {fr"%{key:s};": val for (key, val,) in macros.items()}
             if macros
             else {}
         )
@@ -110,7 +154,7 @@ class YamlConfig(_AttrDict):
                 # excluded from replacement. A more elegant (but complex)
                 # approach would be to use PyYAML's various hooks to do the
                 # substitution as the file is parsed.
-                logger.info("reading config data from '{:s}'".format(path))
+                logger.info(f"reading config data from '{path:s}'")
                 yaml = regex.sub(replace, stream.read())
             data = safe_load(yaml)
             try:
@@ -119,7 +163,7 @@ class YamlConfig(_AttrDict):
                 else:
                     self.update(data)
             except TypeError:  # data is None
-                logger.warning("config file {:s} is empty".format(path))
+                logger.warning(f"config file {path:s} is empty")
         return
 
 

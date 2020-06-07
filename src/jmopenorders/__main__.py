@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2019 Jürgen Mülbert. All rights reserved.
+# Copyright (c) 2019-2020 Jürgen Mülbert. All rights reserved.
 #
 # Licensed under the EUPL, Version 1.2 or – as soon they
 # will be approved by the European Commission - subsequent
@@ -35,22 +35,78 @@
 # Die sprachspezifischen Genehmigungen und Beschränkungen
 # unter der Lizenz sind dem Lizenztext zu entnehmen.
 #
-"""
-Main application entry point.
+"""Main application entry point.
 
 python -m jmopenorders
 """
+import random
+from enum import Enum
+from typing import Optional
+
+import typer
+from rich.console import Console
+
+from jmopenorders import __version__, hello
 
 
-def main() -> int:
-    """Execute the application."""
-    raise NotImplementedError("To be implemented")
+class Color(str, Enum):
+    """Color definition."""
 
-    return 1
+    white = "white"
+    red = "red"
+    cyan = "cyan"
+    magenta = "magenta"
+    yellow = "yellow"
+    green = "green"
+
+
+app = typer.Typer(
+    name="jmopenorders", help="Open Orders Generator", add_completion=False,
+)
+console = Console()
+
+
+def version_callback(value: bool) -> None:
+    """Prints the version of the Package."""
+    if value:
+        console.print(
+            f"[yellow]jmopenorders[/] version: [bold blue]{__version__}[/]"
+        )
+        raise typer.Exit()
+
+
+@app.command(name="Test")
+def main(
+    name: str = typer.Option(..., help="Name of the person to greet."),
+    color: Optional[Color] = typer.Option(
+        None,
+        "-c",
+        "--color",
+        "--colour",
+        case_sensitive=False,
+        help="Color for ma,e. Of not specified the choice will be random.",
+    ),
+    version: bool = typer.Option(
+        None,
+        "-v",
+        "--version",
+        callback=version_callback,
+        is_eager=True,
+        help="Prints the version of the jmopenorders package.",
+    ),
+) -> None:
+    """Prints a greeting for a giving name."""
+    typer.echo("Hello, World!")
+    if color is None:
+        # If no color specified use random value from `Color` class
+        color = random.choice(list(Color.__members__.values()))
+
+    greeting: str = hello.Hello(name)
+    console.print(f"[bold {color}]{greeting}[/]")
 
 
 # Make the script executable
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    typer.run(main)

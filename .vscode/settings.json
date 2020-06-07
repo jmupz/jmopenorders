@@ -1,99 +1,97 @@
 {
-    "python.pythonPath": "/Users/juergen/opt/miniconda3/envs/pyside2/bin/python",
-    "python.linting.pylintEnabled": false,
-    "python.linting.pylintArgs": ["--reports", "12", "--disable-msg", "I0011"],
-    "python.linting.flake8Enabled": true,
-    "python.linting.flake8Args": [
-        "--ignore=E24,W504",
-        "--verbose",
-        "--max-line-length = 80"
-    ],
-    "python.linting.pycodestyleEnabled": true,
-    "python.linting.pydocstyleEnabled": true,
-    "python.linting.pydocstyleArgs": [
-        "--ignore=D100",
-        "--ignore=D203",
-        "--ignore=D405"
-    ],
-    "python.linting.enabled": true,
-    "python.linting.lintOnSave": true,
-    "python.formatting.provider": "black",
-    "python.testing.pytestEnabled": true,
-    "python.testing.nosetestsEnabled": false,
-    "qtForPython.path.designer": "~/miniconda/envs/develop/bin/Designer",
-    "qtForPython.path.linguist": "~/miniconda/envs/develop/bin/Linguist",
-    "qtForPython.path.lrelease": "~/miniconda/envs/develop/bin/lrelease",
-    "qtForPython.path.pylupdate": "~/miniconda/envs/develop/bin/pyside2-lupdate",
-    "qtForPython.path.pyrcc": "~/miniconda/envs/develop/bin/pyside2-rcc",
-    "qtForPython.path.pyuic": "~/miniconda/envs/develop/bin/pyside2-uic",
-    "qtForPython.path.qmlscene": "~/miniconda//envs/develop/bin/qmlscene --verbose ${file}",
-    "pyside2-vsc.designer-creator.path": "",
-    "pyside2-vsc.rcc.cmd": "~/miniconda/envs/develop/bin/pyside2-rcc",
-    "pyqt-integration.linguist.cmd": "linguist",
-    "pyside2-vsc.uic.cmd": "~/miniconda/envs/develop/bin/pyside2-uic",
+  "python.pythonPath": ".venv/bin/python3",
+  "python.linting.pylintEnabled": false,
+  "python.linting.pylintArgs": ["--reports", "12", "--disable-msg", "I0011"],
+  "python.linting.flake8Enabled": true,
+  "python.linting.flake8Args": [
+    "--ignore=E24,W504",
+    "--verbose",
+    "--max-line-length = 80"
+  ],
+  "python.linting.pycodestyleEnabled": false,
+  "python.linting.pydocstyleEnabled": false,
+  "python.linting.pydocstyleArgs": [
+    "--ignore=D100",
+    "--ignore=D203",
+    "--ignore=D405"
+  ],
+  "python.linting.enabled": true,
+  "python.linting.lintOnSave": true,
+  "python.formatting.provider": "black",
+  "python.testing.pytestEnabled": true,
+  "python.testing.nosetestsEnabled": false,
+  "qtForPython.path.designer": "~/miniconda/envs/develop/bin/Designer",
+  "qtForPython.path.linguist": "~/miniconda/envs/develop/bin/Linguist",
+  "qtForPython.path.lrelease": "~/miniconda/envs/develop/bin/lrelease",
+  "qtForPython.path.pylupdate": "~/miniconda/envs/develop/bin/pyside2-lupdate",
+  "qtForPython.path.pyrcc": "~/miniconda/envs/develop/bin/pyside2-rcc",
+  "qtForPython.path.pyuic": "~/miniconda/envs/develop/bin/pyside2-uic",
+  "qtForPython.path.qmlscene": "~/miniconda//envs/develop/bin/qmlscene --verbose ${file}",
+  "pyside2-vsc.designer-creator.path": "",
+  "pyside2-vsc.rcc.cmd": "~/miniconda/envs/develop/bin/pyside2-rcc",
+  "pyqt-integration.linguist.cmd": "linguist",
+  "pyside2-vsc.uic.cmd": "~/miniconda/envs/develop/bin/pyside2-uic",
 
-    "files.trimTrailingWhitespace": true,
-    "files.autoSave": "afterDelay",
-    "files.exclude": {
-        "**/*.pyc": true,
-        "**/*.min.js": true,
-        "**/*.js.map": true,
-        "htmlcov": true,
-        "build": true,
-        "*.log": true,
-        "*.egg-info": true,
-        "**/.classpath": true,
-        "**/.project": true,
-        "**/.settings": true,
-        "**/.factorypath": true
-    },
-    "editor.quickSuggestions": {
-        "other": true,
-        "comments": false,
-        "strings": false
-    },
+  "files.trimTrailingWhitespace": true,
+  "files.autoSave": "afterDelay",
+  "files.exclude": {
+    "**/*.pyc": true,
+    "**/*.min.js": true,
+    "**/*.js.map": true,
+    "htmlcov": true,
+    "build": true,
+    "*.log": true,
+    "*.egg-info": true,
+    "**/.classpath": true,
+    "**/.project": true,
+    "**/.settings": true,
+    "**/.factorypath": true
+  },
+  "editor.quickSuggestions": {
+    "other": true,
+    "comments": false,
+    "strings": false
+  },
 
-    "editor.acceptSuggestionOnEnter": "on",
+  "editor.acceptSuggestionOnEnter": "on",
 
-    "editor.quickSuggestionsDelay": 10,
+  "editor.quickSuggestionsDelay": 10,
 
-    "editor.suggestOnTriggerCharacters": true,
+  "editor.suggestOnTriggerCharacters": true,
 
-    "editor.tabCompletion": "on",
+  "editor.tabCompletion": "on",
 
-    "editor.suggest.localityBonus": true,
+  "editor.suggest.localityBonus": true,
 
-    "editor.suggestSelection": "recentlyUsed",
+  "editor.suggestSelection": "recentlyUsed",
 
-    "editor.wordBasedSuggestions": true,
+  "editor.wordBasedSuggestions": true,
 
-    "editor.parameterHints.enabled": true,
-    "docker-linter.debug": true,
-    "docker-linter.flake8.enable": true,
-    "docker-linter.rubocop.enable": true,
-    "graphvizPreview.engine": "dot",
-    "python.condaPath": "~/miniconda/bin/conda",
-    "python.formatting.blackArgs": [
-        "--line-length 80"
-    ],
-    "python.linting.ignorePatterns": [
-        ".vscode/*.py",
-        "**/site-packages/**/*.py",
-        "build/*",
-        ".tox/*",
-        ".scratch/*",
-        "_vendor/*",
-        "data/*"
-    ],
-    "python.linting.mypyEnabled": true,
-    "python.linting.pylintUseMinimalCheckers": false,
-    "python.workspaceSymbols.enabled": false,
-    "python.linter": "flake8",
-    "pythonTestExplorer.testFramework": "pytest",
-    "restructuredtext.linter.executablePath": "doc8",
-    "ruby.format": "rubocop",
-    "ruby.intellisense": "rubyLocate",
-    "ruby.codeCompletion": "rcodetools",
-    "swiftlint.enable": true
-
+  "editor.parameterHints.enabled": true,
+  "docker-linter.debug": true,
+  "docker-linter.flake8.enable": true,
+  "docker-linter.rubocop.enable": true,
+  "graphvizPreview.engine": "dot",
+  "python.condaPath": "~/miniconda/bin/conda",
+  "python.formatting.blackArgs": ["--line-length 80"],
+  "python.linting.ignorePatterns": [
+    ".vscode/*.py",
+    "**/site-packages/**/*.py",
+    "build/*",
+    ".tox/*",
+    ".scratch/*",
+    "_vendor/*",
+    "data/*"
+  ],
+  "python.linting.mypyEnabled": false,
+  "python.linting.pylintUseMinimalCheckers": false,
+  "python.workspaceSymbols.enabled": false,
+  "python.linter": "flake8",
+  "pythonTestExplorer.testFramework": "pytest",
+  "restructuredtext.linter.executablePath": "doc8",
+  "ruby.format": "rubocop",
+  "ruby.intellisense": "rubyLocate",
+  "ruby.codeCompletion": "rcodetools",
+  "swiftlint.enable": true,
+  "python.linting.pylamaEnabled": false
 }

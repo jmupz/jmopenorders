@@ -1,70 +1,34 @@
-# We set the language to c because python isn't supported on the MacOS X nodes
-# on Travis. However, the language ends up being irrelevant anyway, since we
-# install Python ourselves using conda.
+# Config file for automatic testing at travis-ci.org
+# This file will be regenerated if you run travis_pypi_setup.py
 language: python
-
-# Use Travis' container-based architecture
-sudo: false
-
-services:
-  - xvfb
-
-# Turn off email notifications
-notifications:
-  email: false
-
-cache:
-  directories:
-    - $HOME/.cache/pip
+python:
+  - 3.8
+  - 3.7
+  - 3.6
 
 env:
-  global:
-    # The following versions are the 'default' for tests, unless
-    # overidden underneath. They are defined here in order to save having
-    # to repeat them for all configurations.
-    - PIP_DEPENDENCIES='tox'
-    - DISPLAY=":99.0"
+  - POETRY_VERSION=1.0.5
 
-jobs:
-  include:
-    - name: "Python 3.8.0 on Bionic Linux"
-      dist: bionic
-      python: 3.8 # this works for Linux but is ignored on macOS or Windows
-      env: TOXENV=py38
-    - name: "Python 3.6.0 on Xenial Linux"
-      dist: xenial
-      python: 3.6
-      env: TOXENV=py36
+before_install:
+  - pip freeze | xargs pip uninstall -y
+  - curl -sSL "https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py" | python
+  - source "$HOME/.poetry/env"
 
-    - name: "Python 3.7.4 on macOS"
-      os: osx
-      osx_image: xcode11.2 # Python 3.7.4 running on macOS 10.14.4
-      language: shell # 'language: python' is an error on Travis CI macOS
-      env: TOXENV=py37
+# Command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
+install: poetry install
 
-    - name: "Python 3.8.0 on Windows"
-      os: windows
-      language: shell
-      before_install:
-        - choco install python3
-        - python -m pip install --upgrade pip
-      env:
-        - PATH=/PATH=/c/Python37:/c/Python37/Scripts:/c/Python38:/c/Python38/Scripts:/c/Python39:/c/Python39/Scripts:$PATH;
-        - TOXENV=py38
-
-install:
-  - pip3 install --upgrade pip # all three OSes agree about 'pip3'
-  - pip3 install --upgrade tox tox-venv virtualenv
-  - pip3 install codecov
-
-script:
-    tox
+# command to run tests, e.g. python setup.py test
+script: make test^
 
 after_success:
-  - tox -e release
-  - if [["$TRAVIS_OS_NAME" == "linux"]]; then
-    tox -e report
-    fi
+  # Send coverage to coveralls
+  - pip install coveralls
+  - coveralls
+
+notifications:
+  email:
+    on_success: never
+    on_failure: change
 
 deploy:
   provider: pypi
@@ -76,3 +40,4 @@ deploy:
   on:
     tags: true
     repo: jmuelbert/jmopenorders
+    python: 3.8

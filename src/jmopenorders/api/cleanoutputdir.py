@@ -45,7 +45,6 @@ from ..core.logger import logger
 
 
 class CleanOutputDir:
-
     """Clean the output directory."""
 
     def __init__(self, outdir: str = "") -> None:
@@ -59,6 +58,6 @@ class CleanOutputDir:
             for file in files:
                 if ".xlsx" in file:
                     os.remove(file)
-                    logger.debug("Remove File: {}".format(file))
+                    logger.debug(f"Remove File: {file}")
         else:
-            logger.warn("The Outdir {} does not exists".format(self.out_dir))
+            logger.warn(f"The Outdir {self.out_dir} does not exists")

@@ -1,5 +1,4 @@
 """Get the Data from csv-file to generate to output."""
-# -*- coding: utf-8 -*-
 #
 # Copyright (c) 2019 Jürgen Mülbert. All rights reserved.
 #

@@ -1,4 +1,3 @@
-"""Generator for fake data for testing."""
 #
 # Copyright (c) 2019 Jürgen Mülbert. All rights reserved.
 #
@@ -36,6 +35,7 @@
 # Die sprachspezifischen Genehmigungen und Beschränkungen
 # unter der Lizenz sind dem Lizenztext zu entnehmen.
 #
+"""Generator for fake data for testing."""
 import csv
 import os
 from datetime import date
@@ -47,9 +47,15 @@ from openpyxl import Workbook
 class CreateFakeOrders:
     """Fake-Data creator data for testing."""
 
-    def __init__(self, myDataPath, l18n):
-        """Init for the fake-data-generator."""
-        self.data_path = myDataPath
+    def __init__(self, my_data_path: str, l18n: str):
+        """Init for the fake-data-generator.
+
+        Args:
+            my_data_path: The path to store the generated data
+            l18n: The localization for the data, default is "de_DE"
+
+        """
+        self.data_path = my_data_path
         self.part_person = []
         self.service_person = []
         self.order_list = []
@@ -61,21 +67,29 @@ class CreateFakeOrders:
 
         self.fake = Factory.create(l18n)
 
-    def generate_part_person(self, count):
-        """Generate random names for parts-person."""
+    def generate_part_person(self, count: int) -> None:
+        """Generate random names for parts-person.
+
+        Args:
+            count: The count of part persons to generate
+        """
         for _ in range(0, count):
             self.part_person.append(
                 self.fake.first_name() + " " + self.fake.last_name(),
             )
 
-    def generate_service_person(self, count):
-        """Generate random names for service persons."""
+    def generate_service_person(self, count: int) -> None:
+        """Generate random names for service persons.
+
+        Args:
+            count: The count of service persons to generate
+        """
         for _ in range(0, count):
             self.service_person.append(
                 self.fake.last_name() + ", " + self.fake.first_name(),
             )
 
-    def generate_header(self):
+    def generate_header(self) -> None:
         """Generate Headers."""
         line = ["", "", "", "", "", "", "OFFENE AUFTRÄGE"]
         self.order_list.append(line)
@@ -107,8 +121,15 @@ class CreateFakeOrders:
 
         self.order_list.append(line)
 
-    def generate_orders(self, count=20, workshop=True):
-        """Generate workshop orders."""
+    def generate_orders(self, count: int = 20, workshop: bool = True) -> None:
+        """Generate workshop orders.
+
+        The main function to generate orders.
+
+        Args:
+            count: The count how many to genrate, default = 20
+            workshop: If this True than generate for Workshop else for Parts
+        """
         for _ in range(0, count):
             if workshop is True:
                 self.workshop_count = count
@@ -120,8 +141,7 @@ class CreateFakeOrders:
             else:
                 self.part_count = count
                 line = ["", "ET" + self.fake.numerify(text="######"), "Teile"]
-            fake_date = self.fake.date_between(
-                start_date="-2y", end_date="+1y")
+            fake_date = self.fake.date_between(start_date="-2y", end_date="+1y")
             line.append(fake_date.strftime("%d.%m.%Y"))
             date_now = date.today()
             delta = date_now - fake_date
@@ -155,7 +175,7 @@ class CreateFakeOrders:
             line.append(self.fake.numerify(text="####,##"))
             self.order_list.append(line)
 
-    def generate_splitter(self, workshop=True):
+    def generate_splitter(self, workshop=True) -> None:
         """Generate a sub header."""
         self.order_list.append("")
         if workshop is True:
@@ -177,8 +197,14 @@ class CreateFakeOrders:
         self.order_list.append(line)
         self.order_list.append("")
 
-    def csv_output(self, name):
-        """Write the data to a csv-file."""
+    def csv_output(self, name: str) -> None:
+        """Write the data to a csv-file.
+
+        Put the generated fake data in the file 'data_path/nmae'
+
+        Args:
+            name: The name of the output file
+        """
         with open(
             os.path.join(self.data_path, name), "w", newline="",
         ) as csvfile:
@@ -186,8 +212,14 @@ class CreateFakeOrders:
             for row in self.order_list:
                 orderswriter.writerow(row)
 
-    def xlsx_output(self, name):
-        """Write the data to a excel file."""
+    def xlsx_output(self, name: str) -> None:
+        """Write the data to a excel file.
+
+        Put the generated fake data in the file 'data_path/nmae'
+
+        Args:
+            name: The name of the output file
+        """
         wb = Workbook()
         ws = wb.active
         column_num = 1
@@ -203,7 +235,7 @@ class CreateFakeOrders:
         wb.save(os.path.join(self.data_path, name))
 
 
-def main():
+def main() -> None:
     """Entrypoint to generate test data."""
     orders = CreateFakeOrders(".", "de_DE")
     orders.generate_part_person(20)

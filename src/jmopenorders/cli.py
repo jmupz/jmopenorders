@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-"""Implementation of the command line interface."""
 #
 # Copyright (c) 2019-2020 Jürgen Mülbert. All rights reserved.
 #
@@ -37,126 +36,73 @@
 # Die sprachspezifischen Genehmigungen und Beschränkungen
 # unter der Lizenz sind dem Lizenztext zu entnehmen.
 #
-from argparse import ArgumentParser
-from inspect import getfullargspec
-from typing import List
+"""Console script for jmopenorders."""
 
-from . import __version__
-from .api import hello
+import typer
+from rich.console import Console
+
+from jmopenorders import __version__
+
 from .api import report
-from .core.config import config
-from .core.logger import logger
 
-__all__ = ("main",)
-
-
-def main(argv: List) -> int:
-    """
-    Execute the application CLI.
-
-    :param argv: argument list to parse (sys.argv by default)
-    :return: exit status
-    """
-    args = _args(argv)
-    logger.start(args.warn or "DEBUG")  # can't use default from config yet
-    logger.debug("starting execution")
-    config.load(args.config)
-    config.core.config = args.config
-    if args.warn:
-        config.core.logging = args.warn
-    logger.stop()  # clear handlers to prevent duplicate records
-    logger.start(config.core.logging)
-    command = args.commands
-    args = vars(args)
-    spec = getfullargspec(command)
-    if not spec.varkw:
-        # No kwargs, remove unexpected arguments.
-        args = {key: args[key] for key in args if key in spec.args}
-    try:
-        command(**args)
-    except RuntimeError as err:
-        logger.critical(err)
-        return 1
-    logger.debug("sucessful completion")
-    return 0
+app = typer.Typer(
+    name="jmopenorders", help="Open Orders Generator", add_completion=False,
+)
+console = Console()
 
 
-def _args(argv: List[str]) -> List[str]:
-    """ Parse command line arguments.
+@app.command(name="")
+def version_callback(value: bool) -> None:
+    """Prints the version of the Package."""
+    if value:
+        console.print(
+            f"[yellow]jmopenorders[/] version: [bold blue]{__version__}[/]"
+        )
+        raise typer.Exit()
 
-    :param argv: argument list to parse
-    """
-    parser = ArgumentParser()
-    parser.add_argument(
+
+@app.command()
+def main(
+    inputpath: str = typer.Option(
+        None,
+        "-i",
+        "--inputpath",
+        "--ipath",
+        case_sensitive=False,
+        help="The Inputpath for the data",
+    ),
+    outputpath: str = typer.Option(
+        None,
+        "-o",
+        "--outputpath",
+        "--opath",
+        help="The Outputpath for the data",
+    ),
+    personfile: str = typer.Option(
+        None,
+        "-p",
+        "--personfile",
+        "--persondata",
+        help="The Name of the personfile",
+    ),
+    datafile: str = typer.Option(
+        None, "-d", "--datafile", "--data", help="The Name of the datafile"
+    ),
+    version: bool = typer.Option(
+        None,
         "-v",
         "--version",
-        action="version",
-        version="jmopenorders {:s}".format(__version__),
-        help="print version and exit",
-    )
+        callback=version_callback,
+        is_eager=True,
+        help="Prints the version of the jmopenorders package.",
+    ),
+) -> None:
+    """Console script for jmopenorders."""
+    report(personfile, datafile, inputpath, outputpath)
 
-    common = ArgumentParser(add_help=False)  # common subcommand arguments
-    common.add_argument(
-        "-c", "--config", action="append", help="config file [etc/config.yml]",
-    )
-    subparsers = parser.add_subparsers(title="subcommands")
-    _hello(subparsers, common)
-    _report(subparsers, common)
-    args = parser.parse_args(argv)
-    print("args: " + str(args))
-    if not args.config:
-        # Don't specify this as an argument default or else it will always be
-        # included it the list.
-        args.config = "etc/config.yml"
-    return args
-
-
-def _hello(subparsers, common) -> None:
-    """ CLI adaptor for the api.hello command.
-
-    :param subparsers: subcommand parsers
-    :param common: parser for common subcommand arguments
-    """
-
-    parser = subparsers.add_parser("hello", parents=[common])
-    parser.set_defaults(commands=hello)
-
-    return
-
-
-def _report(subparsers, common) -> None:
-    """ CLI adaptor for the api.hello command.
-
-    :param subparsers: subcommand parsers
-    :param common: parser for common subcommand arguments
-    """
-
-    parser = subparsers.add_parser("report", parents=[common])
-
-    parser.set_defaults(commands=report)
-    parser.add_argument(
-        "-w", "--warn", default="WARN", help="logger warning level [WARN]",
-    )
-    parser.add_argument(
-        "-i", "--inputpath", type=str, help="inputpath for data",
-    )
-    parser.add_argument(
-        "-o", "--outputpath", type=str, help="outputpath to write files",
-    )
-    parser.add_argument(
-        "-p", "--personfile", type=str, help="the names to report",
-    )
-    parser.add_argument("-d", "--datafile", type=str, help="the datafile")
-    parser.set_defaults(commands=Report)
-    return
+    return 0
 
 
 # Make the module executable.
 if __name__ == "__main__":
-    try:
-        status = main()
-    except Exception:
-        logger.critical("shutting down due to fatal error")
-        raise  # print stack trace
-    else:
-        raise SystemExit(status)
+    typer.run(main)  # pragma: no cover

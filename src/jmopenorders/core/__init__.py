@@ -1,4 +1,3 @@
-"""Core implementation package."""
 #
 # Copyright (c) 2019-2020 Jürgen Mülbert. All rights reserved.
 #
@@ -36,3 +35,4 @@
 # Die sprachspezifischen Genehmigungen und Beschränkungen
 # unter der Lizenz sind dem Lizenztext zu entnehmen.
 #
+"""core package for jmopenorders."""

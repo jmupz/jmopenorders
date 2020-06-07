@@ -35,11 +35,18 @@
 # Die sprachspezifischen Genehmigungen und Beschränkungen
 # unter der Lizenz sind dem Lizenztext zu entnehmen.
 #
-"""
-Put the version to the __version__ variable.
-"""
+"""Top-level package for jmopenorders."""
 
 
-__all__ = ("__version__",)
+try:
+    from importlib.metadata import version, PackageNotFoundError
+except ImportError:  # pragma: no cover
+    from importlib_metadata import version, PackageNotFoundError
 
-__version__ = "0.2.1.dev0"
+try:
+    __version__ = version(__name__)
+except PackageNotFoundError:  # pragma: no cover
+    __version__ = "unknown"
+
+__author__ = """Jürgen Mülbert"""
+__email__ = "juergen.muelbert@gmail.com"

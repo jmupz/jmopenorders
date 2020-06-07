@@ -1,5 +1,6 @@
+#!/usr/bin/env python
 #
-# Copyright (c) 2019-2020 Jürgen Mülbert. All rights reserved.
+# Copyright (c) 2019 Jürgen Mülbert. All rights reserved.
 #
 # Licensed under the EUPL, Version 1.2 or – as soon they
 # will be approved by the European Commission - subsequent
@@ -35,10 +36,38 @@
 # Die sprachspezifischen Genehmigungen und Beschränkungen
 # unter der Lizenz sind dem Lizenztext zu entnehmen.
 #
-from ..core.logger import logger
+"""Tests for `jmopenorders` package."""
+import pytest
+
+from jmopenorders import cli
 
 
-def hello(name: str = "World") -> str:
-    logger.debug("executing hello command")
+@pytest.fixture
+def response() -> None:
+    """Sample pytest fixture.
 
-    return "Hello, {:s}!".format(name)  # TODO: use f-string for python 3.6+
+    See more at: http://doc.pytest.org/en/latest/fixture.html
+    """
+    # noqa  import requests
+    # noqa return requests.get('https://github.com/audreyr/cookiecutter-pypackage')
+
+
+def test_content(response: str) -> None:
+    """Sample pytest test function with the pytest fixture as an argument.
+
+    Args:
+        response: The Response String
+    """
+    # noqa from bs4 import BeautifulSoup
+    # noqa assert 'GitHub' in BeautifulSoup(response.content).title.string
+
+
+@pytest.mark.parametrize(
+    ("inputpath", "outputpath", "personfile", "datafile", "expected"),
+    [("~/test/data", "~/test/output", "person.csv", "data.csv", "good")],
+)
+def test_command_line_interface(
+    inputpath, outputpath, personfile, datafile, expected
+) -> None:
+    """Test the CLI."""
+    assert cli(inputpath, outputpath, personfile, datafile) == expected

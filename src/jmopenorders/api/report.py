@@ -35,13 +35,12 @@
 # Die sprachspezifischen Genehmigungen und Beschränkungen
 # unter der Lizenz sind dem Lizenztext zu entnehmen.
 #
+"""Generate the output in a xlsx file."""
 import os
 
-from . import cleanoutputdir
-from . import generateorders
-from . import getdata
-from . import getserviceperson
 from jmopenorders.core.logger import logger
+
+from . import cleanoutputdir, generateorders, getdata, getserviceperson
 
 
 def report(
@@ -49,14 +48,23 @@ def report(
     datafile: str = "data.csv",
     inputpath: str = "home",
     outputpath: str = "out",
-) -> str:
+) -> None:
+    """Generate the report.
 
+    The report function is the entrypoint for reporting.
+
+    Args:
+        personfile: the csv-file with the names of the servicepersons
+        datafile: the csv-file with the orders of all servicepresons
+        inputpath: the path where stored the datafiles
+        outputpath: the path to stored the xlsx-files.
+    """
     logger.debug("executing report command")
 
     # combine the inputpath with the personfile name
     persondata_file = os.path.join(os.path.abspath(inputpath), personfile)
 
-    logger.debug("Personfile= {}".format(persondata_file))
+    logger.debug(f"Personfile= {persondata_file}")
 
     # Get the names of the persons to an arrary
     names = getserviceperson.GetServicePerson(persondata_file)
@@ -80,5 +88,3 @@ def report(
             )
     else:
         logger.critical("Berater file is empty or not exist")
-
-    return "Hello, {:s}!".format(personfile)

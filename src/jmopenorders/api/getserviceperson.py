@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2019 Jürgen Mülbert. All rights reserved.
+# Copyright (c) 2019-2020 Jürgen Mülbert. All rights reserved.
 #
 # Licensed under the EUPL, Version 1.2 or – as soon they
 # will be approved by the European Commission - subsequent
@@ -35,6 +35,7 @@
 # Die sprachspezifischen Genehmigungen und Beschränkungen
 # unter der Lizenz sind dem Lizenztext zu entnehmen.
 #
+"""Read the serviceperson csv-file."""
 import csv
 from typing import List
 
@@ -42,7 +43,6 @@ from ..core.logger import logger
 
 
 class GetServicePerson:
-
     """Get the service persion from csv-file."""
 
     def __init__(self, filename: str):
@@ -51,9 +51,12 @@ class GetServicePerson:
         self.berater: List[str]
 
     def get(self) -> List[str]:
-        """
-        Read the Service Person from csv-file.
+        """Get the Persons.
 
+        Returns:
+             List - the List of the Persons.
+
+        Read the Service Person from csv-file.
         Then create a array and get this back
         """
         service_person = []
