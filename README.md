@@ -1,12 +1,8 @@
 [![Tests](https://github.com/jmuelbert/jmopenorders/workflows/Tests/badge.svg)](https://github.com/jmuelbert/jmopenorders/actions?workflow=Tests)
-
-[![Coverage](https://codecov.io/gh/jmuelbert/jmopenorders/branch/master/graph/badge,svg)](https://codecov.io/gh/jmuelbert/jmopenorders)
-
+[![codecov](https://codecov.io/gh/jmuelbert/jmopenorders/branch/master/graph/badge.svg)](https://codecov.io/gh/jmuelbert/jmopenorders)
 [![PyPi](https://img.shields.io/pypi/v/jmopenorders.svg)](https://pypi.python.org/pypi/jmopenorders/)
-
-[![(https://readthedocs.org/projects/jmopenorders/badge/)](https://jmopenorders.readthedocs.io/)
-
-[![(https://img.shields.io/badge/license-EUPL-blue.svg)](https://joinup.ec.europa.eu/page/eupl-text-11-12)
+[![Documentation Status](https://readthedocs.org/projects/jmopenorders/badge/?version=latest)](https://jmopenorders.readthedocs.io/en/latest/?badge=latest)
+[![EUPL-1.2](https://img.shields.io/badge/license-EUPL-blue.svg)](https://joinup.ec.europa.eu/page/eupl-text-11-12)
 
 # jmopenorders
 
@@ -19,20 +15,20 @@ python does run on almosts known platforms.
 
 The master branch represents the latest pre-release code.
 
-- [Releases](https://github.com/jmuelbert/jmopenorders/releases).
+-   [Releases](https://github.com/jmuelbert/jmopenorders/releases).
 
-- [Milestones](https://github.com/jmuelbert/jmopenorders/milestones).
+-   [Milestones](https://github.com/jmuelbert/jmopenorders/milestones).
 
 ## Requests and Bug reports
 
-- [GitHub issues (preferred)](https://github.com/jmuelbert/jmopenorders/issues).
+-   [GitHub issues (preferred)](https://github.com/jmuelbert/jmopenorders/issues).
 
 ## Questions or Comments
 
 ## Wiki
 
-- [Main Page](https://github.com/jmuelbert/jmopenorders/wiki).
-- [User Manual](http://jmuelbert.github.io/jmopenorders/).
+-   [Main Page](https://github.com/jmuelbert/jmopenorders/wiki).
+-   [User Manual](http://jmuelbert.github.io/jmopenorders/).
 
 ## Installing
 
