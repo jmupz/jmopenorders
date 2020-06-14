@@ -1,12 +1,21 @@
 {
-  "python.pythonPath": ".venv/bin/python3",
+  "python.pythonPath": "/Users/juergen/Library/Caches/pypoetry/virtualenvs/jmopenorders-W7p0kP5e-py3.8/bin/python",
+  "python.workspaceSymbols.enabled": false,
+  "python.linter": "flake8",
+  "python.linting.enabled": true,
+  "python.linting.lintOnSave": true,
+  "python.linting.pylintUseMinimalCheckers": false,
   "python.linting.pylintEnabled": false,
   "python.linting.pylintArgs": ["--reports", "12", "--disable-msg", "I0011"],
+  "python.linting.mypyEnabled": false,
+  "python.linting.pylamaEnabled": false,
   "python.linting.flake8Enabled": true,
   "python.linting.flake8Args": [
-    "--ignore=E24,W504",
+    "--select=ANN,B,B9,BLK,C,D,DAR,E,F,I,S,W",
+    "--ignore=E203,E501,W503,ANN101",
     "--verbose",
-    "--max-line-length = 80"
+    "--max-line-length = 80",
+    "--max-complexity = 11"
   ],
   "python.linting.pycodestyleEnabled": false,
   "python.linting.pydocstyleEnabled": false,
@@ -15,9 +24,22 @@
     "--ignore=D203",
     "--ignore=D405"
   ],
-  "python.linting.enabled": true,
-  "python.linting.lintOnSave": true,
+  "python.linting.ignorePatterns": [
+    "**/site-packages/**/*.py",
+    ".mypy_cache/*",
+    ".nox/*",
+    ".pytest_cache/*",
+    ".py_type/*",
+    ".scratch/*",
+    ".vscode/*.py",
+    "_vendor/*",
+    "__pycache__",
+    "build/*",
+    "data/*"
+  ],
   "python.formatting.provider": "black",
+  "python.formatting.blackArgs": ["--line-length 80"],
+  "pythonTestExplorer.testFramework": "pytest",
   "python.testing.pytestEnabled": true,
   "python.testing.nosetestsEnabled": false,
   "qtForPython.path.designer": "~/miniconda/envs/develop/bin/Designer",
@@ -31,7 +53,7 @@
   "pyside2-vsc.rcc.cmd": "~/miniconda/envs/develop/bin/pyside2-rcc",
   "pyqt-integration.linguist.cmd": "linguist",
   "pyside2-vsc.uic.cmd": "~/miniconda/envs/develop/bin/pyside2-uic",
-
+  "python.condaPath": "~/opt//miniconda/bin/conda",
   "files.trimTrailingWhitespace": true,
   "files.autoSave": "afterDelay",
   "files.exclude": {
@@ -72,26 +94,9 @@
   "docker-linter.flake8.enable": true,
   "docker-linter.rubocop.enable": true,
   "graphvizPreview.engine": "dot",
-  "python.condaPath": "~/miniconda/bin/conda",
-  "python.formatting.blackArgs": ["--line-length 80"],
-  "python.linting.ignorePatterns": [
-    ".vscode/*.py",
-    "**/site-packages/**/*.py",
-    "build/*",
-    ".tox/*",
-    ".scratch/*",
-    "_vendor/*",
-    "data/*"
-  ],
-  "python.linting.mypyEnabled": false,
-  "python.linting.pylintUseMinimalCheckers": false,
-  "python.workspaceSymbols.enabled": false,
-  "python.linter": "flake8",
-  "pythonTestExplorer.testFramework": "pytest",
   "restructuredtext.linter.executablePath": "doc8",
   "ruby.format": "rubocop",
   "ruby.intellisense": "rubyLocate",
   "ruby.codeCompletion": "rcodetools",
-  "swiftlint.enable": true,
-  "python.linting.pylamaEnabled": false
+  "swiftlint.enable": true
 }

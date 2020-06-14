@@ -104,7 +104,7 @@ class YamlConfig(_AttrDict):
     Data can be accessed as dict values or object attributes.
     """
 
-    def __init__(self, path: str, root: str, macros: Dict):
+    def __init__(self, path: str, root: str, macros: Dict) -> None:
         """Initialize this object.
 
         Args:
@@ -117,7 +117,7 @@ class YamlConfig(_AttrDict):
             self.load(path, root, macros)
         return
 
-    def load(self, path, root: str, macros: Dict):
+    def load(self, path: str, root: str, macros: Dict) -> Any:
         """Load data from YAML configuration files.
 
         Configuration values are read from a sequence of one or more YAML
@@ -136,14 +136,19 @@ class YamlConfig(_AttrDict):
         """
 
         def replace(match: Dict) -> str:
-            """Callback for re.sub to do macro replacement."""
+            """Callback for re.sub to do macro replacement.
+
+            Args:
+                match: The search pattern.
+
+            Returns:
+                The macro that match.
+            """
             # This allows for multi-pattern substitution in a single pass.
             return macros[match.group(0)]
 
         macros = (
-            {fr"%{key:s};": val for (key, val,) in macros.items()}
-            if macros
-            else {}
+            {fr"%{key:s};": val for (key, val,) in macros.items()} if macros else {}
         )
         regex = compile("|".join(macros) or r"^(?!)")
         for path in [path] if isinstance(path, str) else path:

@@ -43,6 +43,7 @@ until the logger is started.
 from logging import Formatter
 from logging import Logger as _Logger
 from logging import NullHandler, StreamHandler
+from typing import Any
 
 __all__ = ["logger", "Logger"]
 
@@ -70,7 +71,7 @@ class Logger(_Logger):
         self.addHandler(NullHandler())  # default to no output
         return
 
-    def start(self, level: str = "WARN", stream=None) -> None:
+    def start(self, level: str = "WARN", stream: Any = None) -> None:
         """Start logging to a stream.
 
         Until the logger is started, no messages will be emitted. This applies

@@ -60,12 +60,20 @@ class GetData:
     Auftragswert bereit geliefert
     """
 
-    def __init__(self, filename: str = ""):
-        """Init the GetData Class."""
+    def __init__(self, filename: str = "") -> None:
+        """Init the GetData Class.
+
+        Args:
+            filename: The filename for the datafile
+        """
         self.file_name = filename
 
     def get(self) -> List[str]:
-        """Get the data from the csv-file."""
+        """Get the data from the csv-file.
+
+        Returns:
+            List[str] of generated data.
+        """
         # global orders_file
         try:
             with open(self.file_name) as orders_file:
@@ -76,9 +84,7 @@ class GetData:
 
         except OSError:
             logger.debug(
-                "The File with the data '{}' does not exists".format(
-                    self.file_name
-                )
+                "The File with the data '{}' does not exists".format(self.file_name)
             )
             return []
 

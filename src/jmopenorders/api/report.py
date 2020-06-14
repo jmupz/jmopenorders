@@ -39,7 +39,6 @@
 import os
 
 from jmopenorders.core.logger import logger
-
 from . import cleanoutputdir, generateorders, getdata, getserviceperson
 
 

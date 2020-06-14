@@ -38,66 +38,38 @@
 #
 """Console script for jmopenorders."""
 
-import typer
-from rich.console import Console
-
-from jmopenorders import __version__
+import click
 
 from .api import report
 
-app = typer.Typer(
-    name="jmopenorders", help="Open Orders Generator", add_completion=False,
+
+@click.command()
+@click.version_option()
+@click.option("-i", "--inputpath", default="input", help="The Inputpath for the data")
+@click.option(
+    "-o", "--outputpath", default="output", help="The Outputpath for the data",
 )
-console = Console()
+@click.option(
+    "-p", "--personfile", default="persons.csv", help="The Name of the personfile"
+)
+@click.option("-d", "--datafile", default="orders.csv", help="The Name of the datafile")
+def main(inputpath: str, outputpath: str, personfile: str, datafile: str) -> int:
+    r"""jmopenorders, generate separate files from datafile.
 
+    \f
+    Todo:
+        Change the paths to the click Type Path
+        integrate config.
 
-@app.command(name="")
-def version_callback(value: bool) -> None:
-    """Prints the version of the Package."""
-    if value:
-        console.print(
-            f"[yellow]jmopenorders[/] version: [bold blue]{__version__}[/]"
-        )
-        raise typer.Exit()
+    Args:
+        inputpath: The path to the inputdata.
+        outputpath: The path for write the generated data.
+        personfile: the name for the personfile.
+        datafile: the name for the datafile.
 
-
-@app.command()
-def main(
-    inputpath: str = typer.Option(
-        None,
-        "-i",
-        "--inputpath",
-        "--ipath",
-        case_sensitive=False,
-        help="The Inputpath for the data",
-    ),
-    outputpath: str = typer.Option(
-        None,
-        "-o",
-        "--outputpath",
-        "--opath",
-        help="The Outputpath for the data",
-    ),
-    personfile: str = typer.Option(
-        None,
-        "-p",
-        "--personfile",
-        "--persondata",
-        help="The Name of the personfile",
-    ),
-    datafile: str = typer.Option(
-        None, "-d", "--datafile", "--data", help="The Name of the datafile"
-    ),
-    version: bool = typer.Option(
-        None,
-        "-v",
-        "--version",
-        callback=version_callback,
-        is_eager=True,
-        help="Prints the version of the jmopenorders package.",
-    ),
-) -> None:
-    """Console script for jmopenorders."""
+    Returns:
+        Status as int (0 is good)
+    """
     report(personfile, datafile, inputpath, outputpath)
 
     return 0
@@ -105,4 +77,4 @@ def main(
 
 # Make the module executable.
 if __name__ == "__main__":
-    typer.run(main)  # pragma: no cover
+    main()  # pragma: no cover

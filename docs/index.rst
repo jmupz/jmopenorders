@@ -5,13 +5,13 @@
 
 .. title:: jmopenorders
 
-Welcome to jmopenorders documentation.
+The jmopenorders project.
 ======================================
 
 Quick links
 -----------
 
-* Current version: |version| (`download from PyPI <https://pypi.python.org/pypi/jmopenorders>`_, :doc:`release notes <releases>`)
+* Current version: |version| (`download from PyPI <https://pypi.python.org/pypi/jmopenorders>`_)
 * `Source (GitHub) <https://github.com/jmuelbert/jmopenorders>`_
 
 Documentation
@@ -20,14 +20,15 @@ Documentation
 ..  toctree::
     :maxdepth: 2
 
-    readme
     installation
     installation_windows
     upgrade
     settings
+    modules
     contributing
     authors
     history
+    license
 
 * :ref:`genindex`
 * :ref:`modindex`

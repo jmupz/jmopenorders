@@ -37,6 +37,7 @@
 # unter der Lizenz sind dem Lizenztext zu entnehmen.
 #
 """Tests for `jmopenorders` package."""
+
 import pytest
 
 from jmopenorders import cli
@@ -63,11 +64,19 @@ def test_content(response: str) -> None:
 
 
 @pytest.mark.parametrize(
-    ("inputpath", "outputpath", "personfile", "datafile", "expected"),
+    ("input_path", "output_path", "person_file", "data_file", "expected"),
     [("~/test/data", "~/test/output", "person.csv", "data.csv", "good")],
 )
 def test_command_line_interface(
-    inputpath, outputpath, personfile, datafile, expected
+    input_path: str, output_path: str, person_file: str, data_file: str, expected: bool
 ) -> None:
-    """Test the CLI."""
-    assert cli(inputpath, outputpath, personfile, datafile) == expected
+    """Test the CLI.
+
+    Args:
+        input_path: The path to the directory for input data files.
+        output_path: The path to the directory for the generated files.
+        person_file: The data_file that holds the service persons.
+        data_file: The file with all ordersdata to split off.
+        expected: The expected result.
+    """
+    assert cli(input_path, output_path, person_file, data_file) == expected

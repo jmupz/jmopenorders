@@ -58,8 +58,9 @@ The Format of the data file is:
     - Gesamt                        pos 11 (float)
     - Auftragswert bereit geliefert pos 12 (float)
 """
-import os
+
 from locale import localeconv
+import os
 from typing import List
 
 from openpyxl import Workbook
@@ -71,22 +72,31 @@ from ..core.logger import logger
 class GenerateOrders:
     """Generate the orders for output."""
 
-    def __init__(self, destdir: str):
-        """Init the GenerateOrders Class."""
+    def __init__(self, dest_dir: str) -> None:
+        """Init the GenerateOrders Class.
+
+        Args:
+            dest_dir: The name of the directory to store the report.
+        """
         self.dest_name = ""
-        self.dest_dir = destdir
+        self._dest_dir = dest_dir
         self.thousandSep = localeconv()["thousands_sep"]
         self.decimalPoint = localeconv()["decimal_point"]
 
-    def create(self, actual_name: str, actual_content: List[str]):
-        """Put all the data for the actual_name to the excel-file."""
+    def create(self, actual_name: str, actual_content: List[str]) -> None:
+        """Put all the data for the actual_name to the excel-file.
+
+        Args:
+            actual_name: The name of the service person to report.
+            actual_content: The complete data as list.
+        """
         row_num = 1
         col_num = 1
 
         # Create a workbook and add a worksheet.
-        if self.dest_dir:
+        if self._dest_dir:
             self.dest_name = os.path.join(
-                os.path.abspath(self.dest_dir), actual_name + ".xlsx"
+                os.path.abspath(self._dest_dir), actual_name + ".xlsx"
             )
         else:
             self.dest_name = actual_name + ".xlsx"
@@ -130,23 +140,15 @@ class GenerateOrders:
                         cell.value = item
                         cell.number_format = "dd.mm.yyyy"
                     # Tage offen ist eine ganze Zahl
-                    elif col_num == 5:
-                        cell = sheet.cell(row=row_num, column=col_num)
-                        mystr = item.replace(self.thousandSep, "").replace(
-                            self.decimalPoint, "."
-                        )
-                        cell.value = float(mystr)
-                        cell.number_format = "#,##0.00"
                     # Alles was nach Deb-Name ist, ist eine reale Zahl
                     elif col_num > 8:
                         cell = sheet.cell(row=row_num, column=col_num)
-                        mystr = item.replace(self.thousandSep, "").replace(
-                            self.decimalPoint, "."
-                        )
+                        mystr = item.replace(".", "")
+                        mystr = mystr.replace(",", ".")
                         cell.value = float(mystr)
-                        cell.number_format = "#,##0.00_€"
                     else:
-                        sheet.cell(row=row_num, column=col_num).value = item
+                        cell = sheet.cell(row=row_num, column=col_num)
+                        cell.value = item
 
                     col_num += 1
 

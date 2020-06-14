@@ -45,8 +45,12 @@ from ..core.logger import logger
 class GetServicePerson:
     """Get the service persion from csv-file."""
 
-    def __init__(self, filename: str):
-        """Init the GetServicePerson Class."""
+    def __init__(self, filename: str) -> None:
+        """Init the GetServicePerson Class.
+
+        Args:
+            filename: The Filename for the datafile with the service persons.
+        """
         self.file_name = filename
         self.berater: List[str]
 

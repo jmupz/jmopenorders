@@ -39,74 +39,18 @@
 
 python -m jmopenorders
 """
-import random
-from enum import Enum
-from typing import Optional
 
-import typer
-from rich.console import Console
-
-from jmopenorders import __version__, hello
+import click
 
 
-class Color(str, Enum):
-    """Color definition."""
-
-    white = "white"
-    red = "red"
-    cyan = "cyan"
-    magenta = "magenta"
-    yellow = "yellow"
-    green = "green"
-
-
-app = typer.Typer(
-    name="jmopenorders", help="Open Orders Generator", add_completion=False,
-)
-console = Console()
-
-
-def version_callback(value: bool) -> None:
-    """Prints the version of the Package."""
-    if value:
-        console.print(
-            f"[yellow]jmopenorders[/] version: [bold blue]{__version__}[/]"
-        )
-        raise typer.Exit()
-
-
-@app.command(name="Test")
-def main(
-    name: str = typer.Option(..., help="Name of the person to greet."),
-    color: Optional[Color] = typer.Option(
-        None,
-        "-c",
-        "--color",
-        "--colour",
-        case_sensitive=False,
-        help="Color for ma,e. Of not specified the choice will be random.",
-    ),
-    version: bool = typer.Option(
-        None,
-        "-v",
-        "--version",
-        callback=version_callback,
-        is_eager=True,
-        help="Prints the version of the jmopenorders package.",
-    ),
-) -> None:
+@click.command()
+@click.version_option()
+def main() -> None:
     """Prints a greeting for a giving name."""
-    typer.echo("Hello, World!")
-    if color is None:
-        # If no color specified use random value from `Color` class
-        color = random.choice(list(Color.__members__.values()))
-
-    greeting: str = hello.Hello(name)
-    console.print(f"[bold {color}]{greeting}[/]")
 
 
 # Make the script executable
 
 
 if __name__ == "__main__":
-    typer.run(main)
+    main()

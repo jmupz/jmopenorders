@@ -48,7 +48,11 @@ class CleanOutputDir:
     """Clean the output directory."""
 
     def __init__(self, outdir: str = "") -> None:
-        """Init the CleanOutputDir Class."""
+        """Init the CleanOutputDir Class.
+
+        Args:
+            outdir: The name of the output directory.
+        """
         self.out_dir = os.path.abspath(outdir)
 
     def clean(self) -> None:

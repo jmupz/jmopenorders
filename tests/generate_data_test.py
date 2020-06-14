@@ -36,9 +36,10 @@
 # unter der Lizenz sind dem Lizenztext zu entnehmen.
 #
 """Generator for fake data for testing."""
+
 import csv
-import os
 from datetime import date
+import os
 
 from faker import Factory
 from openpyxl import Workbook
@@ -47,13 +48,12 @@ from openpyxl import Workbook
 class CreateFakeOrders:
     """Fake-Data creator data for testing."""
 
-    def __init__(self, my_data_path: str, l18n: str):
+    def __init__(self, my_data_path: str, l18n: str) -> None:
         """Init for the fake-data-generator.
 
         Args:
-            my_data_path: The path to store the generated data
-            l18n: The localization for the data, default is "de_DE"
-
+            my_data_path: the path to store the fake data
+            l18n: the localization for the fake data
         """
         self.data_path = my_data_path
         self.part_person = []
@@ -71,7 +71,7 @@ class CreateFakeOrders:
         """Generate random names for parts-person.
 
         Args:
-            count: The count of part persons to generate
+            count: Count of parts persons to generate.
         """
         for _ in range(0, count):
             self.part_person.append(
@@ -82,7 +82,7 @@ class CreateFakeOrders:
         """Generate random names for service persons.
 
         Args:
-            count: The count of service persons to generate
+            count: Count of parts persons to generate.
         """
         for _ in range(0, count):
             self.service_person.append(
@@ -124,11 +124,9 @@ class CreateFakeOrders:
     def generate_orders(self, count: int = 20, workshop: bool = True) -> None:
         """Generate workshop orders.
 
-        The main function to generate orders.
-
         Args:
-            count: The count how many to genrate, default = 20
-            workshop: If this True than generate for Workshop else for Parts
+            count: The count of fake datalines.
+            workshop: Is true when tha dataline should generated for the workshop.
         """
         for _ in range(0, count):
             if workshop is True:
@@ -175,8 +173,12 @@ class CreateFakeOrders:
             line.append(self.fake.numerify(text="####,##"))
             self.order_list.append(line)
 
-    def generate_splitter(self, workshop=True) -> None:
-        """Generate a sub header."""
+    def generate_splitter(self, workshop: bool = True) -> None:
+        """Generate a sub header.
+
+        Args:
+            workshop: True when generate the header for the workshop
+        """
         self.order_list.append("")
         if workshop is True:
             line = ["Gesamt Werkstatt", self.workshop_count]
@@ -198,16 +200,12 @@ class CreateFakeOrders:
         self.order_list.append("")
 
     def csv_output(self, name: str) -> None:
-        """Write the data to a csv-file.
-
-        Put the generated fake data in the file 'data_path/nmae'
+        """Write the data to a csv file.
 
         Args:
-            name: The name of the output file
+            name: The name for the output file.
         """
-        with open(
-            os.path.join(self.data_path, name), "w", newline="",
-        ) as csvfile:
+        with open(os.path.join(self.data_path, name), "w", newline="",) as csvfile:
             orderswriter = csv.writer(csvfile, delimiter=";")
             for row in self.order_list:
                 orderswriter.writerow(row)
@@ -215,10 +213,8 @@ class CreateFakeOrders:
     def xlsx_output(self, name: str) -> None:
         """Write the data to a excel file.
 
-        Put the generated fake data in the file 'data_path/nmae'
-
         Args:
-            name: The name of the output file
+            name: The name for the output file.
         """
         wb = Workbook()
         ws = wb.active
