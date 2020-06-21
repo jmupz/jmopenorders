@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 #
 # Copyright (c) 2019 Jürgen Mülbert. All rights reserved.
 #
@@ -36,10 +37,9 @@
 # unter der Lizenz sind dem Lizenztext zu entnehmen.
 #
 """Generator for fake data for testing."""
-
 import csv
-from datetime import date
 import os
+from datetime import date
 
 from faker import Factory
 from openpyxl import Workbook

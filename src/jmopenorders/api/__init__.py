@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """JM OpenOrders Library."""
 #
 # Copyright (c) 2019-2020 Jürgen Mülbert. All rights reserved.

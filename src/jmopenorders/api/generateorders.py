@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 #
 # Copyright (c) 2019-2020 Jürgen Mülbert. All rights reserved.
 #
@@ -58,9 +59,8 @@ The Format of the data file is:
     - Gesamt                        pos 11 (float)
     - Auftragswert bereit geliefert pos 12 (float)
 """
-
-from locale import localeconv
 import os
+from locale import localeconv
 from typing import List
 
 from openpyxl import Workbook

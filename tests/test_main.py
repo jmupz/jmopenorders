@@ -1,5 +1,7 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 #
-# Copyright (c) 2019-2020 Jürgen Mülbert. All rights reserved.
+# Copyright (c) 2019 Jürgen Mülbert. All rights reserved.
 #
 # Licensed under the EUPL, Version 1.2 or – as soon they
 # will be approved by the European Commission - subsequent
@@ -35,21 +37,20 @@
 # Die sprachspezifischen Genehmigungen und Beschränkungen
 # unter der Lizenz sind dem Lizenztext zu entnehmen.
 #
-"""Current version of the jmopenorders application.
+"""Tests for `jmopenorders` package."""
+import pytest
+from click.testing import CliRunner
 
-This project uses the Semantic Versioning scheme in conjunction with PEP 0440:
+from jmopenorders import __main__
 
-    <http://semver.org/>
-    <https://www.python.org/dev/peps/pep-0440>
 
-Major versions introduce significant changes to the API, and backwards
-compatibility is not guaranteed. Minor versions are for new features and other
-backwards-compatible changes to the API. Patch versions are for bug fixes and
-internal code changes that do not affect the API. Development versions are
-incomplete states of a release .
+@pytest.fixture
+def runner() -> CliRunner:
+    """Fixture for invoking command-line interfaces."""
+    return CliRunner()
 
-Version 0.x should be considered a development version with an unstable API,
-and backwards compatibility is not guaranteed for minor versions.
-"""
 
-__version__ = "0.2.1.dev0"
+def test_main_succeeds(runner: CliRunner) -> None:
+    """It exits with a status code of zero."""
+    result = runner.invoke(__main__.main)
+    assert result.exit_code == 0

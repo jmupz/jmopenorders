@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 #
 # Copyright (c) 2019-2020 Jürgen Mülbert. All rights reserved.
 #
@@ -42,7 +43,8 @@ this object to store application-wide configuration values.
 
 """
 from re import compile
-from typing import Any, Dict
+from typing import Any
+from typing import Dict
 
 from yaml import safe_load
 
