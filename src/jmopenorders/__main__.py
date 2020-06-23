@@ -38,6 +38,8 @@
 # unter der Lizenz sind dem Lizenztext zu entnehmen.
 #
 """Console script for jmopenorders."""
+import sys
+
 import click
 
 from .api import report
@@ -75,4 +77,4 @@ def main(inputpath: str, outputpath: str, personfile: str, datafile: str) -> int
 
 # Make the module executable.
 if __name__ == "__main__":
-    main()  # pragma: no cover
+    sys.exit(main())  # pragma: no cover
