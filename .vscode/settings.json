@@ -41,7 +41,6 @@
   "python.formatting.blackArgs": ["--line-length 80"],
   "pythonTestExplorer.testFramework": "pytest",
   "python.testing.pytestEnabled": true,
-  "python.testing.nosetestsEnabled": true,
   "python.condaPath": "~/opt//miniconda/bin/conda",
   "docker-linter.debug": true,
   "docker-linter.flake8.enable": true,
