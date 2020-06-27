@@ -1,8 +1,5 @@
-{%- macro heading(text) -%}
-{{text}}
-{% for _ in text %}={% endfor %}
-{%- endmacro -%}
-{{ heading(cookiecutter.friendly_name) }}
+jmopenorders
+============
 
 |Tests| |Codecov| |PyPI| |Python Version| |Read the Docs| |License| |Black| |pre-commit| |Dependabot|
 

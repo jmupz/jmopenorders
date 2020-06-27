@@ -65,7 +65,7 @@ source = ["jmopenorders"]
 
 [tool.coverage.report]
 show_missing = true
-fail_under = 35
+fail_under = 30
 
 [build-system]
 requires = ["poetry>=0.12"]

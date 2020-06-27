@@ -39,44 +39,18 @@
 #
 """Tests for `jmopenorders` package."""
 import pytest
+from click.testing import CliRunner
 
-from jmopenorders.__main__ import main
+from jmopenorders import __main__
 
 
 @pytest.fixture
-def response() -> None:
-    """Sample pytest fixture.
-
-    See more at: http://doc.pytest.org/en/latest/fixture.html
-    """
-    # noqa  import requests
-    # noqa return requests.get('https://github.com/audreyr/cookiecutter-pypackage')
+def runner() -> CliRunner:
+    """Fixture for invoking command-line interfaces."""
+    return CliRunner()
 
 
-def test_content(response: str) -> None:
-    """Sample pytest test function with the pytest fixture as an argument.
-
-    Args:
-        response: The Response String
-    """
-    # noqa from bs4 import BeautifulSoup
-    # noqa assert 'GitHub' in BeautifulSoup(response.content).title.string
-
-
-@pytest.mark.parametrize(
-    ("input_path", "output_path", "person_file", "data_file", "expected"),
-    [("~/test/data", "~/test/output", "person.csv", "data.csv", "good")],
-)
-def test_command_line_interface(
-    input_path: str, output_path: str, person_file: str, data_file: str, expected: bool
-) -> None:
-    """Test the CLI.
-
-    Args:
-        input_path: The path to the directory for input data files.
-        output_path: The path to the directory for the generated files.
-        person_file: The data_file that holds the service persons.
-        data_file: The file with all ordersdata to split off.
-        expected: The expected result.
-    """
-    assert main(input_path, output_path, person_file, data_file) == expected
+def test_main_succeeds(runner: CliRunner) -> None:
+    """It exits with a status code of zero."""
+    result = runner.invoke(__main__.main, ["--version"])
+    assert result.exit_code == 0
