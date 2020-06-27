@@ -37,6 +37,6 @@
 # Die sprachspezifischen Genehmigungen und Beschränkungen
 # unter der Lizenz sind dem Lizenztext zu entnehmen.
 #
-from .report import report
+from jmopenorders.api import report
 
 __all__ = ["report"]

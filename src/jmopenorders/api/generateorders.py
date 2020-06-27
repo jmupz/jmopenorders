@@ -64,7 +64,7 @@ from locale import localeconv
 from typing import List
 
 from openpyxl import Workbook
-from openpyxl.styles import Font
+from openpyxl.styles import Font  # ignore
 
 from ..core.logger import logger
 
@@ -83,7 +83,7 @@ class GenerateOrders:
         self.thousandSep = localeconv()["thousands_sep"]
         self.decimalPoint = localeconv()["decimal_point"]
 
-    def create(self, actual_name: str, actual_content: List[str]) -> None:
+    def create(self, actual_name: str, actual_content: List[List[str]]) -> None:
         """Put all the data for the actual_name to the excel-file.
 
         Args:

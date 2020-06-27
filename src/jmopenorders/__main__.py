@@ -42,7 +42,7 @@ import sys
 
 import click
 
-from .api import report
+from jmopenorders.api.report import report
 
 
 @click.command()
