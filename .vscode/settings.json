@@ -1,5 +1,5 @@
 {
-  "python.pythonPath": "/Users/juergen/Library/Caches/pypoetry/virtualenvs/jmopenorders-W7p0kP5e-py3.8/bin/python",
+  "python.pythonPath": "/Users/juergen/.pyenv/versions/3.8.3/bin/python",
   "python.workspaceSymbols.enabled": false,
   "python.linter": "flake8",
   "python.linting.enabled": true,
