@@ -1,8 +1,11 @@
 jmopenorders
 ============
 
-|Tests| |Codecov| |PyPI| |Python Version| |Read the Docs| |License| |Black| |pre-commit| |Dependabot|
+|Gitpod| |Tests| |Codecov| |PyPI| |Python Version| |Read the Docs| |License| |Black| |pre-commit| |Dependabot|
 
+.. |Gitpod| image:: https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod
+    : target: https://gitpod.io/#https://github.com/jmuelbert/jmbopenorders
+    :alt: Gitpod-Ready-Code
 .. |Tests| image:: https://github.com/jmuelbert/jmopenorders/workflows/Tests/badge.svg
    :target: https://github.com/jmuelbert/jmopenorders/actions?workflow=Tests
    :alt: Tests
