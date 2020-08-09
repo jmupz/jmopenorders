@@ -115,8 +115,7 @@ class GenerateOrders:
                     logger.debug("Header: " + item)
                     cell = sheet.cell(row=row_num, column=col_num)
                     cell.value = item
-                    cell.font = Font(name="Courier", size=12)
-                    cell.style = "Title"
+                    cell.font = Font(name="Courier", size=12, bold=True)
                     cell.number_format = "text"
                     col_num += 1
 
@@ -138,6 +137,7 @@ class GenerateOrders:
                     if col_num == 4:
                         cell = sheet.cell(row=row_num, column=col_num)
                         cell.value = item
+                        cell.font = Font(name="Courier", size=12)
                         cell.number_format = "dd.mm.yyyy"
                     # Tage offen ist eine ganze Zahl
                     # Alles was nach Deb-Name ist, ist eine reale Zahl
@@ -145,9 +145,13 @@ class GenerateOrders:
                         cell = sheet.cell(row=row_num, column=col_num)
                         mystr = item.replace(".", "")
                         mystr = mystr.replace(",", ".")
+                        cell.font = Font(name="Courier", size=12)
+                        cell.format_style = "#,##0.00"
                         cell.value = float(mystr)
                     else:
                         cell = sheet.cell(row=row_num, column=col_num)
+                        cell.font = Font(name="Courier", size=12)
+                        cell.number_format = "text"
                         cell.value = item
 
                     col_num += 1
