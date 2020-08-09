@@ -5,7 +5,7 @@ jmopenorders
    :alt: Codacy Badge
    :target: https://app.codacy.com/manual/jmuelbert/jmopenorders?utm_source=github.com&utm_medium=referral&utm_content=jmuelbert/jmopenorders&utm_campaign=Badge_Grade_Dashboard
 
-|Gitpod| |Tests| |Codecov| |PyPI| |Python Version| |Read the Docs| |License| |Black| |pre-commit| |Dependabot|
+|Gitpod| |Tests| |LGTM| |Codecov| |PyPI| |Python Version| |Read the Docs| |License| |Black| |pre-commit| |Dependabot|
 
 
 Features
@@ -86,11 +86,12 @@ This project was generated from `@cjolowicz`_'s `Hypermodern Python Cookiecutter
 .. |Gitpod| image:: https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod
     :target: https://gitpod.io/#https://github.com/jmuelbert/jmopenorders
     :alt: Gitpod-Ready-Code
-.. |LGTM| image:: https://img.shields.io/lgtm/alerts/g/jmuelbert/jmopenorders.svg?logo=lgtm&logoWidth=18
-    :target: https://lgtm.com/projects/g/jmuelbert/jmopenorders/alerts/
 .. |Tests| image:: https://github.com/jmuelbert/jmopenorders/workflows/Tests/badge.svg
    :target: https://github.com/jmuelbert/jmopenorders/actions?workflow=Tests
    :alt: Tests
+.. |LGTM| image:: https://img.shields.io/lgtm/alerts/g/jmuelbert/jmopenorders.svg?logo=lgtm&logoWidth=18
+    :target: https://lgtm.com/projects/g/jmuelbert/jmopenorders/alerts/
+    :alt: LGTM
 .. |Codecov| image:: https://codecov.io/gh/jmuelbert/jmopenorders/branch/master/graph/badge.svg
    :target: https://codecov.io/gh/jmuelbert/jmopenorders
    :alt: Codecov
